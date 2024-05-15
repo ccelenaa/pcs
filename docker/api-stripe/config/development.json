@@ -8,9 +8,9 @@
     "version": "15",
     "connection": {
       "host": "postgresql",
-      "database": "bleme",
-      "user": "bleme",
-      "password": "bleme",
+      "database": "pcs",
+      "user": "pcs",
+      "password": "pcs",
       "port": 5432
     }
   },
