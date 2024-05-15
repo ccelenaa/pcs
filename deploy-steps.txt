@@ -1,0 +1,37 @@
+1- K3S Installation:
+curl -sfL https://get.k3s.io | sh - 
+/etc/rancher/k3s/k3s.yaml
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+sudo install -o root -g root -m 0755 kustomize /usr/local/bin/kustomize
+
+2- Bleme deployment:
+- Create bleme namespace:
+kubectl create namespace bleme
+kubectl create namespace monitoring
+- LetEncrypt certificate: 
+apt-get install certbot
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.4/cert-manager.yaml
+certbot certonly --manual --preferred-challenges dns -d bleme.fr -d '*.bleme.fr'
+/etc/letsencrypt/live/bleme.fr/
+kubectl create secret tls sectlsu --cert /etc/letsencrypt/live/bleme.fr/fullchain.pem --key /etc/letsencrypt/live/bleme.fr/privkey.pem -n bleme
+
+- Pods deployment:
+kustomize build overlays/aws-prod | kubectl apply -f -
+
+postgres
+rabbitmq
+prometheus
+api-payment
+api-bleme
+front-bleme
+dashboard
+grafana
+
+kubectl exec -it pod-api-bleme -- sh
+npx prisma migrate dev
+
+copy public content to /mnt/front/

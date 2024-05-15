@@ -1,0 +1,79 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    privileged: true
+    image: nginx:1.23.2-alpine
+    ports:
+      - "80:80"
+      - "${NGINX_PORT:-443}:443"
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./front-pcs/src/public:/var/www/pcs/public
+      - ./docker/nginx/SSL/certs/rsa:/etc/nginx/ssl
+
+  postgresql:
+    privileged: true
+    image: "postgres:15-alpine"
+    environment:
+      POSTGRES_DB:       "pcs"
+      POSTGRES_USER:     "pcs"
+      POSTGRES_PASSWORD: "pcs"
+    ports:
+      - "5432:5432"
+    # volumes:
+      # - ./docker/postgres/data:/var/lib/postgresql/data
+      # - ./docker/postgres/sql:/docker-entrypoint-initdb.d
+
+  api-pcs:
+    privileged: true
+    build:
+      context: ./api-pcs/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./api-pcs:/usr/lib/esgi/api-pcs
+      - ./docker/api-pcs/config:/usr/lib/esgi/api-pcs/config
+    ports:
+      - "3000:80"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: 'postgresql://pcs:pcs@postgresql:5432/pcs?schema=public'
+    # env_file:
+    # - ./docker/nest/config/development.yaml
+
+  api-stripe:
+    privileged: true
+    build:
+      context: ./api-stripe/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./api-stripe:/usr/lib/esgi/api-stripe
+      - ./docker/api-stripe/config:/usr/lib/esgi/api-stripe/config
+    ports:
+      - "3002:80"
+    environment:
+      NODE_ENV: development
+
+  front:
+    privileged: true
+    build:
+      context: ./front-pcs/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./front-pcs:/usr/lib/esgi/front-pcs
+    ports:
+      - "3003:80"
+    # env_file:
+    # - ./front-pcs/.env
+
+  # rabbitmq:
+  #   privileged: true
+  #   image: "rabbitmq:3.8.32-management"
+  #   environment:
+  #     RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbitmq_management sample_retention_policies [{global,[{3600,1}]},{basic,[{3600,1}]},{detailed,[{10,1}]}]"
+  #   ports:
+  #     - "5672:5672"
+  #     - "25672:15672"
+  #   volumes:
+  #     - ./docker/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json

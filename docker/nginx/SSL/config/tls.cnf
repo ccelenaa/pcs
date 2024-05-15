@@ -1,0 +1,32 @@
+[ req ]
+  prompt             = no
+  default_bits       = 4096
+  distinguished_name = distinguished_name
+  req_extensions     = req_extensions
+
+[ distinguished_name ]
+  countryName                     = FR
+  stateOrProvinceName             = Ile-de-france
+  localityName                    = Paris
+  organizationName                = Paris Caretaker Services
+  organizationalUnitName          = Paris Caretaker Services
+  commonName                      = *.pcs.fr
+  emailAddress                    = pcs.agence.esgi@gmail.com
+
+[ req_extensions ]
+  basicConstraints = critical, CA:false
+  keyUsage = critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+  extendedKeyUsage = serverAuth, clientAuth
+  subjectAltName = @alt_names
+
+[ x509_extensions ]
+  basicConstraints = critical, CA:false
+  keyUsage = critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+  extendedKeyUsage = serverAuth, clientAuth
+  authorityInfoAccess = OCSP;URI:http://ocsp.x509.com/, caIssuers;URI:http://issuers.x509.com/ca.html
+  crlDistributionPoints = URI:http://crl.x509.com/crl.pem
+  subjectAltName = @alt_names
+
+[ alt_names ]
+  DNS.1 = pcs.fr
+  DNS.2 = *.pcs.fr

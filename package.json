@@ -1,0 +1,21 @@
+{
+  "name": "pcs",
+  "version": "1.0.0",
+  "description": "pcs composer",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sudo docker compose up -d",
+    "stop": "sudo docker compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pcs-platform/pcs.git"
+  },
+  "author": "Kamal MEHDI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pcs-platform/pcs/issues"
+  },
+  "homepage": "https://github.com/pcs-platform/pcs#readme"
+}
