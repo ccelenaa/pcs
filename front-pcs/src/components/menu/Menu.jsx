@@ -32,13 +32,13 @@ export default function Menu(props) {
       }, 300, reference);
     } else {
       if (curMenu.target?.url) {
-        var [html] = document.getElementsByTagName('html');
+        // var [html] = document.getElementsByTagName('html');
 
-        if (html.classList.contains('burger-menu-opened')) {
-          html.classList.remove('burger-menu-opened');
-        } else {
-          html.classList.add('burger-menu-opened');
-        }
+        // if (html.classList.contains('burger-menu-opened')) {
+        //   html.classList.remove('burger-menu-opened');
+        // } else {
+        //   html.classList.add('burger-menu-opened');
+        // }
       } else {
         alert('Page << ' + curMenu.title + ' >> en préparation !!');
       }
@@ -124,7 +124,7 @@ export default function Menu(props) {
               };
 
               return curMenu.sub_menus.map(function (menu, index) {
-                return menu.target?.url ? (<NavLink to={menu.target.url} className="" onClick={goTop} key={index}>{template(menu)}</NavLink>) : template(menu, index);
+                return menu.target?.url ? (<a href={menu.target.url} className="" onClick={goTop} key={index}>{template(menu)}</a>) : template(menu, index);
               });
             })()
           }

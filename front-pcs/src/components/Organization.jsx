@@ -16,8 +16,108 @@ function Organization() {
   
   var [organization, setOrganization] = useState({
     name:   url ? url[1] : 'Undefine',
-    organization: {},
-    status: 'pending'
+    organization: {
+      name: url ? url[1] : 'Undefine',
+      data: {},
+      menu: [
+        {
+            category: "main",
+            created_at: "2022-11-09T15:21:15.150Z",
+            created_by: null,
+            data: {},
+            deleted_at: null,
+            id: "db4e597f-c64d-4cda-af78-02fd44400020",
+            options: {},
+            organization_id: "db4e597f-c64d-4cda-af78-02fd44400002",
+            parent_id: null,
+            position: 0,
+            sub_menus: [],
+            target: {
+                url: "https://pcs.fr"
+            },
+            title: "Accueil PCS",
+            type: "LINK",
+            updated_at: "2022-12-18T15:36:05.920Z"
+        },
+        {
+            category: "main",
+            created_at: "2022-11-09T15:21:15.150Z",
+            created_by: null,
+            data: {},
+            deleted_at: null,
+            id: "db4e597f-c64d-4cda-af78-02fd44400020",
+            options: {},
+            organization_id: "db4e597f-c64d-4cda-af78-02fd44400002",
+            parent_id: null,
+            position: 1,
+            sub_menus: [],
+            target: {
+                url: "https://admin.pcs.fr"
+            },
+            title: "Administration PCS",
+            type: "LINK",
+            updated_at: "2022-12-18T15:36:05.920Z"
+        },
+        {
+            category: "main",
+            created_at: "2022-11-09T15:21:15.150Z",
+            created_by: null,
+            data: {},
+            deleted_at: null,
+            id: "db4e597f-c64d-4cda-af78-02fd44400020",
+            options: {},
+            organization_id: "db4e597f-c64d-4cda-af78-02fd44400002",
+            parent_id: null,
+            position: 2,
+            sub_menus: [],
+            target: {
+                url: "https://bailleur.pcs.fr"
+            },
+            title: "Espace bailleurs",
+            type: "LINK",
+            updated_at: "2022-12-18T15:36:05.920Z"
+        },
+        {
+            category: "main",
+            created_at: "2022-11-09T15:21:15.150Z",
+            created_by: null,
+            data: {},
+            deleted_at: null,
+            id: "db4e597f-c64d-4cda-af78-02fd44400020",
+            options: {},
+            organization_id: "db4e597f-c64d-4cda-af78-02fd44400002",
+            parent_id: null,
+            position: 3,
+            sub_menus: [],
+            target: {
+                url: "https://prestataire.pcs.fr"
+            },
+            title: "Espace prestataires",
+            type: "LINK",
+            updated_at: "2022-12-18T15:36:05.920Z"
+        },
+        {
+            category: "main",
+            created_at: "2022-11-09T15:21:15.150Z",
+            created_by: null,
+            data: {},
+            deleted_at: null,
+            id: "db4e597f-c64d-4cda-af78-02fd44400020",
+            options: {},
+            organization_id: "db4e597f-c64d-4cda-af78-02fd44400002",
+            parent_id: null,
+            position: 4,
+            sub_menus: [],
+            target: {
+                url: "https://prestataire.pcs.fr"
+            },
+            title: "Espace voyageurs",
+            type: "LINK",
+            updated_at: "2022-12-18T15:36:05.920Z"
+        }
+      ]
+    },
+    status: 'pending_'
   });  
 
   var [user, setUser] = useState({});
@@ -45,28 +145,29 @@ function Organization() {
         // }
     });
 
-    try {
-      setUser(await getUserData());
-      const org = await getOrganization();
-      if (org) {
-        setOrganization({
-          name:   org.name,
-          organization: org,
-          status: 'valid'
-        });
+    setUser(await getUserData());
 
-        document.title = org.name;
-      }
-    } catch (error) {
-      setOrganization({
-        name:   organization.name,
-        status: 'unvalid'
-      });
-    }
+    // try {
+    //   const org = await getOrganization();
+    //   if (org) {
+    //     setOrganization({
+    //       name:   org.name,
+    //       organization: org,
+    //       status: 'valid'
+    //     });
+
+    //     document.title = org.name;
+    //   }
+    // } catch (error) {
+    //   setOrganization({
+    //     name:   organization.name,
+    //     status: 'unvalid'
+    //   });
+    // }
   }, []);
 
   return organization.status === 'pending' ? (<></>) :
-  organization.status === 'unvalid' ?
+  organization.status === '1unvalid' ?
   (
     <>
       <div style={{padding: '20px'}}>Organisation {organization.name} introuvable !!</div>
