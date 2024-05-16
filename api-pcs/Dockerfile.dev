@@ -8,6 +8,7 @@ WORKDIR /usr/lib/esgi/api-pcs/
 COPY package.json .
 
 RUN npm install
+# RUN npx prisma migrate dev
 
 # Exports
 EXPOSE 80
