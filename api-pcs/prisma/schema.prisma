@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
@@ -11,440 +8,130 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model Organization {
-  id                        String @db.Uuid @id @default(uuid())
-  type                      String @db.VarChar(32) @default("association")
-  reference                 String @db.VarChar(255) @unique
-  name                      String @db.VarChar(255)
-  description               Json @db.JsonB @default("{}")
-  locale                    String @db.VarChar(32) @default("fr-FR")
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  expired_at                DateTime?
-  suspended_at              DateTime?
-  closed_at                 DateTime?
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  pages                     Page[] @relation("organization_pages")
-  seats                     Seat[]
-  groups                    Group[]
-  publications              Publication[] @relation("organization_publications")
-  covers                    Cover[] @relation("organization_covers")
-  menus                     Menu[] @relation("organization_menus")
-  wallets                   Wallet[] @relation("organization_wallets")
-
-  @@map("organizations")
+model administrateur {
+  id         BigInt    @id @default(autoincrement())
+  name       String?   @db.VarChar(128)
+  email      String    @db.VarChar(128)
+  tel        String    @db.VarChar(32)
+  login      String    @db.VarChar(32)
+  password   String    @db.VarChar(512)
+  locale     String    @default("fr-FR") @db.VarChar(32)
+  data       Json      @default("{}")
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
 }
 
-
-model Seat {
-  id                        String @db.Uuid @id @default(uuid())
-  organization_id           String @db.Uuid
-  reference                 String @db.VarChar(10) @unique
-  name                      String @db.VarChar(255)
-  description               String
-  locale                    String @db.VarChar(32) @default("fr-FR")
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  closed_at                 DateTime?
-  deleted_at                DateTime?
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  organization              Organization @relation(fields: [organization_id], references: [id])
-
-  members                   Member[] @relation("seat")
-
-  @@map("seats")
+model bailleur {
+  id           BigInt    @id @default(autoincrement())
+  name         String?   @db.VarChar(128)
+  email        String    @db.VarChar(128)
+  login        String    @db.VarChar(32)
+  password     String    @db.VarChar(512)
+  locale       String    @default("fr-FR") @db.VarChar(32)
+  data         Json      @default("{}")
+  verified_at  DateTime?
+  suspended_at DateTime?
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @default(now())
+  deleted_at   DateTime?
+  bien         bien[]
 }
 
-
-model Account {
-  id                        String @db.Uuid @id @default(uuid())
-  firstname                 String? @db.VarChar(64)
-  lastname                  String? @db.VarChar(64)
-  birthday                  DateTime?
-  email                     String @db.VarChar(64) @unique
-  login                     String @db.VarChar(32) @unique
-  password                  String @db.VarChar(512)
-  locale                    String @db.VarChar(32) @default("fr-FR")
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  verified_at               DateTime?
-  suspended_at              DateTime?
-  closed_at                 DateTime?
-  deleted_at                DateTime?
-  
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  members                   Member[] @relation("account")
-
-  @@map("accounts")
+model bien {
+  id           BigInt     @id @default(autoincrement())
+  id_bailleur  BigInt
+  type         String     @db.VarChar(64)
+  area         String     @db.VarChar(255)
+  description  String     @db.VarChar(255)
+  status       String     @db.VarChar(64)
+  price        String     @db.VarChar(32)
+  currency     String     @default("eu") @db.VarChar(32)
+  data         Json       @default("{}")
+  validated_at DateTime?
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @default(now())
+  deleted_at   DateTime?
+  bailleur     bailleur   @relation(fields: [id_bailleur], references: [id], map: "bien_bailleur_id_fkey")
+  location     location[]
+  planing      planing[]
 }
 
-
-model Member {
-  id                        String @db.Uuid @id @default(uuid())
-  account_id                String @db.Uuid
-  seat_id                   String @db.Uuid
-  code                      String @db.VarChar(16)
-  status                    String @db.VarChar(32) @default("new")
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-  sponsored_by              String? @db.Uuid
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  expired_at                DateTime?
-  suspended_at              DateTime?
-  closed_at                 DateTime?
-  deleted_at                DateTime?
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  account                   Account @relation("account", fields: [account_id], references: [id])
-  sponsor                   Member? @relation("sponsorship", fields: [sponsored_by], references: [id])
-  seat                      Seat @relation("seat", fields: [seat_id], references: [id])
-
-  sponsorships              Member[] @relation("sponsorship")
-  states                    State[] @relation("managment")
-  delegate                  Delegate[] @relation("delegation")
-  created_menus             Menu[] @relation("creation")
-  created_pages             Page[] @relation("creation")
-  created_publications      Publication[] @relation("creation")
-  created_covers            Cover[] @relation("creation")
-  created_wallets           Wallet[] @relation("creation")
-
-  @@map("members")
+model langue {
+  id         BigInt    @id @default(autoincrement())
+  locale     String    @default("fr-FR") @db.VarChar(32)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
 }
 
-
-model State {
-  id                        BigInt @id @default(autoincrement())
-  managed_by                String? @db.Uuid
-  model                     String @db.VarChar(64)
-  model_id                  String @db.Uuid
-  name                      String @db.VarChar(32)
-  value                     String @db.VarChar(32)
-  data                      Json @db.JsonB @default("{}")
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  manager                   Member? @relation("managment", fields: [managed_by], references: [id])
-
-  @@map("states")
+model location {
+  id          BigInt    @id @default(autoincrement())
+  id_bien     BigInt
+  id_voyageur BigInt
+  data        Json      @default("{}")
+  price       String    @db.VarChar(32)
+  price_total String    @db.VarChar(32)
+  currency    String    @default("eu") @db.VarChar(32)
+  start_at    DateTime  @default(now())
+  end_at      DateTime  @default(now())
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now())
+  deleted_at  DateTime?
+  bien        bien      @relation(fields: [id_bien], references: [id], map: "location_bien_id_fkey")
+  voyageur    voyageur  @relation(fields: [id_voyageur], references: [id], map: "location_voyageur_id_fkey")
 }
 
-
-model Group {
-  id                        String @db.Uuid @id @default(uuid())
-  organization_id           String @db.Uuid
-  reference                 String @db.VarChar(255)
-  data                      Json @db.JsonB @default("{}")
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-  deleted_at                DateTime?
-
-  organization              Organization @relation(fields: [organization_id], references: [id])
-  delegation                Delegate[] @relation("delegation")
-
-  @@map("groups")
+model photo {
+  id         BigInt    @id @default(autoincrement())
+  id_bien    BigInt
+  url        String    @db.VarChar(32)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
 }
 
-
-model Page {
-  id                        String @db.Uuid @id @default(uuid())
-  created_by                String @db.Uuid
-  organization_id           String @db.Uuid
-  slug                      String @db.VarChar(512)
-  title                     String @db.VarChar(512)
-  home                      Int?
-  order_by                  String @db.VarChar(16) @default("date")
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  suspended_at              DateTime?
-  deleted_at                DateTime?
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  organization              Organization @relation("organization_pages", fields: [organization_id], references: [id])
-  creator                   Member @relation("creation", fields: [created_by], references: [id])
-
-  page_covers               PageCover[] @relation("pages_covers")
-  page_publications         PagePublication[] @relation("pages_publications")
-
-  @@unique([organization_id, slug])
-  @@map("pages")
+model planing {
+  id         BigInt    @id @default(autoincrement())
+  id_bien    BigInt
+  data       Json      @default("{}")
+  status     String?   @db.VarChar(32)
+  start_at   DateTime  @default(now())
+  end_at     DateTime  @default(now())
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+  bien       bien      @relation(fields: [id_bien], references: [id], map: "planing_bien_id_fkey")
 }
 
-
-model Cover {
-  id                        String @db.Uuid @id @default(uuid())
-  created_by                String @db.Uuid
-  organization_id           String @db.Uuid
-  image                     String? @db.VarChar(1024)
-  target                    Json @db.JsonB @default("{}")
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-  deleted_at                DateTime?
-
-  organization              Organization @relation("organization_covers", fields: [organization_id], references: [id])
-  cover_pages               PageCover[] @relation("pages_covers")
-  creator                   Member @relation("creation", fields: [created_by], references: [id])
-
-  @@map("covers")
+model prestataire {
+  id           BigInt    @id @default(autoincrement())
+  name         String?   @db.VarChar(128)
+  email        String    @db.VarChar(128)
+  login        String    @db.VarChar(32)
+  password     String    @db.VarChar(512)
+  locale       String    @default("fr-FR") @db.VarChar(32)
+  data         Json      @default("{}")
+  verified_at  DateTime?
+  suspended_at DateTime?
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @default(now())
+  deleted_at   DateTime?
 }
 
-
-model PageCover {
-  id                        String @db.Uuid @id @default(uuid())
-  page_id                   String @db.Uuid
-  cover_id                  String @db.Uuid
-  position                  Int @default(1)
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-  deleted_at                DateTime?
-
-  page                      Page @relation("pages_covers", fields: [page_id], references: [id])
-  cover                     Cover @relation("pages_covers", fields: [cover_id], references: [id])
-
-  @@map("pages_covers")
-}
-
-
-model Menu {
-  id                        String @db.Uuid @id @default(uuid())
-  parent_id                 String? @db.Uuid
-  created_by                String? @db.Uuid
-  organization_id           String @db.Uuid
-
-  title                     String @db.VarChar(255) @default("Menu title")
-  position                  Int @default(1)
-  type                      String @db.VarChar(64) @default("link")
-  category                  String @default("main")
-
-  target                    Json @db.JsonB @default("{}")
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  parent                    Menu? @relation("sub_menus", fields: [parent_id], references: [id])
-  sub_menus                 Menu[] @relation("sub_menus")
-
-  creator                   Member? @relation("creation", fields: [created_by], references: [id])
-  organization              Organization @relation("organization_menus", fields: [organization_id], references: [id])
-
-  @@map("menus")
-}
-
-
-model PagePublication {
-  id                        String @db.Uuid @id @default(uuid())
-  page_id                   String @db.Uuid
-  publication_id            String @db.Uuid
-  position                  Int @default(1)
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  deleted_at                DateTime?
-  pined_at                  DateTime @default(now())
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  page                      Page @relation("pages_publications", fields: [page_id], references: [id])
-  publication               Publication @relation("pages_publications", fields: [publication_id], references: [id])
-
-  @@map("pages_publications")
-}
-
-
-model Publication {
-  id                        String @db.Uuid @id @default(uuid())
-  created_by                String @db.Uuid
-  organization_id           String @db.Uuid
-  slug                      String @db.VarChar(512) @unique
-  title                     String @db.VarChar(512)
-  content_id                String @db.VarChar(64)
-  content_type              String @db.VarChar(64)
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  publication_pages         PagePublication[] @relation("pages_publications")
-  creator                   Member @relation("creation", fields: [created_by], references: [id])
-  organization              Organization @relation("organization_publications", fields: [organization_id], references: [id])
-
-  @@map("publications")
-}
-
-
-model Document {
-  id                        String @db.Uuid @id @default(uuid())
-  publication_id            String @db.Uuid
-  title                     String @db.VarChar(512)
-  content                   String
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  @@map("documents")
-}
-
-
-model Event {
-  id                        String @db.Uuid @id @default(uuid())
-  publication_id            String @db.Uuid
-  title                     String @db.VarChar(512)
-  content                   String
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  @@map("events")
-}
-
-
-model Choice {
-  id                        String @db.Uuid @id @default(uuid())
-  publication_id            String @db.Uuid
-  title                     String @db.VarChar(512)
-  content                   String
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  @@map("choices")
-}
-
-
-model Wallet {
-  id                        String @db.Uuid @id @default(uuid())
-  created_by                String @db.Uuid
-  organization_id           String @db.Uuid
-  title                     String @db.VarChar(512)
-  description               String
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  creator                   Member @relation("creation", fields: [created_by], references: [id])
-  organization              Organization @relation("organization_wallets", fields: [organization_id], references: [id])
-
-  @@map("wallets")
-}
-
-
-model Price {
-  id                        String @db.Uuid @id @default(uuid())
-  model                     String? @db.VarChar(32)
-  model_id                  String? @db.Uuid
-  value                     Json @db.JsonB @default("{}")
-  title                     String? @db.VarChar(521)
-  comment                   String? @db.VarChar(1024)
-  options                   Json @db.JsonB @default("{}")
-  data                      Json @db.JsonB @default("{}")
-
-  start_at                  DateTime?
-  end_at                    DateTime?
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  @@map("prices")
-}
-
-
-model Transaction {
-  id                        String @db.Uuid @id @default(uuid())
-  status                    String? @db.VarChar(100)
-  data                      Json @db.JsonB @default("{}")
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-  deleted_at                DateTime?
-
-  @@map("transactions")
-}
-
-
-model Type {
-  id                        String @db.Uuid @id @default(uuid())
-  organization_id           String @db.Uuid
-  data                      Json @db.JsonB @default("{}")
-
-  deleted_at                DateTime?
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-
-  @@map("types")
-}
-
-
-model Delegate {
-  id                        String @db.Uuid @id @default(uuid())
-  member_id                 String @db.Uuid
-  group_id                  String @db.Uuid
-  data                      Json @db.JsonB @default("{}")
-
-  created_at                DateTime @default(now())
-  updated_at                DateTime @default(now())
-  deleted_at                DateTime?
-
-  member                    Member @relation("delegation", fields: [member_id], references: [id])
-  group                     Group @relation("delegation", fields: [group_id], references: [id])
-
-  @@map("delegates")
+model voyageur {
+  id           BigInt     @id @default(autoincrement())
+  name         String?    @db.VarChar(128)
+  email        String     @db.VarChar(128)
+  tel          String     @db.VarChar(32)
+  login        String     @db.VarChar(32)
+  password     String     @db.VarChar(512)
+  locale       String     @default("fr-FR") @db.VarChar(32)
+  data         Json       @default("{}")
+  verified_at  DateTime?
+  suspended_at DateTime?
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @default(now())
+  deleted_at   DateTime?
+  location     location[]
 }

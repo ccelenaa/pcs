@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/pcs-platform/pcs.git"
   },
-  "author": "Kamal MEHDI",
-  "license": "ISC",
+  "author": "Celina Chouali",
+  "license": "GNU ESGI",
   "bugs": {
     "url": "https://github.com/pcs-platform/pcs/issues"
   },
