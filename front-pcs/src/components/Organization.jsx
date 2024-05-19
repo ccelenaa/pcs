@@ -109,7 +109,7 @@ function Organization() {
             position: 4,
             sub_menus: [],
             target: {
-                url: "https://prestataire.pcs.fr"
+                url: "https://voyageur.pcs.fr"
             },
             title: "Espace voyageurs",
             type: "LINK",

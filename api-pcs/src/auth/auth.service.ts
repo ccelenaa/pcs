@@ -2,10 +2,11 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { SignupDto } from './dto/signup.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as argon from 'argon2';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+// import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { SigninDto } from './dto';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -13,30 +14,32 @@ export class AuthService {
 
   }
 
-  async signup(auth: SignupDto) {
+  async signup(auth: SignupDto, service: string) {
     console.log('head ', {auth});
     const hash = await argon.hash(auth.password);
-
+    const client = this.prisma[service];
     try {
-      const account = await this.prisma.account.create({
+      const account = await client.create({
         data: {...auth, password: hash}
       });
 
       delete account.password;
       return account;
     } catch (error) {
-      if(error instanceof PrismaClientKnownRequestError) {
-        if(error.code == 'P2002') {
-          throw new ForbiddenException('Credentials taken');
-        }
-      }
+      // if(error instanceof PrismaClientKnownRequestError) {
+      //   if(error.code == 'P2002') {
+      //     throw new ForbiddenException('Credentials taken');
+      //   }
+      // }
 
       throw error;
     }
   }
 
-  async signin(auth: SigninDto) {
-    const account = await this.prisma.account.findFirst({
+  async signin(auth: SigninDto, service: string) {
+    const client = this.prisma[service];
+
+    const account = await client.findFirst({
       where: {
         OR: [
           {
@@ -57,9 +60,11 @@ export class AuthService {
   }
 
 
-  async signToken(userId: string, email: string): Promise<string> {
+  async signToken(userId: BigInt, type: string, email: string): Promise<string> {
+    console.log(userId.toString());
     const payload = {
-      sub: userId,
+      sub: userId.toString(),
+      type,
       email
     };
 

@@ -54,7 +54,7 @@ CREATE TABLE "voyageur" (
 );
 
 -- CreateTable
-CREATE TABLE "administrateur" (
+CREATE TABLE "admin" (
     "id" BIGSERIAL NOT NULL,
     "name" VARCHAR(128),
     "email" VARCHAR(128) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE "administrateur" (
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "deleted_at" TIMESTAMP(3),
 
-    CONSTRAINT "administrateur_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "admin_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

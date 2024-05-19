@@ -28,11 +28,13 @@ export class AuthController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post('signup')
-  async signup(@Res({passthrough: true}) res: Response, @Body() dto: SignupDto) {
-    const account = await this.authService.signup(dto);
-    const cookie: string = await this.authService.signToken(account.id, account.email);
+  async signup(@Headers('origin') origin: String, @Res({passthrough: true}) res: Response, @Body() dto: SignupDto) {
+    const service = origin.match(/^(?:https?:\/\/)?([\w]+)\.pcs\.fr/)?.[1] || "";
 
-    res.cookie('token', cookie, this.cookieOptions);
+    const account = await this.authService.signup(dto, service);
+    const cookie: string = await this.authService.signToken(account.id, service, account.email);
+
+    res.cookie(`token_${service}`, cookie, this.cookieOptions);
 
     return account;
   }
@@ -41,13 +43,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('signin')
   async signin(@Headers('origin') origin: String, @Res({passthrough: true}) res: Response, @Body() dto: SigninDto) {
-    console.log({origin});
+    const service = origin.match(/^(?:https?:\/\/)?([\w]+)\.pcs\.fr/)?.[1] || "";
+    const account = await this.authService.signin(dto, service);
+    const cookie: string = await this.authService.signToken(account.id, service, account.email);
 
-    const account = await this.authService.signin(dto);
-
-    const cookie: string = await this.authService.signToken(account.id, account.email);
-
-    res.cookie('token', cookie, this.cookieOptions);
+    res.cookie(`token_${service}`, cookie, this.cookieOptions);
 
     return account;
   }
@@ -55,7 +55,8 @@ export class AuthController {
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Post('signout')
-  signout(@Res({passthrough: true}) res: Response) {
-    res.clearCookie('token', this.cookieOptions);
+  signout(@Headers('origin') origin: String, @Res({passthrough: true}) res: Response) {
+    const service = origin.match(/^(?:https?:\/\/)?([\w]+)\.pcs\.fr/)?.[1] || "";
+    res.clearCookie(`token_${service}`, this.cookieOptions);
   }
 }

@@ -22,7 +22,7 @@ export class RabbitMQService {
   constructor(private configService: ConfigService, private prisma: PrismaService, private httpService: HttpService) {
     // this.configService.getOrThrow(this.CONFIG_KEY);
 
-    this.connect();
+    // this.connect();
   }
 
   async connect() {

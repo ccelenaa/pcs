@@ -30,9 +30,14 @@ async function bootstrap() {
   // app.useGlobalPipes(
   //   new ValidationPipe({
   //     forbidUnknownValues: false
+
   //   }),
   // );
   app.use(cookieParser());
+
+  (BigInt.prototype as any).toJSON = function () {
+    return this.toString();
+  };
 
   await app.listen(port);
 }

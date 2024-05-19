@@ -13,4 +13,4 @@ RUN npm install
 EXPOSE 80
 
 # Run container
-CMD npx run start:dev & npx prisma studio
+CMD npm run start:dev & npx prisma studio

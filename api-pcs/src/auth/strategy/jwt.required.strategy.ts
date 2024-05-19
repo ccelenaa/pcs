@@ -20,15 +20,14 @@ export class JwtRequiredStrategy extends PassportStrategy(Strategy, 'jwt.require
 
   async validate(payload: {
     sub: string,
+    type: string,
     email: string,
     login: string
   }) {
-    const account = await this.prisma.account.findFirst({
+    
+    const account = await this.prisma[payload.type].findFirst({
       where: {
-        id: payload.sub
-      },
-      include: {
-        members: true
+        id: payload.sub as unknown
       }
     });
 
@@ -41,6 +40,7 @@ export class JwtRequiredStrategy extends PassportStrategy(Strategy, 'jwt.require
   }
 
   private static extractJWT(req: Request): string | null {
-    return req.cookies['token'];
+    const service = req.headers.origin.match(/^(?:https?:\/\/)?([\w]+)\.pcs\.fr/)?.[1] || "";
+    return req.cookies[`token_${service}`];
   }
 }
