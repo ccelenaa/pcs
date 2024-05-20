@@ -34,10 +34,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 
 export default function AsideSetting(props) {
-  const {menu: selected} = useParams();
-  
+  // const {menu: selected} = useParams();
+  const {pathname: selected = ""} = useLocation();
+
   useEffect(() => {
 
   },[]);
@@ -46,14 +48,14 @@ export default function AsideSetting(props) {
   if(props.isAuth !== 'true'){
     menus = [
       {
-        menu: 'login',
-        label: 'Signin',
+        menu: '/auth',
+        label: 'Authetification',
         icon: faUnlockKeyhole
       },
       {
-        menu: 'signup',
-        label: 'Signup',
-        icon: faUsersRectangle
+        menu: '/inscription',
+        label: 'Inscription',
+        icon: all.faAdd
       }
     ];
   } else {
@@ -61,111 +63,105 @@ export default function AsideSetting(props) {
       case "admin":
         menus = [
           {
-            menu: 'profile',
-            label: 'Profile',
+            menu: '/compte',
+            label: 'Compte',
             icon: faUser
           },{
-            menu: 'bailleurs',
-            label: 'Gestion bailleurs',
+            menu: '/messages',
+            label: 'Messages',
+            icon: all.faComment
+          },{
+            menu: '/biens',
+            label: 'Gestion des biens',
+            icon: all.faHomeLg
+          },{
+            menu: '/prestations',
+            label: 'Gestion des prestations',
+            icon: all.faHandshakeAngle
+          },{
+            menu: '/bailleurs',
+            label: 'Gestion des bailleurs',
             icon: faUserFriends
           },{
-            menu: 'prestataires',
-            label: 'Gestion prestataires',
+            menu: '/prestataires',
+            label: 'Gestion des prestataires',
             icon: faUserGroup
           },{
-            menu: 'voyageurs',
-            label: 'Gestion voyageurs',
+            menu: '/voyageurs',
+            label: 'Gestion des voyageurs',
             icon: faUserGroup
-          },{
-            menu: 'voyageurs1',
-            label: 'Gestion des Biens',
-            icon: faUserGroup
-          },{
-            menu: 'prestations',
-            label: 'Gestion des prestations',
-            icon: faUserGroup
-          },{
-            menu: 'security',
-            label: 'Sécurité',
-            icon: faShieldAlt
-          },{
-            menu: 'parameters',
-            label: 'Parametres',
-            icon: all.faCog
-          },{
-            menu: 'account',
-            label: 'Compte',
-            icon: faFolderClosed
           },
         ]; break;
       case "bailleur":
         menus = [
           {
-            menu: 'profile',
-            label: 'Profile',
-            icon: faUser
-          },
-          {
-            menu: 'security',
-            label: 'Mes biens',
-            icon: faShieldAlt
-          },{
-            menu: 'parameters',
-            label: 'Parametres',
-            icon: all.faCog
-          },{
-            menu: 'account',
+            menu: '/compte',
             label: 'Compte',
-            icon: faFolderClosed
+            icon: faUser
+          },{
+            menu: '/messages',
+            label: 'Messages',
+            icon: all.faComment
+          },{
+            menu: '/biens',
+            label: 'Mes biens',
+            icon: all.faHomeLg
+          },{
+            menu: '/prestations',
+            label: 'Prestations',
+            icon: all.faAdd
+          },{
+            menu: '/factures',
+            label: 'Mes factures',
+            icon: all.faCreditCard
           },
         ]; break;
       case "prestataire":
         menus = [
           {
-            menu: 'profile',
-            label: 'Profile',
+            menu: '/compte',
+            label: 'Compte',
             icon: faUser
           },{
-            menu: 'memberships',
+            menu: '/messages',
+            label: 'Messages',
+            icon: all.faMessage
+          },{
+            menu: '/prestations',
             label: 'Mes prestations',
             icon: faHandshakeAngle
-          },
-          {
-            menu: 'security',
-            label: 'Mes factures',
-            icon: faShieldAlt
           },{
-            menu: 'parameters',
-            label: 'Parametres',
-            icon: all.faCog
-          },{
-            menu: 'account',
-            label: 'Compte',
+            menu: '/planing',
+            label: 'Mes disponibilités',
             icon: faFolderClosed
+          },{
+            menu: '/factures',
+            label: 'Mes factures',
+            icon: faCreditCard
           },
         ]; break;
       case "voyageur":
         menus = [
           {
-            menu: 'profile',
-            label: 'Profile',
+            menu: '/compte',
+            label: 'Compte',
             icon: faUser
           },{
-            menu: 'parameters',
+            menu: '/biens',
             label: 'Biens disponibles',
             icon: all.faCog
           },{
-            menu: 'security',
-            label: 'Mes reservations',
+            menu: '/locations',
+            label: 'Mes locations',
             icon: faShieldAlt
           },{
-            menu: 'memberships',
+            menu: '/prestations',
             label: 'Demande de prestations',
             icon: faHandshakeAngle
           },{
-            menu: 'account',
+            menu: '/factures',
             label: 'Mes factures',
-            icon: faFolderClosed
+            icon: faCreditCard
           },
         ];
     }
@@ -181,7 +177,7 @@ export default function AsideSetting(props) {
                 menus.map((m) => {
                   return (
                     <li>
-                      <NavLink to={`/settings/${m.menu}`} className={selected===m.menu ? 'selectedd': ''} style={{display: 'flex'}}>
+                      <NavLink to={m.menu} className={selected.startsWith(m.menu) ? 'selectedd': ''} style={{display: 'flex'}}>
                         <div style={{flexShrink: '0', flexGrow: '0', height: '12px', width: '25px', textAlign: 'center', paddingRight: '8px'}}>
                           <FontAwesomeIcon icon={m.icon} className="burger" style={{}}/>
                         </div>

@@ -49,7 +49,8 @@ export default function Settings(props) {
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);
   const history = useHistory();
-  const {menu: selected} = useParams();
+  // const {menu: selected} = useParams();
+  const {pathname: selected = ""} = useLocation();
 
   useEffect(() => {
     document.getElementsByTagName('html')[0].scrollTop = 0;
@@ -104,28 +105,28 @@ export default function Settings(props) {
   }
 
 
-
   const back = (event) => {
     var [html] = document.getElementsByTagName('html');
     html.classList.remove('settings-bloc-selected');
   }
 
-  if(isAuth === 'false' && selected !== 'login') {
-    return <Redirect to="/login"/>;
+  if(isAuth === 'false' && selected !== '/auth' && selected !== '/inscription') {
+    return <Redirect to="/auth"/>;
   }
 
-  if(isAuth === 'true' && selected === 'login') {
-    return <Redirect to="/account"/>;
+  if(isAuth === 'true' && (selected === '/auth' || selected === '/inscription' || selected === '/')) {
+    return <Redirect to="/compte"/>;
   }
 
-  if(['true','false'].includes(isAuth)) {
-    return (<>
-        <div className='body-container'>
-            <div className='body-content'>
+  return (<>
+      <div className='body-container'>
+          <div className='body-content'>
+            { ['true','false'].includes(isAuth) ?
+              <>
                 <div class="body-content-inner" onClick={back}>
                     <AsideSetting {...props} isAuth={isAuth}/>
                     <div class="main-container">
-                        <AsideSSetting></AsideSSetting>
+                        {/* <AsideSSetting></AsideSSetting> */}
                         <div class="main-content">
                         {
                           props.organization.name == 'admin' ? <Admin {...props}/> :
@@ -138,10 +139,9 @@ export default function Settings(props) {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </>)
-  } else {
-    return <></>
-  }
+              </>: <></>
+            }
+          </div>
+      </div>
+  </>)
 }

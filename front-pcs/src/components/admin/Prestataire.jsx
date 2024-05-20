@@ -6,11 +6,11 @@ import { API_URL } from '../../Config';
 import { useHistory, Link, NavLink } from 'react-router-dom';
 import AsideSetting from '../aside/Settings';
 
-export default function Security(props) {
+export default function Prestataire(props) {
 
   return (<>
     <div class="">
-      Security
+      1 seul Prestataire
     </div>
   </>)
 }

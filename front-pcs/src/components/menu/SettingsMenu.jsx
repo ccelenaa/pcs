@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Settings from 'components/settings/Settings';
+// import Settings from 'components/settings/Settings';
 export default function SettingsMenu(props) {
 
   const menus = [
@@ -84,7 +84,7 @@ export default function SettingsMenu(props) {
       </div>
         </div>
         <div className="droite">
-          <Settings/>
+          {/* <Settings/> */}
         </div>
       {/* </div> */}
       </div>

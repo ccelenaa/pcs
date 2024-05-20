@@ -77,7 +77,7 @@ export default function TopMenu(props) {
                             }} />
                             <FontAwesomeIcon icon={faHome} size="2x" /> */}
               <div className="bold flower" style={getNameStyle()}>
-                {props.organization.name}
+                PCS {props.organization.name}
               </div>
             </div>
           </NavLink>
@@ -94,7 +94,7 @@ export default function TopMenu(props) {
                                 color: '#363e5a'
                             }} />
                     </NavLink> */}
-          <NavLink to="/settings/profile" onClick={settings} className="">
+          <NavLink to="/compte" onClick={settings} className="">
             <div className="logger" style={{ width: '40px', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <div style={{ height: '25px', width: '25px' }}>
                 <svg className="icon icon-account" viewBox="0 0 24 24" aria-hidden="true" focusable="true" style={{ width: '25px' }}>

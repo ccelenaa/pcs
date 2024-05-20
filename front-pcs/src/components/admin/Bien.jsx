@@ -6,11 +6,11 @@ import { API_URL } from '../../Config';
 import { useHistory, Link, NavLink } from 'react-router-dom';
 import AsideSetting from '../aside/Settings';
 
-export default function Payments(props) {
+export default function Bien(props) {
 
   return (<>
     <div class="">
-      Paiements
+      1 Bien
     </div>
   </>)
 }

@@ -8,7 +8,7 @@ import AsideSetting from '../aside/Settings';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Profile(props) {
+export default function Compte(props) {
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);
   const history = useHistory();

@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { AccountModule } from './account/account.module';
+import { BienModule } from './bien/bien.module';
+import { BailleurModule } from './bailleur/bailleur.module';
 import { OrganizationModule } from './organization/origanization.module';
 import { PageModule } from './page/page.module';
 import { WalletModule } from './wallet/wallet.module';
@@ -27,6 +29,8 @@ import { CronModule } from './cron/cron.module';
     PageModule,
     PrismaModule,
     AccountModule,
+    BienModule,
+    BailleurModule,
     OrganizationModule,
     RabbitMQModule,
     PrometheusModule,
