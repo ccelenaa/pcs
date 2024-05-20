@@ -5,14 +5,15 @@ import { API_URL } from './../../Config';
 import { isConnected, setConnexion } from 'services/user';
 import { useHistory, Link, NavLink, Route, useLocation } from 'react-router-dom';
 
-export default function Login() {
+export default function Login(props) {
   const history = useHistory();
-
+  console.log({props})
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);
   const [formData, setFormData] = useState({
     login: "",
-    password: ""
+    password: "",
+    service: props.organization.name
   });
 
   const handleChange = (event) => {

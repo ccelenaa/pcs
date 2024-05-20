@@ -60,11 +60,11 @@ export class AuthService {
   }
 
 
-  async signToken(userId: BigInt, type: string, email: string): Promise<string> {
+  async signToken(userId: BigInt, service: string, email: string): Promise<string> {
     console.log(userId.toString());
     const payload = {
       sub: userId.toString(),
-      type,
+      service,
       email
     };
 

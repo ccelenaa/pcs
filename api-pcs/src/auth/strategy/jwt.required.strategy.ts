@@ -20,12 +20,12 @@ export class JwtRequiredStrategy extends PassportStrategy(Strategy, 'jwt.require
 
   async validate(payload: {
     sub: string,
-    type: string,
+    service: string,
     email: string,
     login: string
   }) {
     
-    const account = await this.prisma[payload.type].findFirst({
+    const account = await this.prisma[payload.service].findFirst({
       where: {
         id: payload.sub as unknown
       }

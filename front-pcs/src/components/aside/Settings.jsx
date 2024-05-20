@@ -30,7 +30,7 @@ import {
   faPhoneFlip,
   faPhoneVolume,
   faChevronRight,
-  faUserAlt,faHandshakeAngle,faFolderClosed,faShieldAlt,faPen,faCreditCard,faHaykal
+  faUsersRectangle,faHandshakeAngle,faUserFriends,faUserGroup,faFolderClosed,faShieldAlt,faPen,faCreditCard,faHaykal
 } from '@fortawesome/free-solid-svg-icons';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -42,47 +42,134 @@ export default function AsideSetting(props) {
 
   },[]);
 
-  const menus = props.isAuth !== 'true' ? 
-  [
-    {
-      menu: 'login',
-      label: 'Login',
-      icon: faUser
+  let menus = [];
+  if(props.isAuth !== 'true'){
+    menus = [
+      {
+        menu: 'login',
+        label: 'Signin',
+        icon: faUnlockKeyhole
+      },
+      {
+        menu: 'signup',
+        label: 'Signup',
+        icon: faUsersRectangle
+      }
+    ];
+  } else {
+    switch(props.organization.name){
+      case "admin":
+        menus = [
+          {
+            menu: 'profile',
+            label: 'Profile',
+            icon: faUser
+          },{
+            menu: 'bailleurs',
+            label: 'Gestion bailleurs',
+            icon: faUserFriends
+          },{
+            menu: 'prestataires',
+            label: 'Gestion prestataires',
+            icon: faUserGroup
+          },{
+            menu: 'voyageurs',
+            label: 'Gestion voyageurs',
+            icon: faUserGroup
+          },{
+            menu: 'voyageurs1',
+            label: 'Gestion des Biens',
+            icon: faUserGroup
+          },{
+            menu: 'prestations',
+            label: 'Gestion des prestations',
+            icon: faUserGroup
+          },{
+            menu: 'security',
+            label: 'Sécurité',
+            icon: faShieldAlt
+          },{
+            menu: 'parameters',
+            label: 'Parametres',
+            icon: all.faCog
+          },{
+            menu: 'account',
+            label: 'Compte',
+            icon: faFolderClosed
+          },
+        ]; break;
+      case "bailleur":
+        menus = [
+          {
+            menu: 'profile',
+            label: 'Profile',
+            icon: faUser
+          },
+          {
+            menu: 'security',
+            label: 'Mes biens',
+            icon: faShieldAlt
+          },{
+            menu: 'parameters',
+            label: 'Parametres',
+            icon: all.faCog
+          },{
+            menu: 'account',
+            label: 'Compte',
+            icon: faFolderClosed
+          },
+        ]; break;
+      case "prestataire":
+        menus = [
+          {
+            menu: 'profile',
+            label: 'Profile',
+            icon: faUser
+          },{
+            menu: 'memberships',
+            label: 'Mes prestations',
+            icon: faHandshakeAngle
+          },
+          {
+            menu: 'security',
+            label: 'Mes factures',
+            icon: faShieldAlt
+          },{
+            menu: 'parameters',
+            label: 'Parametres',
+            icon: all.faCog
+          },{
+            menu: 'account',
+            label: 'Compte',
+            icon: faFolderClosed
+          },
+        ]; break;
+      case "voyageur":
+        menus = [
+          {
+            menu: 'profile',
+            label: 'Profile',
+            icon: faUser
+          },{
+            menu: 'parameters',
+            label: 'Biens disponibles',
+            icon: all.faCog
+          },{
+            menu: 'security',
+            label: 'Mes reservations',
+            icon: faShieldAlt
+          },{
+            menu: 'memberships',
+            label: 'Demande de prestations',
+            icon: faHandshakeAngle
+          },{
+            menu: 'account',
+            label: 'Mes factures',
+            icon: faFolderClosed
+          },
+        ];
     }
-  ]:
-  [
-    {
-      menu: 'profile',
-      label: 'Profile',
-      icon: faUser
-    },{
-      menu: 'memberships',
-      label: 'Adhésions',
-      icon: faHandshakeAngle
-    },{
-      menu: 'payments',
-      label: 'Paiements',
-      icon: faCreditCard
-    },{
-      menu: 'messages',
-      label: 'Messages',
-      icon: all.faPaperPlane
-    },{
-      menu: 'security',
-      label: 'Sécurité',
-      icon: faShieldAlt
-    },{
-      menu: 'parameters',
-      label: 'Parametres',
-      icon: all.faCog
-    },{
-      menu: 'account',
-      label: 'Compte',
-      icon: faFolderClosed
-    },
-  ]
-  // console.log("test");
-  // console.log(Object.entries(all));
+  }
 
   return (
     <>

@@ -17,6 +17,10 @@ import { Redirect, useParams } from 'react-router-dom/cjs/react-router-dom';
 import AsideSSetting from 'components/aside/SSettings';
 
 export default function Settings(props) {
+  console.log({
+    kamal: "kamal",
+    props
+  })
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);
   const history = useHistory();

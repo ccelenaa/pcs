@@ -15,6 +15,7 @@ import configuration from './utils/configuration';
 import { PrometheusModule } from './prometheus/prometheus.module';
 import { APP_FILTER } from '@nestjs/core';
 import { MetricsExceptionFilter } from './filters/metricsException';
+import { CronModule } from './cron/cron.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { MetricsExceptionFilter } from './filters/metricsException';
     AccountModule,
     OrganizationModule,
     RabbitMQModule,
-    PrometheusModule
+    PrometheusModule,
+    CronModule
   ],
   controllers: [AppController],
   providers: [
