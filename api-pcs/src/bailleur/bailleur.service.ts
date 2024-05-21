@@ -7,7 +7,7 @@ export class BailleurService {
 
   constructor(private prisma: PrismaService) { }
 
-  async getBailleurs(): Promise<bailleur[]> {
+  async gets(): Promise<bailleur[]> {
     return await this.prisma.bailleur.findMany({
       include: {
         bien: true,
@@ -18,7 +18,7 @@ export class BailleurService {
     });
   }
 
-  async getBailleur(id_bailleur: number): Promise<bailleur> {
+  async get(id_bailleur: number): Promise<bailleur> {
     return await this.prisma.bailleur.findFirst({
       where: {
         id: id_bailleur

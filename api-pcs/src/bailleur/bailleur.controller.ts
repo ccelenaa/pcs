@@ -15,8 +15,8 @@ export class BailleurController {
   */
   @Get()
   @HttpCode(HttpStatus.OK)
-  async bailleurs() {
-    return this.bailleurService.getBailleurs();
+  async gets() {
+    return this.bailleurService.gets();
   }
 
   /*
@@ -25,8 +25,8 @@ export class BailleurController {
   */
   @Get(':id_bailleur')
   @HttpCode(HttpStatus.OK)
-  async bailleur(@Param('id_bailleur') id_bailleur: number) {
-    return this.bailleurService.getBailleur(id_bailleur);
+  async get(@Param('id_bailleur') id_bailleur: number) {
+    return this.bailleurService.get(id_bailleur);
   }
 
   /*

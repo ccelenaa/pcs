@@ -48,8 +48,8 @@ export default function Bailleurs(props) {
   return (<>
     <div className="tab-container">
       <div className="row header">
-        <div className="cell">Nom du bailleur</div>
-        <div className="cell">Création</div>
+        <div className="cell">Bailleur</div>
+        <div className="cell">Créer</div>
         <div className="cell slim2">Biens</div>
         <div className="cell slim">Susp</div>
         <div className="cell slim">Val</div>
