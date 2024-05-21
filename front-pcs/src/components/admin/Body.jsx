@@ -16,6 +16,7 @@ import Prestataires from './Prestataires';
 import Voyageur from './Voyageur';
 import Voyageurs from './Voyageurs';
 import Messages from './Messages';
+import Langues from './Langues';
 
 export default function Body(props) {
   console.log({
@@ -37,5 +38,6 @@ export default function Body(props) {
     <Route path='/prestataires/:id' render={(prps) => <Prestataire {...props}/>}/>
     <Route path='/voyageurs' exact render={(prps) => <Voyageurs {...props}/>}/>
     <Route path='/voyageurs/:id' render={(prps) => <Voyageur {...props}/>}/>
+    <Route path='/langues' render={(prps) => <Langues {...props}/>}/>
   </>)
 }

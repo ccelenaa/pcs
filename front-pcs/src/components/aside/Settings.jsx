@@ -90,6 +90,10 @@ export default function AsideSetting(props) {
             menu: '/voyageurs',
             label: 'Gestion des voyageurs',
             icon: faUserGroup
+          },{
+            menu: '/langues',
+            label: 'Langues',
+            icon: faUserGroup
           },
         ]; break;
       case "bailleur":
@@ -125,7 +129,7 @@ export default function AsideSetting(props) {
           },{
             menu: '/messages',
             label: 'Messages',
-            icon: all.faMessage
+            icon: all.faComment
           },{
             menu: '/prestations',
             label: 'Mes prestations',
