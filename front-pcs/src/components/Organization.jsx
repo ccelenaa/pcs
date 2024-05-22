@@ -128,52 +128,23 @@ function Organization() {
   var [langues, setLangues] = useState([]);
   
   useEffect(async () => {
-    // timer(0, 3000).subscribe(n => {
-    //   console.log('timer', n);
-    // });
     interval(3000).subscribe(n => {
         var els = document.getElementsByClassName('createdAt');
         for (let el of els) {
           el.innerHTML = Since(new Date(el.dataset.date));
         }
-
-        // if (html.classList.contains('burger-menu-opened')) {
-        //   html.classList.remove('burger-menu-opened');
-        // } else {
-        //   html.classList.add('burger-menu-opened');
-        // }
-
-        // if (html.classList.contains('burger-menu-opened')) {
-        //   html.classList.remove('burger-menu-opened');
-        // } else {
-        //   html.classList.add('burger-menu-opened');
-        // }
     });
+
     const userApi = await getUserData();
     const languesBd = await langueService.gets();
-    console.log({malocal: userApi.locale});
-    i18n.changeLanguage(userApi.locale);
+
+    if(userApi) {
+      i18n.changeLanguage(userApi.locale);
+    }
 
     setUser(userApi);
     setLangues(languesBd);
 
-    // try {
-    //   const org = await getOrganization();
-    //   if (org) {
-    //     setOrganization({
-    //       name:   org.name,
-    //       organization: org,
-    //       status: 'valid'
-    //     });
-
-    //     document.title = org.name;
-    //   }
-    // } catch (error) {
-    //   setOrganization({
-    //     name:   organization.name,
-    //     status: 'unvalid'
-    //   });
-    // }
   }, []);
 
   return organization.status === 'pending' ? (<></>) :
