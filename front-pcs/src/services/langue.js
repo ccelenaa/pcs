@@ -12,10 +12,10 @@ export default {
             if(response.status === 200) {
                 return response.data;
             }
-            return null;
+            return [];
         }).catch(function (error) {
             console.log({error})
-            return null;
+            return [];
         });
     },
 }
