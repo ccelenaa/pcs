@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Organization from './components/Organization';
 import { BrowserRouter as Router, useLocation} from 'react-router-dom';
 import {setConnexion, isConnected} from './services/user';
-  
+import "./services/i18n";
+
 function App() {
   // console.log('APP()');
 

@@ -34,8 +34,8 @@ export default function Login(props) {
     // xhr.withCredentials = true;
     // xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
     // var auth = new FormData();
-    // auth.append('login', 'Kamal');
-    // auth.append('password', 'kamal');
+    // auth.append('login', 'Celina');
+    // auth.append('password', 'Celina');
     // console.log(auth);
     // xhr.send(auth);
 

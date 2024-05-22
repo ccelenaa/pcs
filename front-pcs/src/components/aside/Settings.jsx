@@ -2,43 +2,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link, BrowserRouter as Router, Route, useParams, NavLink } from 'react-router-dom';
 import {
-  faUniversity,
-  faDove,
-  faUser,
-  faLocationDot,
-  faBirthdayCake,
-  faAddressBook,
-  faAddressCard,
-  faKeyboard,
-  faKey,
-  faFileWord,
-  faFlag,
-  faClockRotateLeft,
-  faClockFour,
-  faClock,
-  faContactBook,
-  faContactCard,
-  faPenAlt,
-  faUnlockKeyhole,
-  faFaceFrownOpen,
-  faFaceFrown,
-  faArrowLeftLong,
-  faArrowRightLong,
-  faPhoneAlt,
-  faPhone,
-  faPhoneSquare,
-  faPhoneFlip,
-  faPhoneVolume,
-  faChevronRight,
-  faUsersRectangle,faHandshakeAngle,faUserFriends,faUserGroup,faFolderClosed,faShieldAlt,faPen,faCreditCard,faHaykal
+  faUser,faUnlockKeyhole,faHandshakeAngle,faUserFriends,faUserGroup,faFolderClosed,faShieldAlt,faCreditCard
 } from '@fortawesome/free-solid-svg-icons';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { useTranslation } from "react-i18next";
 
 export default function AsideSetting(props) {
   // const {menu: selected} = useParams();
   const {pathname: selected = ""} = useLocation();
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
 
@@ -49,12 +23,12 @@ export default function AsideSetting(props) {
     menus = [
       {
         menu: '/auth',
-        label: 'Authetification',
+        label: 'side.auth',
         icon: faUnlockKeyhole
       },
       {
         menu: '/inscription',
-        label: 'Inscription',
+        label: 'side.register',
         icon: all.faAdd
       }
     ];
@@ -64,36 +38,36 @@ export default function AsideSetting(props) {
         menus = [
           {
             menu: '/compte',
-            label: 'Compte',
+            label: 'side.admin.account',
             icon: faUser
           },{
             menu: '/messages',
-            label: 'Messages',
+            label: 'side.admin.messages',
             icon: all.faComment
           },{
             menu: '/biens',
-            label: 'Gestion des biens',
+            label: 'side.admin.biens',
             icon: all.faHomeLg
           },{
             menu: '/prestations',
-            label: 'Gestion des prestations',
+            label: 'side.admin.prestations',
             icon: all.faHandshakeAngle
           },{
             menu: '/bailleurs',
-            label: 'Gestion des bailleurs',
+            label: 'side.admin.bailleurs',
             icon: faUserFriends
           },{
             menu: '/prestataires',
-            label: 'Gestion des prestataires',
+            label: 'side.admin.prestataires',
             icon: faUserGroup
           },{
             menu: '/voyageurs',
-            label: 'Gestion des voyageurs',
+            label: 'side.admin.voyageurs',
             icon: faUserGroup
           },{
             menu: '/langues',
-            label: 'Langues',
-            icon: faUserGroup
+            label: 'side.admin.langues',
+            icon: all.faLanguage
           },
         ]; break;
       case "bailleur":
@@ -185,7 +159,7 @@ export default function AsideSetting(props) {
                         <div style={{flexShrink: '0', flexGrow: '0', height: '12px', width: '25px', textAlign: 'center', paddingRight: '8px'}}>
                           <FontAwesomeIcon icon={m.icon} className="burger" style={{}}/>
                         </div>
-                        <div style={{flexShrink: '1', flexGrow: '1'}}>{m.label}</div>
+                        <div style={{flexShrink: '1', flexGrow: '1'}}>{t(m.label)}</div>
                         {
                           selected===m.menu
                           ? <div style={{

@@ -19,10 +19,6 @@ import Messages from './Messages';
 import Langues from './Langues';
 
 export default function Body(props) {
-  console.log({
-    kamal: "kamal",
-    props
-  })
 
   return (<>
     <Route path='/auth' render={(prps) => <Login {...props}/>}/>

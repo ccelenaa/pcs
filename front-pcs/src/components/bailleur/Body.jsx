@@ -12,10 +12,6 @@ import Message from './Message';
 import Login from 'components/login/Login';
 
 export default function Body(props) {
-  console.log({
-    kamal: "kamal",
-    props
-  })
 
   return (<>
     <Route path='/auth' render={(prps) => <Login {...props}/>}/>

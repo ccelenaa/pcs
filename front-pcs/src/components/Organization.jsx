@@ -8,10 +8,14 @@ import { timer, interval } from 'rxjs';
 
 import {getOrganization} from '../services/organization';
 import {getUserData} from '../services/user';
+import langueService from '../services/langue';
 import { Since } from './../utils/date.ts'
 import SettingsMenu from './menu/SettingsMenu';
+import { useTranslation } from "react-i18next";
+
 
 function Organization() {
+  const { i18n, t } = useTranslation();
   var url = /^([a-zA-Z0-9-]+)\.([a-zA-Z0-9]+)\.([a-zA-Z]+)$/g.exec(window.location.hostname);
   
   var [organization, setOrganization] = useState({
@@ -121,6 +125,7 @@ function Organization() {
   });  
 
   var [user, setUser] = useState({});
+  var [langues, setLangues] = useState([]);
   
   useEffect(async () => {
     // timer(0, 3000).subscribe(n => {
@@ -144,8 +149,13 @@ function Organization() {
         //   html.classList.add('burger-menu-opened');
         // }
     });
+    const userApi = await getUserData();
+    const languesBd = await langueService.gets();
+    console.log({malocal: userApi.locale});
+    i18n.changeLanguage(userApi.locale);
 
-    setUser(await getUserData());
+    setUser(userApi);
+    setLangues(languesBd);
 
     // try {
     //   const org = await getOrganization();
@@ -177,9 +187,9 @@ function Organization() {
     <>
       <Menu menu={organization.organization.menu}/>
       {/* <SettingsMenu/> */}
-      <Header organization={organization.organization}/>
-      <Body organization={organization.organization} account={user}/>
-      <Footer organization={organization.organization}/>
+      <Header organization={organization.organization} langues={langues}/>
+      <Body organization={organization.organization} account={user} langues={langues}/>
+      <Footer organization={organization.organization} langues={langues}/>
     </>
   );
 }

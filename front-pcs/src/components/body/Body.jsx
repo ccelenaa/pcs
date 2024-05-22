@@ -42,10 +42,7 @@ import Prestataire from 'components/prestataire/Body';
 import Admin from 'components/admin/Body';
 
 export default function Settings(props) {
-  console.log({
-    kamal: "kamal",
-    props
-  })
+
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);
   const history = useHistory();

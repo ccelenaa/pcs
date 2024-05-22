@@ -7,8 +7,11 @@ import { useHistory, Link, NavLink } from 'react-router-dom';
 import AsideSetting from '../aside/Settings';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from "react-i18next";
 
 export default function Compte(props) {
+  const { i18n, t } = useTranslation();
+
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);
   const history = useHistory();
@@ -19,8 +22,21 @@ export default function Compte(props) {
 
   const account = props.account ?? {};
 
+
+  const onChangeLang = (e) => {
+    i18n.changeLanguage(e.target.value);
+  };
+  console.log({langues: props.langues});
+
   return (<>
     <div class="logout-panel">
+      <select value={i18n.language} onChange={onChangeLang}>
+        {props.langues.map(({ locale, label }) => (
+          <option key={locale} value={locale}>
+            {label}
+          </option>
+        ))}
+      </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="button" value="Logout" onClick={close}/>
     </div>
     <form class="formulaire">

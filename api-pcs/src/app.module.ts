@@ -20,6 +20,7 @@ import { CronModule } from './cron/cron.module';
 import { BailleurModule } from './bailleur/bailleur.module';
 import { PrestataireModule } from './prestataire/prestataire.module';
 import { VoyageurModule } from './voyageur/voyageur.module';
+import { LangueModule } from './langue/langue.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { VoyageurModule } from './voyageur/voyageur.module';
     BailleurModule,
     PrestataireModule,
     VoyageurModule,
+    LangueModule,
     OrganizationModule,
     RabbitMQModule,
     PrometheusModule,

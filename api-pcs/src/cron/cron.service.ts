@@ -14,7 +14,7 @@ export class CronService {
   }
 
   private facturationPrestataires() {
-    cron.schedule('* * * * *', () => {
+    cron.schedule('0 0 1 * *', () => {
       console.log(`La tâche cron s'est déclenchée ...`);
     });
   }
