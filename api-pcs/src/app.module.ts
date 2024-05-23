@@ -21,6 +21,8 @@ import { BailleurModule } from './bailleur/bailleur.module';
 import { PrestataireModule } from './prestataire/prestataire.module';
 import { VoyageurModule } from './voyageur/voyageur.module';
 import { LangueModule } from './langue/langue.module';
+import { PrestationModule } from './prestation/prestation.module';
+import { TypePrestationModule } from './type_prestation/type_prestation.module';
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { LangueModule } from './langue/langue.module';
     BienModule,
     BailleurModule,
     PrestataireModule,
+    PrestationModule,
+    TypePrestationModule,
     VoyageurModule,
     LangueModule,
     OrganizationModule,
