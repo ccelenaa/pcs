@@ -50,7 +50,7 @@ export default function Bailleurs(props) {
       <div className="row header">
         <div className="cell">Bailleur</div>
         <div className="cell">Créer</div>
-        <div className="cell slim2">Biens</div>
+        <div className="cell slim40">Biens</div>
         <div className="cell slim">Susp</div>
         <div className="cell slim">Val</div>
         {/* <div className="cell slim"></div> */}
@@ -61,7 +61,7 @@ export default function Bailleurs(props) {
             <div className="row">
               <div className="cell">{bailleur.name}</div>
               <div className="cell">{bailleur.created_at.slice(0, 16).replace('T', ' ')}</div>
-              <div className="cell slim2">{bailleur.bien.length}</div>
+              <div className="cell slim40">{bailleur.bien.length}</div>
               <div className="cell slim"><input id={`${bailleur.id}_val`} data-bailleurid={bailleur.id} type="checkbox" defaultChecked={bailleur.suspended_at !== null} onChange={suspenssion} title={bailleur.suspended_at?.slice(0, 16).replace('T', ' ')} style={{display: bailleur.verified_at === null ? "none" : "initial"}}/></div>
               <div className="cell slim"><input id={`${bailleur.id}_sus`} data-bailleurid={bailleur.id} type="checkbox" defaultChecked={bailleur.verified_at !== null} onChange={validation} title={bailleur.verified_at?.slice(0, 16).replace('T', ' ')} disabled={bailleur.verified_at !== null}/></div>
               {/* <div className="cell slim"><FontAwesomeIcon icon={all.faRemove} className="burger" style={{fontSize: '18px', cursor: 'pointer'}}/></div> */}

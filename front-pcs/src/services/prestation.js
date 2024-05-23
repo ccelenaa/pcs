@@ -5,7 +5,7 @@ export default {
     gets: (event) => {
         return axios({
             method: 'get',
-            url: `${API_URL}/biens?cache=${Math.random()}`,
+            url: `${API_URL}/prestations?cache=${Math.random()}`,
             responseType: 'json',
             withCredentials: true,
         }).catch(function (error) {
@@ -14,14 +14,26 @@ export default {
         });
     },
 
-    valider: (id, valider) => {
+    get: (id) => {
+        return axios({
+            method: 'get',
+            url: `${API_URL}/prestations/${id}`,
+            responseType: 'json',
+            withCredentials: true,
+        }).catch(function (error) {
+            console.log({error})
+            return null;
+        });
+    },
+
+    setPrestataire: (id, id_prestataire) => {
         return axios({
             method: 'post',
-            url: `${API_URL}/biens/validation/${id}`,
+            url: `${API_URL}/prestations/${id}/set/prestataire`,
             responseType: 'json',
             withCredentials: true,
             data: {
-                valider
+                id_prestataire
             }
         }).catch(function (error) {
             console.log({error})
@@ -29,33 +41,4 @@ export default {
         });
     },
 
-    suspendre: (id, suspendre) => {
-        return axios({
-            method: 'post',
-            url: `${API_URL}/biens/suspenssion/${id}`,
-            responseType: 'json',
-            withCredentials: true,
-            data: {
-                suspendre
-            }
-        }).catch(function (error) {
-            console.log({error})
-            return null;
-        });
-    },
-
-    bailleur_suspendre: (id, suspendre) => {
-        return axios({
-            method: 'post',
-            url: `${API_URL}/biens/bailleur-suspenssion/${id}`,
-            responseType: 'json',
-            withCredentials: true,
-            data: {
-                suspendre
-            }
-        }).catch(function (error) {
-            console.log({error})
-            return null;
-        });
-    },
 }

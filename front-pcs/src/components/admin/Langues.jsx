@@ -19,7 +19,7 @@ export default function Langues(props) {
   return (<>
     <div className="tab-container">
       <div className="row header">
-        <div className="cell slim2">Code</div>
+        <div className="cell slim40">Code</div>
         <div className="cell">Langues</div>
         <div className="cell">Créer</div>
         {/* <div className="cell slim">Susp</div>
@@ -30,7 +30,7 @@ export default function Langues(props) {
         langues.map((langue) => 
           <>
             <div className="row">
-              <div className="cell slim2">[{langue.locale}]</div>
+              <div className="cell slim40">[{langue.locale}]</div>
               <div className="cell">{langue.label}</div>
               <div className="cell">{langue.created_at.slice(0, 16).replace('T', ' ')}</div>
               {/* <div className="cell slim"><input id={`${voyageur.id}_val`} data-voyageurid={voyageur.id} type="checkbox" defaultChecked={voyageur.suspended_at !== null} onChange={suspenssion} title={voyageur.suspended_at?.slice(0, 16).replace('T', ' ')} style={{display: voyageur.verified_at === null ? "none" : "initial"}}/></div>

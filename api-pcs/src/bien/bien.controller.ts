@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpStatus, Param, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtRequiredGuard } from 'src/auth/guard';
 import { BienService } from './bien.service';
 import { GetAccount } from 'src/auth/decorator'
@@ -16,7 +16,7 @@ export class BienController {
   @Get()
   @HttpCode(HttpStatus.OK)
   async biens() {
-    return this.bienService.getBiens();
+    return this.bienService.gets();
   }
 
   /*
@@ -26,16 +26,36 @@ export class BienController {
   @Get(':id_bien')
   @HttpCode(HttpStatus.OK)
   async bien(@Param('id_bien') id_bien: number) {
-    return this.bienService.getBien(id_bien);
+    return this.bienService.get(id_bien);
   }
 
   /*
   Route: /biens/bailleur/:id_bailleur
   Recupere tout les biens d'u bailleur <id_bailleur>
   */
-  @Get('bailleur/:id_bailleur')
+  @Post('suspenssion/:id_bien')
   @HttpCode(HttpStatus.OK)
-  async biensParBailleur(@Param('id_bailleur') id_bailleur: number) {
-    return this.bienService.biensParBailleur(id_bailleur);
+  async suspenssion(@Param('id_bien') id_bien: number, @Body('suspendre') suspendre: boolean) {
+    return this.bienService.suspenssion(id_bien, suspendre);
+  }
+
+  /*
+  Route: /biens/bailleur/:id_bailleur
+  Recupere tout les biens d'u bailleur <id_bailleur>
+  */
+  @Post('validation/:id_bien')
+  @HttpCode(HttpStatus.OK)
+  async validation(@Param('id_bien') id_bien: number, @Body('valider') valider: boolean) {
+    return this.bienService.validation(id_bien, valider);
+  }
+
+  /*
+  Route: /biens/bailleur/:id_bailleur
+  Recupere tout les biens d'u bailleur <id_bailleur>
+  */
+  @Post('bailleur-suspenssion/:id_bien')
+  @HttpCode(HttpStatus.OK)
+  async bailleur_suspenssion(@Param('id_bien') id_bien: number, @Body('suspendre') suspendre: boolean) {
+    return this.bienService.bailleur_suspenssion(id_bien, suspendre);
   }
 }

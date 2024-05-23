@@ -278,10 +278,39 @@ a {
         text-align: center;
       }
 
-      & .slim2 {
+      & .slim40 {
         flex: 0;
         flex-basis: 40px;
         text-align: center;
+      }
+
+      & .slim50 {
+        flex: 0;
+        flex-basis: 60px;
+        text-align: center;
+      }
+
+      & .slim60 {
+        flex: 0;
+        flex-basis: 60px;
+        text-align: center;
+      }
+
+      & .slim70 {
+        flex: 0;
+        flex-basis: 70px;
+        text-align: center;
+      }
+
+      & .slim90 {
+        flex: 0;
+        flex-basis: 90px;
+        text-align: center;
+      }
+
+      & .slim120 {
+        flex: 0;
+        flex-basis: 120px;
       }
 
       :last-child {
