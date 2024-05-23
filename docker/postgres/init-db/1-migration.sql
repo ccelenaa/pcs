@@ -44,8 +44,8 @@ CREATE TABLE "voyageur" (
     "password" VARCHAR(512) NOT NULL,
     "locale" VARCHAR(32) NOT NULL DEFAULT 'fr',
     "data" JSONB NOT NULL DEFAULT '{}',
-    "verified_at" TIMESTAMP(3),
     "suspended_at" TIMESTAMP(3),
+    "verified_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "deleted_at" TIMESTAMP(3),
@@ -90,6 +90,51 @@ CREATE TABLE "bien" (
 );
 
 -- CreateTable
+CREATE TABLE "prestation" (
+    "id" BIGSERIAL NOT NULL,
+    "id_voyageur" BIGSERIAL NOT NULL,
+    "id_prestataire" BIGSERIAL,
+    "id_type_prestation" BIGSERIAL NOT NULL,
+    "id_facture" BIGSERIAL,
+    "lieu_prestation" VARCHAR(512) DEFAULT NULL,
+    "date_prestation" TIMESTAMP(3) DEFAULT NULL,
+    "date_validation_voyageur" TIMESTAMP(3) DEFAULT NULL,
+    "date_validation_prestataire" TIMESTAMP(3) DEFAULT NULL,
+    "status" VARCHAR(32) NOT NULL DEFAULT 'new',
+    "remarque" VARCHAR(512) DEFAULT NULL,
+    "note" INTEGER NOT NULL DEFAULT 0,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" TIMESTAMP(3),
+
+    CONSTRAINT "prestation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "type_prestation" (
+    "id" BIGSERIAL NOT NULL,
+    "label" VARCHAR(255),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" TIMESTAMP(3),
+
+    CONSTRAINT "type_prestation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "prestataire_type_prestation" (
+    "id" BIGSERIAL NOT NULL,
+    "id_prestataire" BIGINT NOT NULL,
+    "id_type_prestation" BIGINT NOT NULL,
+    "price" INTEGER NOT NULL DEFAULT 0,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" TIMESTAMP(3),
+
+    CONSTRAINT "prestataire_type_prestation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "planing" (
     "id" BIGSERIAL NOT NULL,
     "id_bien" BIGINT NOT NULL,
@@ -109,7 +154,7 @@ CREATE TABLE "location" (
     "id" BIGSERIAL NOT NULL,
     "id_bien" BIGINT NOT NULL,
     "id_voyageur" BIGINT NOT NULL,
-    -- "id_prestataire" BIGINT NOT NULL,
+    "id_facture" BIGINT NULL,
     "data" JSONB NOT NULL DEFAULT '{}',
     "price" VARCHAR(32) NOT NULL,
     "price_total" VARCHAR(32) NOT NULL,
@@ -121,6 +166,20 @@ CREATE TABLE "location" (
     "deleted_at" TIMESTAMP(3),
 
     CONSTRAINT "location_pkey" PRIMARY KEY ("id")
+);
+
+
+-- CreateTable
+CREATE TABLE "facture" (
+    "id" BIGSERIAL NOT NULL,
+    "type" VARCHAR(32) NOT NULL DEFAULT 'location',
+    "prix" INTEGER NOT NULL DEFAULT 0,
+    "total" INTEGER NOT NULL DEFAULT 0,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" TIMESTAMP(3),
+
+    CONSTRAINT "facture_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -152,6 +211,24 @@ CREATE TABLE "langue" (
 ALTER TABLE "bien" ADD CONSTRAINT "bien_bailleur_id_fkey" FOREIGN KEY ("id_bailleur") REFERENCES "bailleur"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "prestation" ADD CONSTRAINT "prestation_voyageur_id_fkey" FOREIGN KEY ("id_voyageur") REFERENCES "voyageur"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "prestation" ADD CONSTRAINT "prestation_prestataire_id_fkey" FOREIGN KEY ("id_prestataire") REFERENCES "prestataire"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "prestation" ADD CONSTRAINT "prestation_type_prestation_id_fkey" FOREIGN KEY ("id_type_prestation") REFERENCES "type_prestation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "prestation" ADD CONSTRAINT "prestation_facture_id_fkey" FOREIGN KEY ("id_facture") REFERENCES "facture"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "prestataire_type_prestation" ADD CONSTRAINT "prestataire_type_prestation_prestataire_id_fkey" FOREIGN KEY ("id_prestataire") REFERENCES "prestataire"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "prestataire_type_prestation" ADD CONSTRAINT "prestataire_type_prestation_type_prestation_id_fkey" FOREIGN KEY ("id_type_prestation") REFERENCES "type_prestation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "planing" ADD CONSTRAINT "planing_bien_id_fkey" FOREIGN KEY ("id_bien") REFERENCES "bien"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -161,7 +238,16 @@ ALTER TABLE "location" ADD CONSTRAINT "location_bien_id_fkey" FOREIGN KEY ("id_b
 ALTER TABLE "location" ADD CONSTRAINT "location_voyageur_id_fkey" FOREIGN KEY ("id_voyageur") REFERENCES "voyageur"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "location" ADD CONSTRAINT "location_facture_id_fkey" FOREIGN KEY ("id_facture") REFERENCES "facture"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "photo" ADD CONSTRAINT "photo_bien_id_fkey" FOREIGN KEY ("id_bien") REFERENCES "bien"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+-- AddForeignKey
 -- ALTER TABLE "location" ADD CONSTRAINT "location_prestataire_id_fkey" FOREIGN KEY ("id_prestataire") REFERENCES "prestataire"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
 
 
 

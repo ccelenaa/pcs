@@ -40,6 +40,7 @@ model bien {
   deleted_at   DateTime?
   bailleur     bailleur   @relation(fields: [id_bailleur], references: [id], map: "bien_bailleur_id_fkey")
   location     location[]
+  photo        photo[]
   planing      planing[]
 }
 
@@ -56,6 +57,7 @@ model location {
   id          BigInt    @id @default(autoincrement())
   id_bien     BigInt
   id_voyageur BigInt
+  id_facture  BigInt?
   data        Json      @default("{}")
   price       String    @db.VarChar(32)
   price_total String    @db.VarChar(32)
@@ -66,6 +68,7 @@ model location {
   updated_at  DateTime  @default(now())
   deleted_at  DateTime?
   bien        bien      @relation(fields: [id_bien], references: [id], map: "location_bien_id_fkey")
+  facture     facture?  @relation(fields: [id_facture], references: [id], onDelete: Restrict, map: "location_facture_id_fkey")
   voyageur    voyageur  @relation(fields: [id_voyageur], references: [id], map: "location_voyageur_id_fkey")
 }
 
@@ -76,6 +79,7 @@ model photo {
   created_at DateTime  @default(now())
   updated_at DateTime  @default(now())
   deleted_at DateTime?
+  bien       bien      @relation(fields: [id_bien], references: [id], map: "photo_bien_id_fkey")
 }
 
 model planing {
@@ -92,35 +96,38 @@ model planing {
 }
 
 model prestataire {
-  id           BigInt    @id @default(autoincrement())
-  name         String?   @db.VarChar(128)
-  email        String    @db.VarChar(128)
-  login        String    @db.VarChar(32)
-  password     String    @db.VarChar(512)
-  locale       String    @default("fr") @db.VarChar(32)
-  data         Json      @default("{}")
-  verified_at  DateTime?
-  suspended_at DateTime?
-  created_at   DateTime  @default(now())
-  updated_at   DateTime  @default(now())
-  deleted_at   DateTime?
+  id                          BigInt                        @id @default(autoincrement())
+  name                        String?                       @db.VarChar(128)
+  email                       String                        @db.VarChar(128)
+  login                       String                        @db.VarChar(32)
+  password                    String                        @db.VarChar(512)
+  locale                      String                        @default("fr") @db.VarChar(32)
+  data                        Json                          @default("{}")
+  verified_at                 DateTime?
+  suspended_at                DateTime?
+  created_at                  DateTime                      @default(now())
+  updated_at                  DateTime                      @default(now())
+  deleted_at                  DateTime?
+  prestataire_type_prestation prestataire_type_prestation[]
+  prestation                  prestation[]
 }
 
 model voyageur {
-  id           BigInt     @id @default(autoincrement())
-  name         String?    @db.VarChar(128)
-  email        String     @db.VarChar(128)
-  tel          String     @db.VarChar(32)
-  login        String     @db.VarChar(32)
-  password     String     @db.VarChar(512)
-  locale       String     @default("fr") @db.VarChar(32)
-  data         Json       @default("{}")
-  verified_at  DateTime?
+  id           BigInt       @id @default(autoincrement())
+  name         String?      @db.VarChar(128)
+  email        String       @db.VarChar(128)
+  tel          String       @db.VarChar(32)
+  login        String       @db.VarChar(32)
+  password     String       @db.VarChar(512)
+  locale       String       @default("fr") @db.VarChar(32)
+  data         Json         @default("{}")
   suspended_at DateTime?
-  created_at   DateTime   @default(now())
-  updated_at   DateTime   @default(now())
+  verified_at  DateTime?    @default(now())
+  created_at   DateTime     @default(now())
+  updated_at   DateTime     @default(now())
   deleted_at   DateTime?
   location     location[]
+  prestation   prestation[]
 }
 
 model admin {
@@ -509,4 +516,60 @@ model Delegate {
   member     Member    @relation("delegation", fields: [member_id], references: [id])
 
   @@map("delegates")
+}
+
+model facture {
+  id         BigInt       @id @default(autoincrement())
+  type       String       @default("location") @db.VarChar(32)
+  prix       Int          @default(0)
+  total      Int          @default(0)
+  created_at DateTime     @default(now())
+  updated_at DateTime     @default(now())
+  deleted_at DateTime?
+  location   location[]
+  prestation prestation[]
+}
+
+model prestataire_type_prestation {
+  id                 BigInt          @id @default(autoincrement())
+  id_prestataire     BigInt
+  id_type_prestation BigInt
+  price              Int             @default(0)
+  created_at         DateTime        @default(now())
+  updated_at         DateTime        @default(now())
+  deleted_at         DateTime?
+  prestataire        prestataire     @relation(fields: [id_prestataire], references: [id], map: "prestataire_type_prestation_prestataire_id_fkey")
+  type_prestation    type_prestation @relation(fields: [id_type_prestation], references: [id], map: "prestataire_type_prestation_type_prestation_id_fkey")
+}
+
+model prestation {
+  id                          BigInt          @id @default(autoincrement())
+  id_voyageur                 BigInt          @default(autoincrement())
+  id_prestataire              BigInt          @default(autoincrement())
+  id_type_prestation          BigInt          @default(autoincrement())
+  id_facture                  BigInt          @default(autoincrement())
+  lieu_prestation             String?         @db.VarChar(512)
+  date_prestation             DateTime?
+  date_validation_voyageur    DateTime?
+  date_validation_prestataire DateTime?
+  status                      String          @default("new") @db.VarChar(32)
+  remarque                    String?         @db.VarChar(512)
+  note                        Int             @default(0)
+  created_at                  DateTime        @default(now())
+  updated_at                  DateTime        @default(now())
+  deleted_at                  DateTime?
+  facture                     facture         @relation(fields: [id_facture], references: [id], map: "prestation_facture_id_fkey")
+  prestataire                 prestataire     @relation(fields: [id_prestataire], references: [id], map: "prestation_prestataire_id_fkey")
+  type_prestation             type_prestation @relation(fields: [id_type_prestation], references: [id], map: "prestation_type_prestation_id_fkey")
+  voyageur                    voyageur        @relation(fields: [id_voyageur], references: [id], map: "prestation_voyageur_id_fkey")
+}
+
+model type_prestation {
+  id                          BigInt                        @id @default(autoincrement())
+  label                       String?                       @db.VarChar(255)
+  created_at                  DateTime                      @default(now())
+  updated_at                  DateTime                      @default(now())
+  deleted_at                  DateTime?
+  prestataire_type_prestation prestataire_type_prestation[]
+  prestation                  prestation[]
 }
