@@ -9,10 +9,20 @@ import AsideSetting from '../aside/Settings';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import prestationService from '../../services/prestation';
+import typePrestationService from '../../services/type_prestation';
 
 export default function Prestations(props) {
 
   const [prestations, setPrestations] = React.useState([]);
+  const [typePrestations, setTypePrestations] = React.useState([]);
+
+  const getTypePrestations = () => {
+    typePrestationService.gets().then((brs) => {
+      if (brs.status === 200) {
+        setPrestations(brs.data);
+      }
+    })
+  }
 
   const getPrestations = () => {
     prestationService.gets().then((brs) => {

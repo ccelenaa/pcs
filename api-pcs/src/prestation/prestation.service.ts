@@ -19,4 +19,17 @@ export class PrestationService {
     });
   }
 
+  async setPrestataire(id_prestation: number, id_prestataire: number | null): Promise<prestation> {
+    return await this.prisma.prestation.update({
+      where: {
+        id: id_prestation
+      },
+      data: {
+        id_prestataire
+      },
+      include: {
+        prestataire: true
+      }
+    });
+  }
 }
