@@ -96,6 +96,8 @@ CREATE TABLE "prestation" (
     "id_prestataire" BIGSERIAL,
     "id_type_prestation" BIGSERIAL NOT NULL,
     "id_facture" BIGSERIAL,
+    "price" INTEGER NOT NULL DEFAULT 0,
+    "currency" VARCHAR(32) NOT NULL DEFAULT 'eu',
     "lieu_prestation" VARCHAR(512) DEFAULT NULL,
     "date_prestation" TIMESTAMP(3) DEFAULT NULL,
     "date_validation_voyageur" TIMESTAMP(3) DEFAULT NULL,
@@ -220,7 +222,9 @@ ALTER TABLE "prestation" ADD CONSTRAINT "prestation_prestataire_id_fkey" FOREIGN
 ALTER TABLE "prestation" ADD CONSTRAINT "prestation_type_prestation_id_fkey" FOREIGN KEY ("id_type_prestation") REFERENCES "type_prestation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "prestation" ADD CONSTRAINT "prestation_facture_id_fkey" FOREIGN KEY ("id_facture") REFERENCES "facture"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "prestation" ADD CONSTRAINT "prestation_facture_id_fkey" FOREIGN KEY ("id_facture") REFERENCES "facture"("id") ON DELETE CASCADE;
+ALTER TABLE "prestation" ALTER COLUMN "id_facture" DROP NOT NULL;
+ALTER TABLE "prestation" ALTER COLUMN "id_prestataire" DROP NOT NULL;
 
 -- AddForeignKey
 ALTER TABLE "prestataire_type_prestation" ADD CONSTRAINT "prestataire_type_prestation_prestataire_id_fkey" FOREIGN KEY ("id_prestataire") REFERENCES "prestataire"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
