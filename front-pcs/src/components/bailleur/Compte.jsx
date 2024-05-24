@@ -24,17 +24,13 @@ export default function Compte(props) {
       <input type="button" value="Logout" onClick={close}/>
     </div>
     <form class="formulaire">
-      <div>
-        <label>Prenom</label>
-        <input type="text" value={account.firstname} />
+    <div>
+        <label>Nom</label>
+        <input type="text" value={account.name} />
       </div>
       <div>
-        <label for="">Nom</label>
-        <input type="text" value={account.lastname} />
-      </div>
-      <div>
-        <label>Date de naissance</label>
-        <input type="text" value={account.birthday} />
+        <label for="">Telephone</label>
+        <input type="text" value={account.tel} />
       </div>
       <div>
         <label>Email</label>

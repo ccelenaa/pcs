@@ -41,16 +41,12 @@ export default function Compte(props) {
     </div>
     <form class="formulaire">
       <div>
-        <label>Prenom</label>
-        <input type="text" value={account.firstname} />
+        <label>Nom</label>
+        <input type="text" value={account.name} />
       </div>
       <div>
-        <label for="">Nom</label>
-        <input type="text" value={account.lastname} />
-      </div>
-      <div>
-        <label>Date de naissance</label>
-        <input type="text" value={account.birthday} />
+        <label for="">Telephone</label>
+        <input type="text" value={account.tel} />
       </div>
       <div>
         <label>Email</label>
