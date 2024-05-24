@@ -6,11 +6,11 @@ import { API_URL } from '../../Config';
 import { useHistory, Link, NavLink } from 'react-router-dom';
 import AsideSetting from '../aside/Settings';
 
-export default function Parameters(props) {
+export default function Locations(props) {
 
   return (<>
     <div class="">
-      Paramètres
+      Locations
     </div>
   </>)
 }

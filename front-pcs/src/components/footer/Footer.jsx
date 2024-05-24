@@ -10,16 +10,16 @@ export default function Footer(){
         <div class="footer-container">
            <div className="footer-content">
                 <div style={{flexGrow: 1}}>
-                    Conditionne générales (reservé aux adhérents)<br/>
+                    Conditionne générales<br/>
                 </div>
                 <div style={{flexGrow: 1}}>
-                    <a href={'public/documents/reglement.pdf'} target="_blank">Reglement interieur</a><br/>
+                    Reglements<br/>
                 </div>
                 <div style={{flexGrow: 1}}>
-                    <Link to="/webmaster" className="">Web master</Link>
+                    Web maste<br/>
                 </div>
                 <div>
-                    Copyright enfants-ihaggarene 2020<br/>
+                    Copyright ESGI 2024<br/>
                 </div>
             </div>
         </div>

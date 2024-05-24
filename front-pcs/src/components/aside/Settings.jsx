@@ -127,15 +127,15 @@ export default function AsideSetting(props) {
           },{
             menu: '/biens',
             label: 'Biens disponibles',
-            icon: all.faCog
+            icon: all.faHomeLg
           },{
             menu: '/locations',
             label: 'Mes locations',
-            icon: faShieldAlt
+            icon: all.faHomeLg
           },{
             menu: '/prestations',
             label: 'Demande de prestations',
-            icon: faHandshakeAngle
+            icon: all.faHandshakeAngle
           },{
             menu: '/factures',
             label: 'Mes factures',
