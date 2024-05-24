@@ -8,7 +8,13 @@ export class PrestationService {
   constructor(private prisma: PrismaService) { }
 
   async gets(): Promise<prestation[]> {
-    return await this.prisma.prestation.findMany();
+    return await this.prisma.prestation.findMany({
+      include: {
+        prestataire: true,
+        type_prestation: true,
+        voyageur: true
+      }
+    });
   }
 
   async get(id_prestation: number): Promise<prestation> {

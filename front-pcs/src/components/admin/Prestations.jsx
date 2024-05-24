@@ -9,17 +9,27 @@ import AsideSetting from '../aside/Settings';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import prestationService from '../../services/prestation';
+import prestataireService from '../../services/prestataire';
 import typePrestationService from '../../services/type_prestation';
 
 export default function Prestations(props) {
 
   const [prestations, setPrestations] = React.useState([]);
   const [typePrestations, setTypePrestations] = React.useState([]);
+  const [prestataires, setPrestataires] = React.useState([]);
+
+  const getPrestataires= () => {
+    prestataireService.gets().then((brs) => {
+      if (brs.status === 200) {
+        setPrestataires(brs.data);
+      }
+    })
+  }
 
   const getTypePrestations = () => {
     typePrestationService.gets().then((brs) => {
       if (brs.status === 200) {
-        setPrestations(brs.data);
+        setTypePrestations(brs.data);
       }
     })
   }
@@ -34,6 +44,8 @@ export default function Prestations(props) {
 
   React.useEffect(() => {
     getPrestations();
+    getPrestataires();
+    getTypePrestations();
   },[]);
 
   const validation = (event) => {
@@ -57,26 +69,30 @@ export default function Prestations(props) {
   return (<>
     <div className="tab-container">
       <div className="row header">
-        <div className="cell slim120">Type</div>
-        <div className="cell slim70">Surface</div>
-        <div className="cell">prestation</div>
-        <div className="cell slim70">Prix</div>
-        <div className="cell slim50">B-Sus</div>
-        <div className="cell slim">Sus</div>
-        <div className="cell slim">Val</div>
+        <div className="cell">Voyageyr</div>
+        <div className="cell">Prestation</div>
+        <div className="cell">Date</div>
+        <div className="cell">Prestataire dispo</div>
       </div>
       {
         prestations.map((prestation) => 
           <>
             <div className="row">
-              <div className="cell slim120">{prestation.type}</div>
-              <div className="cell slim70">{prestation.area}</div>
-              <div className="cell">{prestation.description}</div>
-              <div className="cell slim70">{prestation.price} {prestation.currency}</div>
-              <div className="cell slim50"><input id={`${prestation.id}_b_val`} data-prestationid={prestation.id} type="checkbox" defaultChecked={prestation.bailleur_suspended_at !== null} title={prestation.bailleur_suspended_at?.slice(0, 16).replace('T', ' ')} disabled/></div>
-              <div className="cell slim"><input id={`${prestation.id}_val`} data-prestationid={prestation.id} type="checkbox" defaultChecked={prestation.suspended_at !== null} onChange={suspenssion} title={prestation.suspended_at?.slice(0, 16).replace('T', ' ')} style={{display: prestation.validated_at === null ? "none" : "initial"}}/></div>
-              <div className="cell slim"><input id={`${prestation.id}_sus`} data-prestationid={prestation.id} type="checkbox" defaultChecked={prestation.validated_at !== null} onChange={validation} title={prestation.validated_at?.slice(0, 16).replace('T', ' ')} disabled={prestation.validated_at !== null}/></div>
-              {/* <div className="cell slim"><FontAwesomeIcon icon={all.faRemove} className="burger" style={{fontSize: '18px', cursor: 'pointer'}}/></div> */}
+              <div className="cell">{prestation.voyageur.name}</div>
+              <div className="cell">{prestation.type_prestation.label}</div>
+              <div className="cell">{prestation.date_prestation?.slice(0, 16).replace('T', ' ')}</div>
+              <div className="cell">
+                <select>
+                  <option key="null" value="null">
+                    Selection du prestataire
+                  </option>
+                  {prestataires.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </>
         )
