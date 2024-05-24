@@ -69,7 +69,7 @@ export default function Prestations(props) {
   return (<>
     <div className="tab-container">
       <div className="row header">
-        <div className="cell">Voyageyr</div>
+        <div className="cell">Voyageur</div>
         <div className="cell">Prestation</div>
         <div className="cell">Date</div>
         <div className="cell">Prestataire dispo</div>
