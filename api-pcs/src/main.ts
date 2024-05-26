@@ -5,9 +5,6 @@ import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
 import configuration from './utils/configuration';
 import { getEnv } from './utils/tools';
-import { Metrics } from './interceptor/metrics';
-import { MetricsExceptionFilter } from './filters/metricsException';
-import { PrometheusService } from './prometheus/prometheus.service';
 
 const configService = new ConfigService(configuration());
 
@@ -17,8 +14,6 @@ async function bootstrap() {
     rawBody: true,
   });
 
-  app.useGlobalInterceptors(new Metrics(PrometheusService.getInstance()));
-  app.useGlobalFilters(new MetricsExceptionFilter(PrometheusService.getInstance()));
   app.enableCors({
     allowedHeaders: ['content-type'],
     origin: /.*$/i,

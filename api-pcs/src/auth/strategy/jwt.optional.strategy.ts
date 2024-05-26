@@ -1,4 +1,4 @@
-import { Injectable, Req } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { Request } from "express";
@@ -20,10 +20,11 @@ export class JwtOptionalStrategy extends PassportStrategy(Strategy, 'jwt.optiona
 
   async validate(payload: {
     sub: string,
+    service: string,
     email: string,
     login: string
   }) {
-    const account = await this.prisma.account.findFirst({
+    const account = await this.prisma[payload.service].findFirst({
       where: {
         id: payload.sub
       },

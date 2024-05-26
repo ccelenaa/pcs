@@ -1,8 +1,6 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtRequiredGuard } from 'src/auth/guard';
 import { BailleurService } from './bailleur.service';
-import { GetAccount } from 'src/auth/decorator'
-import { Account, Prisma, PrismaClient } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Controller('bailleurs')

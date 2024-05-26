@@ -29,7 +29,7 @@ export class BienService {
         id: id_bien
       },
       data: {
-        validated_at: validation ? new Date() : null
+        date_validation: validation ? new Date() : null
       }
     });
   }
@@ -40,7 +40,7 @@ export class BienService {
         id: id_bien
       },
       data: {
-        suspended_at: suspenssion ? new Date() : null
+        date_suspension: suspenssion ? new Date() : null
       }
     });
   }
@@ -51,7 +51,7 @@ export class BienService {
         id: id_bien
       },
       data: {
-        bailleur_suspended_at: suspenssion ? new Date() : null
+        date_suspension_bailleur: suspenssion ? new Date() : null
       }
     });
   }

@@ -13,7 +13,7 @@ export class VoyageurService {
       //   prestation: true,
       // },
       orderBy: {
-        created_at: 'desc'
+        date_creation: 'desc'
       }
     });
   }
@@ -35,7 +35,7 @@ export class VoyageurService {
         id: id_voyageur
       },
       data: {
-        verified_at: validation ? new Date() : null
+        date_validation: validation ? new Date() : null
       },
       // include: {
       //   bien: true
@@ -49,7 +49,7 @@ export class VoyageurService {
         id: id_voyageur
       },
       data: {
-        suspended_at: suspenssion ? new Date() : null
+        date_suspension: suspenssion ? new Date() : null
       },
       // include: {
       //   bien: true,

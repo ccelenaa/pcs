@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { bailleur, bien, langue } from '@prisma/client';
+import { langue } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class LangueService {
   async gets(): Promise<langue[]> {
     return await this.prisma.langue.findMany({
       orderBy: {
-        created_at: 'desc'
+        date_creation: 'desc'
       }
     });
   }
@@ -18,7 +18,7 @@ export class LangueService {
   async get(langue: string): Promise<langue> {
     return await this.prisma.langue.findFirst({
       where: {
-        locale: langue
+        langue: langue
       }
     });
   }
@@ -29,7 +29,7 @@ export class LangueService {
         id: id_langue
       },
       data: {
-        deleted_at: new Date()
+        date_creation: new Date()
       }
     });
   }

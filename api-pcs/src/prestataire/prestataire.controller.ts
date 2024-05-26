@@ -1,6 +1,5 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { PrestataireService } from './prestataire.service';
-import { GetAccount } from 'src/auth/decorator'
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Controller('prestataires')

@@ -1,8 +1,6 @@
 import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Param, Post, RawBodyRequest, Req, UseGuards } from '@nestjs/common';
-import { Account, Organization } from '@prisma/client';
-import { GetAccount } from 'src/auth/decorator';
+import { GetCompte } from 'src/auth/decorator';
 import { JwtOptionalGuard } from 'src/auth/guard';
-import { OptionalOrganization, RequireOrganization } from 'src/organization/decorator';
 import { PaymentService } from './payment.service';
 
 @Controller('payments')
@@ -14,11 +12,11 @@ export class PaymentController {
   @Post('checkout/:price')
   async findOne(
     @Param('price') id: string,
-    @RequireOrganization() organization: Organization,
-    @GetAccount() account: Account,
+    // @RequireOrganization() organization: Organization,
+    @GetCompte() compte: Object,
     @Headers('Origin') origin: string
   ) {
-    return await this.paymentService.checkout(organization, account, id, origin);
+    // return await this.paymentService.checkout(null, compte, id, origin);
   }
 
   @HttpCode(HttpStatus.OK)

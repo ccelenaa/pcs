@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { bien, prestation, type_prestation } from '@prisma/client';
+import { prestation } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class PrestationService {
     return await this.prisma.prestation.findMany({
       include: {
         prestataire: true,
-        type_prestation: true,
+        service: true,
         voyageur: true
       }
     });
