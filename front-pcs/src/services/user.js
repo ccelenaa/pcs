@@ -14,7 +14,7 @@ export function setConnexion (connected) {
 function getUser (event) {
     return axios({
         method: 'get',
-        url: `${API_URL}/accounts/me`,
+        url: `${API_URL}/comptes/moi`,
         responseType: 'json',
         withCredentials: true
     });

@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
-import {getMenu} from './../../services/menu';
 
 export default function Menu(props) {
   var [currentMenu, setCurrentMenu] = useState('main_menu');

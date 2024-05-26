@@ -10,7 +10,7 @@ import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import prestationService from '../../services/prestation';
 import prestataireService from '../../services/prestataire';
-import typePrestationService from '../../services/type_prestation';
+import typePrestationService from '../../services/service';
 
 export default function Prestations(props) {
 
@@ -62,7 +62,7 @@ export default function Prestations(props) {
     const suspendre = event.target.checked;
     prestationService.suspendre(prestation_id, suspendre).then(({data: u}) => {
       setPrestations(prestations.map(p => p.id == u.id ? u : p));
-      prestations.map(p => console.log(p.id, p.suspended_at));
+      prestations.map(p => console.log(p.id, p.date_suspension));
     });
   }
 
@@ -78,17 +78,17 @@ export default function Prestations(props) {
         prestations.map((prestation) => 
           <>
             <div className="row">
-              <div className="cell">{prestation.voyageur.name}</div>
-              <div className="cell">{prestation.type_prestation.label}</div>
+              <div className="cell">{prestation.voyageur.nom}</div>
+              <div className="cell">{prestation.service.label}</div>
               <div className="cell">{prestation.date_prestation?.slice(0, 16).replace('T', ' ')}</div>
               <div className="cell">
                 <select>
                   <option key="null" value="null">
                     Selection du prestataire
                   </option>
-                  {prestataires.map(({ id, name }) => (
+                  {prestataires.map(({ id, nom }) => (
                     <option key={id} value={id}>
-                      {name}
+                      {nom}
                     </option>
                   ))}
                 </select>

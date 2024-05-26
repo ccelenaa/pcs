@@ -5,7 +5,7 @@ export default {
     gets: (event) => {
         return axios({
             method: 'get',
-            url: `${API_URL}/type_prestations?cache=${Math.random()}`,
+            url: `${API_URL}/services?cache=${Math.random()}`,
             responseType: 'json',
             withCredentials: true,
         }).catch(function (error) {
@@ -17,7 +17,7 @@ export default {
     get: (id) => {
         return axios({
             method: 'post',
-            url: `${API_URL}/type_prestations/${id}?cache=${Math.random()}`,
+            url: `${API_URL}/services/${id}?cache=${Math.random()}`,
             responseType: 'json',
             withCredentials: true,
         }).catch(function (error) {

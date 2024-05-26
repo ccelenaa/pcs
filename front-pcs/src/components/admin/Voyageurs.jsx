@@ -32,7 +32,7 @@ export default function Voyageurs(props) {
     const valider = event.target.checked;
     voyageurService.valider(voyageur_id, valider).then(({data: u}) => {
       setVoyageurs(voyageurs.map(b => b.id == u.id ? u : b));
-      voyageurs.map(b => console.log(b.id, b.verified_at));
+      voyageurs.map(b => console.log(b.id, b.date_validation));
     });
   }
   
@@ -41,7 +41,7 @@ export default function Voyageurs(props) {
     const suspendre = event.target.checked;
     voyageurService.suspendre(voyageur_id, suspendre).then(({data: u}) => {
       setVoyageurs(voyageurs.map(b => b.id == u.id ? u : b));
-      voyageurs.map(b => console.log(b.id, b.suspended_at));
+      voyageurs.map(b => console.log(b.id, b.date_suspension));
     });
   }
 
@@ -59,11 +59,11 @@ export default function Voyageurs(props) {
         voyageurs.map((voyageur) => 
           <>
             <div className="row">
-              <div className="cell">{voyageur.name}</div>
-              <div className="cell">{voyageur.created_at.slice(0, 16).replace('T', ' ')}</div>
+              <div className="cell">{voyageur.nom}</div>
+              <div className="cell">{voyageur.date_creation.slice(0, 16).replace('T', ' ')}</div>
               {/* <div className="cell slim40">{voyageur.bien.length}</div> */}
-              <div className="cell slim"><input id={`${voyageur.id}_val`} data-voyageurid={voyageur.id} type="checkbox" defaultChecked={voyageur.suspended_at !== null} onChange={suspenssion} title={voyageur.suspended_at?.slice(0, 16).replace('T', ' ')} style={{display: voyageur.verified_at === null ? "none" : "initial"}}/></div>
-              <div className="cell slim"><input id={`${voyageur.id}_sus`} data-voyageurid={voyageur.id} type="checkbox" defaultChecked={voyageur.verified_at !== null} onChange={validation} title={voyageur.verified_at?.slice(0, 16).replace('T', ' ')} disabled={voyageur.verified_at !== null}/></div>
+              <div className="cell slim"><input id={`${voyageur.id}_val`} data-voyageurid={voyageur.id} type="checkbox" defaultChecked={voyageur.date_suspension !== null} onChange={suspenssion} title={voyageur.date_suspension?.slice(0, 16).replace('T', ' ')} style={{display: voyageur.date_validation === null ? "none" : "initial"}}/></div>
+              <div className="cell slim"><input id={`${voyageur.id}_sus`} data-voyageurid={voyageur.id} type="checkbox" defaultChecked={voyageur.date_validation !== null} onChange={validation} title={voyageur.date_validation?.slice(0, 16).replace('T', ' ')} disabled={voyageur.date_validation !== null}/></div>
               {/* <div className="cell slim"><FontAwesomeIcon icon={all.faRemove} className="burger" style={{fontSize: '18px', cursor: 'pointer'}}/></div> */}
             </div>
           </>

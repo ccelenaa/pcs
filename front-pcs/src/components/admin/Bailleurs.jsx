@@ -32,7 +32,7 @@ export default function Bailleurs(props) {
     const valider = event.target.checked;
     bailleurService.valider(bailleur_id, valider).then(({data: u}) => {
       setBailleurs(bailleurs.map(b => b.id == u.id ? u : b));
-      bailleurs.map(b => console.log(b.id, b.verified_at));
+      bailleurs.map(b => console.log(b.id, b.date_validation));
     });
   }
   
@@ -41,7 +41,7 @@ export default function Bailleurs(props) {
     const suspendre = event.target.checked;
     bailleurService.suspendre(bailleur_id, suspendre).then(({data: u}) => {
       setBailleurs(bailleurs.map(b => b.id == u.id ? u : b));
-      bailleurs.map(b => console.log(b.id, b.suspended_at));
+      bailleurs.map(b => console.log(b.id, b.date_suspension));
     });
   }
 
@@ -59,11 +59,11 @@ export default function Bailleurs(props) {
         bailleurs.map((bailleur) => 
           <>
             <div className="row">
-              <div className="cell">{bailleur.name}</div>
-              <div className="cell">{bailleur.created_at.slice(0, 16).replace('T', ' ')}</div>
+              <div className="cell">{bailleur.nom}</div>
+              <div className="cell">{bailleur.date_creation.slice(0, 16).replace('T', ' ')}</div>
               <div className="cell slim40">{bailleur.bien.length}</div>
-              <div className="cell slim"><input id={`${bailleur.id}_val`} data-bailleurid={bailleur.id} type="checkbox" defaultChecked={bailleur.suspended_at !== null} onChange={suspenssion} title={bailleur.suspended_at?.slice(0, 16).replace('T', ' ')} style={{display: bailleur.verified_at === null ? "none" : "initial"}}/></div>
-              <div className="cell slim"><input id={`${bailleur.id}_sus`} data-bailleurid={bailleur.id} type="checkbox" defaultChecked={bailleur.verified_at !== null} onChange={validation} title={bailleur.verified_at?.slice(0, 16).replace('T', ' ')} disabled={bailleur.verified_at !== null}/></div>
+              <div className="cell slim"><input id={`${bailleur.id}_val`} data-bailleurid={bailleur.id} type="checkbox" defaultChecked={bailleur.date_suspension !== null} onChange={suspenssion} title={bailleur.date_suspension?.slice(0, 16).replace('T', ' ')} style={{display: bailleur.date_validation === null ? "none" : "initial"}}/></div>
+              <div className="cell slim"><input id={`${bailleur.id}_sus`} data-bailleurid={bailleur.id} type="checkbox" defaultChecked={bailleur.date_validation !== null} onChange={validation} title={bailleur.date_validation?.slice(0, 16).replace('T', ' ')} disabled={bailleur.date_validation !== null}/></div>
               {/* <div className="cell slim"><FontAwesomeIcon icon={all.faRemove} className="burger" style={{fontSize: '18px', cursor: 'pointer'}}/></div> */}
             </div>
           </>

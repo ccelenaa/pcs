@@ -33,7 +33,7 @@ export default function Prestataires(props) {
     const valider = event.target.checked;
     prestataireService.valider(prestataire_id, valider).then(({data: u}) => {
       setPrestataires(prestataires.map(b => b.id == u.id ? u : b));
-      prestataires.map(b => console.log(b.id, b.verified_at));
+      prestataires.map(b => console.log(b.id, b.date_validation));
     });
   }
   
@@ -42,7 +42,7 @@ export default function Prestataires(props) {
     const suspendre = event.target.checked;
     prestataireService.suspendre(prestataire_id, suspendre).then(({data: u}) => {
       setPrestataires(prestataires.map(p => p.id == u.id ? u : p));
-      prestataires.map(p => console.log(p.id, p.suspended_at));
+      prestataires.map(p => console.log(p.id, p.date_suspension));
     });
   }
 
@@ -60,11 +60,11 @@ export default function Prestataires(props) {
         prestataires.map((prestataire) => 
           <>
             <div className="row">
-              <div className="cell">{prestataire.name}</div>
-              <div className="cell">{prestataire.created_at.slice(0, 16).replace('T', ' ')}</div>
+              <div className="cell">{prestataire.nom}</div>
+              <div className="cell">{prestataire.date_creation.slice(0, 16).replace('T', ' ')}</div>
               {/* <div className="cell slim40">{prestataire.bien.length}</div> */}
-              <div className="cell slim"><input id={`${prestataire.id}_val`} data-prestataireid={prestataire.id} type="checkbox" defaultChecked={prestataire.suspended_at !== null} onChange={suspenssion} title={prestataire.suspended_at?.slice(0, 16).replace('T', ' ')} style={{display: prestataire.verified_at === null ? "none" : "initial"}}/></div>
-              <div className="cell slim"><input id={`${prestataire.id}_sus`} data-prestataireid={prestataire.id} type="checkbox" defaultChecked={prestataire.verified_at !== null} onChange={validation} title={prestataire.verified_at?.slice(0, 16).replace('T', ' ')} disabled={prestataire.verified_at !== null}/></div>
+              <div className="cell slim"><input id={`${prestataire.id}_val`} data-prestataireid={prestataire.id} type="checkbox" defaultChecked={prestataire.date_suspension !== null} onChange={suspenssion} title={prestataire.date_suspension?.slice(0, 16).replace('T', ' ')} style={{display: prestataire.date_validation === null ? "none" : "initial"}}/></div>
+              <div className="cell slim"><input id={`${prestataire.id}_sus`} data-prestataireid={prestataire.id} type="checkbox" defaultChecked={prestataire.date_validation !== null} onChange={validation} title={prestataire.date_validation?.slice(0, 16).replace('T', ' ')} disabled={prestataire.date_validation !== null}/></div>
               {/* <div className="cell slim"><FontAwesomeIcon icon={all.faRemove} className="burger" style={{fontSize: '18px', cursor: 'pointer'}}/></div> */}
             </div>
           </>

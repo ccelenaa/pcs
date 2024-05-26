@@ -6,11 +6,9 @@ import Body   from './body/Body';
 import Footer from './footer/Footer';
 import { timer, interval } from 'rxjs';
 
-import {getOrganization} from '../services/organization';
 import {getUserData} from '../services/user';
 import langueService from '../services/langue';
 import { Since } from './../utils/date.ts'
-import SettingsMenu from './menu/SettingsMenu';
 import { useTranslation } from "react-i18next";
 
 
