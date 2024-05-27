@@ -26,8 +26,8 @@ export function isConnected (event) {
 
 export function getUserData (event) {
     return getUser(event)
-    .then(response => response.data)
-    .catch(err => undefined);
+    .then(response => response.status === 200 ? response.data : null)
+    .catch(err => null);
 }
 
 export function logout (event) {

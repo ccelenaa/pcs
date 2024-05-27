@@ -122,16 +122,10 @@ function Organization() {
     status: 'pending_'
   });  
 
-  var [user, setUser] = useState(null);
+  var [user, setUser] = useState(undefined);
   var [langues, setLangues] = useState([]);
   
   useEffect(async () => {
-    interval(3000).subscribe(n => {
-        var els = document.getElementsByClassName('createdAt');
-        for (let el of els) {
-          el.innerHTML = Since(new Date(el.dataset.date));
-        }
-    });
 
     const userApi = await getUserData();
     const languesBd = await langueService.gets();
@@ -145,7 +139,7 @@ function Organization() {
 
   }, []);
 
-  return user ?
+  return user !== undefined ?
   (
     <>
       <Menu menu={organization.organization.menu}/>

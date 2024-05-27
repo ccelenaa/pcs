@@ -270,51 +270,50 @@ a {
       flex: 1;
       padding: 5px 10px;
       border-right: 1px solid #fff;
-      }
-    
-      & .slim {
+
+      &.slim {
         flex: 0;
         flex-basis: 30px;
         text-align: center;
       }
 
-      & .slim40 {
+      &.slim40 {
         flex: 0;
         flex-basis: 40px;
         text-align: center;
       }
 
-      & .slim50 {
+      &.slim50 {
         flex: 0;
         flex-basis: 60px;
         text-align: center;
       }
 
-      & .slim60 {
+      &.slim60 {
         flex: 0;
         flex-basis: 60px;
         text-align: center;
       }
 
-      & .slim70 {
+      &.slim70 {
         flex: 0;
         flex-basis: 70px;
         text-align: center;
       }
 
-      & .slim80 {
+      &.slim80 {
         flex: 0;
         flex-basis: 80px;
         text-align: center;
       }
 
-      & .slim90 {
+      &.slim90 {
         flex: 0;
         flex-basis: 90px;
         text-align: center;
       }
 
-      & .slim120 {
+      &.slim120 {
         flex: 0;
         flex-basis: 120px;
       }
@@ -326,6 +325,7 @@ a {
       input[type=checkbox] {
         padding: 5px;
       }
+    }
   }
   .header {
     font-weight: bold;
@@ -333,6 +333,15 @@ a {
   }
 }
 
+.row.disabled {
+  .cell {
+    color: rgba(30,40,50,0.3);
+    input[type=text] {
+      color: rgba(30,40,50,0.3);
+      pointer-events: none;
+    }
+  }
+}
 
 
 

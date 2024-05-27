@@ -29,6 +29,10 @@ export default {
     },
 
     getPrestataireServices: (id_prestataire) => {
+        if([undefined, null].includes(id_prestataire)){
+            return [];
+        }
+
         return axios({
             method: 'get',
             url: `${API_URL}/services/prestataire/${id_prestataire}?cache=${Math.random()}`,
