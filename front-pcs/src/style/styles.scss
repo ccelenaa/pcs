@@ -302,6 +302,12 @@ a {
         text-align: center;
       }
 
+      & .slim80 {
+        flex: 0;
+        flex-basis: 80px;
+        text-align: center;
+      }
+
       & .slim90 {
         flex: 0;
         flex-basis: 90px;

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import Menu   from './menu/Menu';
 import Header from './header/Header';
-import Body   from './body/Body';
+import Body   from './Body';
 import Footer from './footer/Footer';
 import { timer, interval } from 'rxjs';
 
@@ -122,7 +122,7 @@ function Organization() {
     status: 'pending_'
   });  
 
-  var [user, setUser] = useState({});
+  var [user, setUser] = useState(null);
   var [langues, setLangues] = useState([]);
   
   useEffect(async () => {
@@ -137,7 +137,7 @@ function Organization() {
     const languesBd = await langueService.gets();
 
     if(userApi) {
-      i18n.changeLanguage(userApi.locale);
+      i18n.changeLanguage(userApi.langue);
     }
 
     setUser(userApi);
@@ -145,21 +145,17 @@ function Organization() {
 
   }, []);
 
-  return organization.status === 'pending' ? (<></>) :
-  organization.status === '1unvalid' ?
-  (
-    <>
-      <div style={{padding: '20px'}}>Organisation {organization.name} introuvable !!</div>
-    </>
-  ) :
+  return user ?
   (
     <>
       <Menu menu={organization.organization.menu}/>
-      {/* <SettingsMenu/> */}
       <Header organization={organization.organization} langues={langues}/>
       <Body organization={organization.organization} account={user} langues={langues}/>
       <Footer organization={organization.organization} langues={langues}/>
     </>
+  ) :
+  (
+    <></>
   );
 }
 

@@ -2,13 +2,14 @@ import axios from 'axios';
 import { API_URL } from '../Config';
 
 export default {
-    gets: (event) => {
+    gets: () => {
         return axios({
             method: 'get',
             url: `${API_URL}/services?cache=${Math.random()}`,
             responseType: 'json',
             withCredentials: true,
-        }).catch(function (error) {
+        }).then((response)=> response.status === 200 ? response.data : [])
+        .catch(function (error) {
             console.log({error});
             return [];
         });
@@ -16,13 +17,28 @@ export default {
 
     get: (id) => {
         return axios({
-            method: 'post',
+            method: 'get',
             url: `${API_URL}/services/${id}?cache=${Math.random()}`,
             responseType: 'json',
             withCredentials: true,
-        }).catch(function (error) {
+        }).then((response)=> response.status === 200 ? response.data : {})
+        .catch(function (error) {
             console.log({error})
-            return null;
+            return {};
         });
     },
+
+    getPrestataireServices: (id_prestataire) => {
+        return axios({
+            method: 'get',
+            url: `${API_URL}/services/prestataire/${id_prestataire}?cache=${Math.random()}`,
+            responseType: 'json',
+            withCredentials: true,
+        }).then((response)=> response.status === 200 ? response.data : [])
+        .catch(function (error) {
+            console.log({error})
+            return [];
+        });
+    },
+
 }

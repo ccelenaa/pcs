@@ -33,7 +33,9 @@ model bien {
   surface                  String     @db.VarChar(255)
   description              String     @db.VarChar(255)
   statut                   String     @db.VarChar(64)
-  prix                     String     @db.VarChar(32)
+  prix                     Float      @default(0)
+  pcs_marge                Float      @default(0)
+  prix_client              Float      @default(0)
   devise                   String     @default("eu") @db.VarChar(32)
   data                     Json       @default("{}")
   date_suspension_bailleur DateTime?
@@ -66,10 +68,12 @@ model location {
   id_bien           BigInt
   id_voyageur       BigInt
   id_facture        BigInt?
-  data              Json      @default("{}")
-  prix              String    @db.VarChar(32)
-  prix_total        String    @db.VarChar(32)
+  prix              Float     @default(0)
+  prix_total        Float     @default(0)
+  pcs_marge         Float     @default(0)
+  prix_client       Float     @default(0)
   devise            String    @default("eu") @db.VarChar(32)
+  data              Json      @default("{}")
   date_debut        DateTime  @default(now())
   date_fin          DateTime  @default(now())
   date_creation     DateTime  @default(now())
@@ -167,8 +171,9 @@ model admin {
 model facture {
   id                BigInt       @id @default(autoincrement())
   type              String       @default("location") @db.VarChar(32)
-  prix              Int          @default(0)
-  total             Int          @default(0)
+  prix              Float        @default(0)
+  total             Float        @default(0)
+  data              Json         @default("{}")
   date_creation     DateTime     @default(now())
   date_modification DateTime     @default(now())
   date_suppression  DateTime?
@@ -182,8 +187,8 @@ model prestataire_service {
   id                BigInt      @id @default(autoincrement())
   id_prestataire    BigInt
   id_service        BigInt
-  prix              Int         @default(0)
-  pcs_marge         Int         @default(10)
+  prix              Float       @default(0)
+  pcs_marge         Float       @default(0)
   date_creation     DateTime    @default(now())
   date_modification DateTime    @default(now())
   date_suppression  DateTime?
@@ -199,7 +204,10 @@ model prestation {
   id_prestataire              BigInt?
   id_service                  BigInt
   id_facture                  BigInt?
-  prix                        Int          @default(0)
+  prix                        Float?
+  pcs_marge                   Float        @default(0)
+  prix_client                 Float?
+  prix_supplementaire         Float?
   devise                      String       @default("eu") @db.VarChar(32)
   lieu_prestation             String?      @db.VarChar(512)
   date_prestation             DateTime?
@@ -222,7 +230,8 @@ model prestation {
 model service {
   id                  BigInt                @id @default(autoincrement())
   label               String?               @db.VarChar(255)
-  pcs_marge           Int                   @default(10)
+  prix_standard       Float                 @default(0)
+  pcs_marge           Float                 @default(0)
   date_creation       DateTime              @default(now())
   date_modification   DateTime              @default(now())
   date_suppression    DateTime?

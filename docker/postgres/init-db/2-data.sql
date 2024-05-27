@@ -12,13 +12,13 @@ INSERT INTO public.prestataires (nom,email,login,"password",langue,"data",date_v
 INSERT INTO public.voyageurs (nom,email,telephone,login,"password",langue,"data",date_validation,date_suspension,date_creation,date_modification,date_suppression) VALUES
 	 ('Pierre Voyageur1','pcs.voyageur1@gmail.com','0643145245','voyageur1','$argon2id$v=19$m=65536,t=3,p=4$bEjs89VfnTwWKRccB1FIzA$tJ+OX5IyTxwBuLYTTYGodt1QPw1TUBasZ77qVphAo0g','fr','{}',NULL,NULL,'2024-05-16 02:20:52.817','2024-05-16 02:20:52.817',NULL),
 	 ('Manuel Voyageur2','pcs.voyageur2@gmail.com','0765542543','voyageur2','$argon2id$v=19$m=65536,t=3,p=4$HYRLvK/aOxLXPXsiJ0JSqg$BRa9LNYwX/u926zUM08yKgR1Qvi7VMpoS3iQ2fEQlwI','fr','{}',NULL,NULL,'2024-05-16 02:20:52.822','2024-05-16 02:20:52.822',NULL);
-INSERT INTO public.services (label) VALUES
-	 ('Remise des clés'),
-	 ('Taxieur'),
-	 ('Deplacement de bagages'),
-	 ('Cuisine a domicile'),
-	 ('Nettoyages'),
-	 ('Coach sportif');
+INSERT INTO public.services (label, prix_standard, pcs_marge) VALUES
+	 ('Remise des clés', 20, 10),
+	 ('Taxieur', 100, 10),
+	 ('Deplacement de bagages', 50, 12),
+	 ('Cuisine a domicile', 80, 15),
+	 ('Nettoyages', 40, 8),
+	 ('Coach sportif', 150, 20);
 INSERT INTO public.prestataire_service (id_prestataire,id_service,prix) VALUES
 	 (1,1,30),
 	 (1,3,50),

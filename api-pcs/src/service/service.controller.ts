@@ -26,4 +26,14 @@ export class TypePrestationController {
     return this.serviceService.get(id_type_prestation);
   }
 
+  /*
+  Route: /biens/:id_bien
+  Recupere le bien ayant <id_bien>
+  */
+  @Get('prestataire/:id_prestation')
+  @HttpCode(HttpStatus.OK)
+  async prestataire_service(@Param('id_prestation') id_prestation: number) {
+    return this.serviceService.getPrestataireServices(id_prestation);
+  }
+
 }

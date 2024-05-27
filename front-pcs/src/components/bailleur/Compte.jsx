@@ -26,11 +26,11 @@ export default function Compte(props) {
     <form class="formulaire">
     <div>
         <label>Nom</label>
-        <input type="text" value={account.name} />
+        <input type="text" value={account.nom} />
       </div>
       <div>
         <label for="">Telephone</label>
-        <input type="text" value={account.tel} />
+        <input type="text" value={account.telephone} />
       </div>
       <div>
         <label>Email</label>

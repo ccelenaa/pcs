@@ -30,10 +30,10 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { setConnexion, isConnected } from './../../services/user';
-import { API_URL } from './../../Config';
+import { setConnexion, isConnected } from '../services/user';
+import { API_URL } from '../Config';
 import { useHistory, Link, NavLink, Route, useLocation } from 'react-router-dom';
-import AsideSetting from '../aside/Settings';
+import AsideSetting from './aside/Settings';
 import { Redirect, useParams } from 'react-router-dom/cjs/react-router-dom';
 import AsideSSetting from 'components/aside/SSettings';
 import Voyageur from 'components/voyageur/Body';
@@ -41,7 +41,7 @@ import Bailleur from 'components/bailleur/Body';
 import Prestataire from 'components/prestataire/Body';
 import Admin from 'components/admin/Body';
 
-export default function Settings(props) {
+export default function Body(props) {
 
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);

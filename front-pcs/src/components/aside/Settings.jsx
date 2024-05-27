@@ -105,6 +105,10 @@ export default function AsideSetting(props) {
             label: 'Messages',
             icon: all.faComment
           },{
+            menu: '/services',
+            label: 'Mes services',
+            icon: faHandshakeAngle
+          },{
             menu: '/prestations',
             label: 'Mes prestations',
             icon: faHandshakeAngle
