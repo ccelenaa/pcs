@@ -116,7 +116,7 @@ CREATE TABLE public.locations (
     id_bien bigint NOT NULL,
     id_voyageur bigint NOT NULL,
     id_facture bigint,
-    prix real NOT DEFAULT 0 NULL,
+    prix real DEFAULT 0 NOT NULL,
     prix_total real DEFAULT 0 NOT NULL,
     pcs_marge real DEFAULT 0 NOT NULL,
     prix_client real DEFAULT 0 NOT NULL,
