@@ -41,11 +41,15 @@ export default function Prestations(props) {
 
   function notation(event) {
     const note = event.currentTarget.dataset.level;
-    const prestation_id = event.currentTarget.dataset.prestationid;
+    const currentNote = event.currentTarget.dataset.currentnote;
 
-    prestationService.setNote(prestation_id, +note).then((u) => {
-      setPrestations(prestations.map(p => p.id == u.id ? u : p));
-    });
+    if(note !== currentNote) {
+      const prestation_id = event.currentTarget.dataset.prestationid;
+  
+      prestationService.setNote(prestation_id, +note).then((u) => {
+        setPrestations(prestations.map(p => p.id == u.id ? u : p));
+      });
+    }
   }
 
   return (<>
@@ -69,7 +73,7 @@ export default function Prestations(props) {
               <div className="cell slim80">
                 <div style={{display: prestation.prestataire ? 'inline': 'none'}} data-prestationid={prestation.id} onMouseLeave={mouseLeave}>
                 {
-                  [1,2,3,4,5].map(i => <FontAwesomeIcon icon={all.faStar} className={"Star Star"+i+ (prestation.note && i<=prestation.note ? " level-"+prestation.note:"")} data-prestationid={prestation.id} data-level={i} onMouseEnter={mouseEnter} onClick={notation}/>)
+                  [1,2,3,4,5].map(i => <FontAwesomeIcon icon={all.faStar} className={"Star Star"+i+ (prestation.note && i<=prestation.note ? " level-"+prestation.note:"")} data-prestationid={prestation.id} data-level={i} data-currentnote={prestation.note} onMouseEnter={mouseEnter} onClick={notation}/>)
                 }
                 </div>
               </div>

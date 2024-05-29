@@ -68,8 +68,12 @@ export default {
                 note
             }
         }).then((response) => {
-            notification.notifier('success', 'hello');
-            return response.status === 200 ? response.data : {};
+            if(response.status === 200) {
+                const prestation = response.data;
+                notification.notifier('success', `Notation +${prestation.note} pour ${prestation.prestataire.nom}`);
+                return prestation;
+            }
+            return {};
         }).catch(function (error) {
             console.log({error})
             return null;
