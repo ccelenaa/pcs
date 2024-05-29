@@ -17,6 +17,18 @@ export class PrestationService {
     });
   }
 
+  async getVoyageurPrestations(id_voyageur: number): Promise<prestation[]> {
+    return await this.prisma.prestation.findMany({
+      where: {
+        id_voyageur
+      },
+      include: {
+        prestataire: true,
+        service: true
+      }
+    });
+  }
+
   async get(id_prestation: number): Promise<prestation> {
     return await this.prisma.prestation.findFirst({
       where: {
@@ -34,7 +46,24 @@ export class PrestationService {
         id_prestataire
       },
       include: {
-        prestataire: true
+        prestataire: true,
+        service: true,
+        voyageur: true
+      }
+    });
+  }
+
+  async setNote(id_prestation: number, note: number): Promise<prestation> {
+    return await this.prisma.prestation.update({
+      where: {
+        id: id_prestation
+      },
+      data: {
+        note
+      },
+      include: {
+        prestataire: true,
+        service: true,
       }
     });
   }

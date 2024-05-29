@@ -15,34 +15,23 @@ export default function Prestataires(props) {
 
   const [prestataires, setPrestataires] = React.useState([]);
 
-  const getPrestataires = () => {
-    prestataireService.gets().then((brs) => {
-      if (brs.status === 200) {
-        console.log({data:brs.data});
-        setPrestataires(brs.data);
-      }
-    })
-  }
-
-  React.useEffect(() => {
-    getPrestataires();
+  React.useEffect(async () => {
+    setPrestataires(await prestataireService.gets());
   },[]);
 
   const validation = (event) => {
     const prestataire_id = event.target.getAttribute('data-prestataireid');
     const valider = event.target.checked;
-    prestataireService.valider(prestataire_id, valider).then(({data: u}) => {
+    prestataireService.valider(prestataire_id, valider).then((u) => {
       setPrestataires(prestataires.map(b => b.id == u.id ? u : b));
-      prestataires.map(b => console.log(b.id, b.date_validation));
     });
   }
   
   const suspenssion = (event) => {
     const prestataire_id = event.target.getAttribute('data-prestataireid');
     const suspendre = event.target.checked;
-    prestataireService.suspendre(prestataire_id, suspendre).then(({data: u}) => {
+    prestataireService.suspendre(prestataire_id, suspendre).then((u) => {
       setPrestataires(prestataires.map(p => p.id == u.id ? u : p));
-      prestataires.map(p => console.log(p.id, p.date_suspension));
     });
   }
 

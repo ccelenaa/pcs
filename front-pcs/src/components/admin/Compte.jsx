@@ -26,13 +26,12 @@ export default function Compte(props) {
   const onChangeLang = (e) => {
     i18n.changeLanguage(e.target.value);
   };
-  console.log({langues: props.langues});
 
   return (<>
     <div class="logout-panel">
-      <select value={i18n.language} onChange={onChangeLang}>
-        {props.langues.map(({ locale, label }) => (
-          <option key={locale} value={locale}>
+      <select defaultValue={i18n.language} onChange={onChangeLang}>
+        {props.langues.map(({ langue, label }) => (
+          <option key={langue} value={langue}>
             {label}
           </option>
         ))}

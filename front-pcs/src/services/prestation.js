@@ -2,13 +2,27 @@ import axios from 'axios';
 import { API_URL } from '../Config';
 
 export default {
-    gets: (event) => {
+    gets: () => {
         return axios({
             method: 'get',
             url: `${API_URL}/prestations?cache=${Math.random()}`,
             responseType: 'json',
             withCredentials: true,
-        }).catch(function (error) {
+        }).then((response) => response.status === 200 ? response.data : [])
+        .catch(function (error) {
+            console.log({error});
+            return [];
+        });
+    },
+
+    parVoyageur: (id_voyageur) => {
+        return axios({
+            method: 'get',
+            url: `${API_URL}/prestations/voyageur/${id_voyageur}?cache=${Math.random()}`,
+            responseType: 'json',
+            withCredentials: true,
+        }).then((response) => response.status === 200 ? response.data : [])
+        .catch(function (error) {
             console.log({error});
             return [];
         });
@@ -20,7 +34,8 @@ export default {
             url: `${API_URL}/prestations/${id}`,
             responseType: 'json',
             withCredentials: true,
-        }).catch(function (error) {
+        }).then((response) => response.status === 200 ? response.data : {})
+        .catch(function (error) {
             console.log({error})
             return null;
         });
@@ -35,7 +50,24 @@ export default {
             data: {
                 id_prestataire
             }
-        }).catch(function (error) {
+        }).then((response) => response.status === 200 ? response.data : {})
+        .catch(function (error) {
+            console.log({error})
+            return null;
+        });
+    },
+
+    setNote: (id,note) => {
+        return axios({
+            method: 'post',
+            url: `${API_URL}/prestations/${id}/set/note`,
+            responseType: 'json',
+            withCredentials: true,
+            data: {
+                note
+            }
+        }).then((response) => response.status === 200 ? response.data : {})
+        .catch(function (error) {
             console.log({error})
             return null;
         });

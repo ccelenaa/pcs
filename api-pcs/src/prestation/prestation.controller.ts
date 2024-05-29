@@ -37,4 +37,24 @@ export class PrestationController {
     return this.prestationService.setPrestataire(id_prestation,id_prestataire);
   }
 
+  /*
+  Route: /biens/:id_bien
+  Recupere le bien ayant <id_bien>
+  */
+  @Post(':id_prestation/set/note')
+  @HttpCode(HttpStatus.OK)
+  async setNote(@Param('id_prestation') id_prestation: number, @Body('note') note: number) {
+    return this.prestationService.setNote(id_prestation, note);
+  }
+
+  /*
+  Route: /biens/:id_bien
+  Recupere le bien ayant <id_bien>
+  */
+  @Get('voyageur/:id_voyageur')
+  @HttpCode(HttpStatus.OK)
+  async getPrestationVoyageur(@Param('id_voyageur') id_voyageur: number) {
+    return this.prestationService.getVoyageurPrestations(id_voyageur);
+  }
+
 }

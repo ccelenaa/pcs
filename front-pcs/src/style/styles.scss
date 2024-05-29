@@ -140,10 +140,12 @@ html {
 a {
   // font-weight: bold;
   text-decoration: none;
+
   &:hover {
     text-decoration: none;
     background-color: rgba(0, 10, 20, .03);
   }
+
   &.selectedd {
     background-color: rgba(0, 10, 20, .06);
     // font-weight: bold;
@@ -152,9 +154,11 @@ a {
   &:visited {
     text-decoration: none;
   }
+
   &:link {
     text-decoration: none;
   }
+
   &:active {
     text-decoration: none;
   }
@@ -175,7 +179,7 @@ a {
   a {
     // font-weight: bold;
     text-decoration: none;
-    color: rgba(0,30,0,0.7);
+    color: rgba(0, 30, 0, 0.7);
 
     &:hover {
       text-decoration: none;
@@ -185,7 +189,7 @@ a {
     &.selectedd2 {
       border-bottom: solid 4px rgb(84, 105, 212);
       color: rgb(84, 105, 212);
-        // font-weight: bold;
+      // font-weight: bold;
     }
 
     &:visited {
@@ -204,37 +208,45 @@ a {
 
 .presentation {
   font-size: 16px;
+
   svg {
     width: 13px; //!important;
     height: 30px;
     color: rgb(124, 129, 145);
   }
-  > ul {
+
+  >ul {
     margin: 0px;
     padding: 0px;
     list-style: none;
+
     li {
-      > a {
+      >a {
         box-sizing: border-box;
         padding: 5px 15px 5px 16px;
         display: block;
         width: 100%;
-        > * {
+
+        >* {
           line-height: 30px;
           display: inline;
         }
       }
     }
   }
-  > div {
+
+  >div {
     display: flex;
     line-height: 30px;
-    > * {
+
+    >* {
       line-height: 30px;
     }
-    > div {
+
+    >div {
       padding-left: 10px;
-      > span {
+
+      >span {
         border-radius: 50px;
         background-color: #9ca4be;
         color: rgba(255, 255, 255, 0.9);
@@ -245,6 +257,18 @@ a {
   }
 }
 
+select {
+  padding: 7px 10px;
+  border: 0px solid rgba(80, 80, 80, 0.3);
+  border-radius: 5px;
+  background-color: rgba(40, 60, 90, .07);
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(40, 60, 90, .13);
+  }
+}
+
 .tab-container {
   display: flex;
   flex-direction: column;
@@ -252,16 +276,16 @@ a {
   border: 1px solid #fff;
   border-collapse: collapse;
   font-size: 14px;
-  
+
   .row {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #fff;
-    
+
     &:nth-child(even) {
       background-color: #fbfbff;
     }
-    
+
     &:nth-child(odd) {
       background-color: #f8f8ff;
     }
@@ -325,8 +349,22 @@ a {
       input[type=checkbox] {
         padding: 5px;
       }
+
+      select {
+        padding: 5px 10px;
+        border: 0px solid rgba(80, 80, 80, 0.3);
+        border-radius: 5px;
+        width: 100%;
+        background-color: rgba(170, 170, 30, .2);
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(40, 60, 90, .13);
+        }
+      }
     }
   }
+
   .header {
     font-weight: bold;
     background-color: rgb(245, 247, 255);
@@ -335,15 +373,66 @@ a {
 
 .row.disabled {
   .cell {
-    color: rgba(30,40,50,0.3);
+    color: rgba(30, 40, 50, 0.3);
+
     input[type=text] {
-      color: rgba(30,40,50,0.3);
+      color: rgba(30, 40, 50, 0.3);
       pointer-events: none;
     }
   }
 }
 
+.Star {
+  cursor: pointer;
+  color: rgba(80, 80, 80, 0.2);
 
+  &.level-1 {
+    color: rgba(210, 40, 40, 1);
+  }
+
+  &.level-2 {
+    color: rgb(236, 106, 0);
+  }
+
+  &.level-3 {
+    color: rgb(236, 106, 0);
+  }
+
+  &.level-4 {
+    color: rgb(11, 175, 11);
+  }
+
+  &.level-5 {
+    color: rgb(11, 175, 11);
+  }
+}
+
+.notation-enabled {
+  .Star {
+    cursor: pointer;
+    color: rgba(80, 80, 80, 0.4);
+
+    &.level-1 {
+      color: rgba(210, 40, 40, 1);
+    }
+
+    &.level-2 {
+      color: rgb(236, 106, 0);
+    }
+
+    &.level-3 {
+      color: rgb(236, 106, 0);
+    }
+
+    &.level-4 {
+      color: rgb(11, 175, 11);
+    }
+
+    &.level-5 {
+      color: rgb(11, 175, 11);
+    }
+  }
+}
 
 .swiper {
   width: 100%;
@@ -545,7 +634,7 @@ a {
   // background-color: rgb(19, 44, 83);
   // background-color: rgb(24, 26, 27);
   // background-color: rgb(236 0 236);
-  
+
   z-index: 999;
   transition: all 0.3s ease-in-out;
   overflow-y: hidden;
@@ -556,6 +645,7 @@ a {
   overflow-x: hidden;
 
 }
+
 .in-settings-bloc {
   display: flex;
   // background-color: rgb(0 232 236);
@@ -563,6 +653,7 @@ a {
   overflow-y: hidden;
   max-height: 100%;
 }
+
 .gauche {
   flex-basis: 10em;
   flex-grow: 1;
@@ -594,7 +685,7 @@ a {
   background-color: rgba(30, 55, 78, 1);
   background-color: rgb(19, 44, 83);
   background-color: rgb(24, 26, 27);
-  
+
   z-index: 999;
   transition: all 0.3s ease-in-out;
   overflow-y: auto;
@@ -1410,7 +1501,7 @@ html {
       img {
         border-radius: 5px;
       }
-      }
+    }
   }
 }
 
@@ -1526,12 +1617,13 @@ html {
   box-sizing: border-box;
   word-wrap: break-word;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
+
   div {
     margin: 0;
     color: #1a1f36;
     box-sizing: border-box;
     word-wrap: break-word;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
     padding-bottom: 10px;
 
     label {
@@ -1542,8 +1634,9 @@ html {
       color: #1a1f36;
       box-sizing: border-box;
       word-wrap: break-word;
-      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
     }
+
     input {
       font-size: 16px;
       padding: 6px 10px;
@@ -1560,9 +1653,10 @@ html {
         color: #1a1f36;
         box-sizing: border-box;
         word-wrap: break-word;
-        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
+
         &[disabled] {
-          background-color: rgba(0,0,0,0.1);
+          background-color: rgba(0, 0, 0, 0.1);
         }
       }
 
@@ -1584,9 +1678,10 @@ div.logout-panel {
   color: #1a1f36;
   box-sizing: border-box;
   word-wrap: break-word;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
   padding-bottom: 10px;
   text-align: right;
+
   input {
     font-size: 16px;
     padding: 6px 10px;
@@ -1610,6 +1705,4 @@ div.logout-panel {
 }
 
 
-@media screen and (min-width: 1200px) {
-
-}
+@media screen and (min-width: 1200px) {}

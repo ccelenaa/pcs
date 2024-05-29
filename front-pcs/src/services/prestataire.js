@@ -13,7 +13,8 @@ export default {
             //     'Pragma': 'no-cache',
             //     'Expires': '0',
             // }
-        }).catch(function (error) {
+        }).then((response) => response.status === 200 ? response.data : [])
+        .catch(function (error) {
             console.log({error})
             return null;
         });
@@ -28,7 +29,8 @@ export default {
             data: {
                 valider
             }
-        }).catch(function (error) {
+        }).then((response) => response.status === 200 ? response.data : {})
+        .catch(function (error) {
             console.log({error})
             return null;
         });
@@ -43,7 +45,8 @@ export default {
             data: {
                 suspendre
             }
-        }).catch(function (error) {
+        }).then((response) => response.status === 200 ? response.data : {})
+        .catch(function (error) {
             console.log({error})
             return null;
         });

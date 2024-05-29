@@ -151,7 +151,7 @@ export default function AsideSetting(props) {
 
   return (
     <>
-      <div className="left-block" style={{ flexShrink: 0, flexBasis: '400px', backgroundColor: '#F5F7FF', position: 'relative', fontSize: '16px'}}>
+      <div className="left-block" style={{ flexShrink: 0, flexBasis: '330px', backgroundColor: '#F5F7FF', position: 'relative', fontSize: '16px'}}>
         <div style={{ position: 'sticky', top: '44px', padding: '30px 0px', margin: '0 auto', maxWidth: '600px' }}>
           <div class="presentation">
             <ul>
