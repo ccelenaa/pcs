@@ -13,6 +13,9 @@ export class PrestationService {
         prestataire: true,
         service: true,
         voyageur: true
+      },
+      orderBy: {
+        date_prestation: 'desc'
       }
     });
   }
@@ -25,6 +28,9 @@ export class PrestationService {
       include: {
         prestataire: true,
         service: true
+      },
+      orderBy: {
+        date_prestation: 'desc'
       }
     });
   }
