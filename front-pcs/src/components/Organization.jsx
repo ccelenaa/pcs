@@ -4,6 +4,7 @@ import Menu   from './menu/Menu';
 import Header from './header/Header';
 import Body   from './Body';
 import Footer from './footer/Footer';
+import Notification from './aside/Notification';
 import { timer, interval } from 'rxjs';
 
 import {getUserData} from '../services/user';
@@ -146,6 +147,7 @@ function Organization() {
       <Header organization={organization.organization} langues={langues}/>
       <Body organization={organization.organization} account={user} langues={langues}/>
       <Footer organization={organization.organization} langues={langues}/>
+      <Notification/>
     </>
   ) :
   (

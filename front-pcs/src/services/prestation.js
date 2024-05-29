@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../Config';
+import notification from './notification';
 
 export default {
     gets: () => {
@@ -66,8 +67,10 @@ export default {
             data: {
                 note
             }
-        }).then((response) => response.status === 200 ? response.data : {})
-        .catch(function (error) {
+        }).then((response) => {
+            notification.notifier('success', 'hello');
+            return response.status === 200 ? response.data : {};
+        }).catch(function (error) {
             console.log({error})
             return null;
         });

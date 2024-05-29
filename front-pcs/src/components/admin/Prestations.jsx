@@ -46,7 +46,7 @@ export default function Prestations(props) {
                 </div>
               </div>
               <div className="cell">
-                <select onChange={changePrestataire} data-prestationid={prestation.id}>
+                <select onChange={changePrestataire} data-prestationid={prestation.id} className={prestation.prestataire ? "assigned":""}>
                   {
                     prestation.prestataire ? <>
                       <option key="null" value="null">

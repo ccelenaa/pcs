@@ -115,7 +115,7 @@ export default function AsideSetting(props) {
           },{
             menu: '/planing',
             label: 'Mes disponibilités',
-            icon: faFolderClosed
+            icon: all.faCalendar
           },{
             menu: '/factures',
             label: 'Mes factures',

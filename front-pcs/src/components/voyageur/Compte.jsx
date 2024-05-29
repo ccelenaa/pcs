@@ -8,7 +8,7 @@ import AsideSetting from '../aside/Settings';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Account(props) {
+export default function Compte(props) {
   var [isAuth, setAuth] = useState('load');
   var [userData, setUserData] = useState(null);
   const history = useHistory();
@@ -26,11 +26,11 @@ export default function Account(props) {
     <form class="formulaire">
       <div>
         <label>Nom</label>
-        <input type="text" value={account.name} />
+        <input type="text" value={account.nom} />
       </div>
       <div>
         <label for="">Telephone</label>
-        <input type="text" value={account.tel} />
+        <input type="text" value={account.telephone} />
       </div>
       <div>
         <label>Email</label>
