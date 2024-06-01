@@ -290,6 +290,7 @@ select {
   font-weight: 500;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
   transform: translateX(100%);
+  // opacity: 0;
   animation:
     moveleft 0.2s linear forwards,
     hiddens 0.2s linear forwards 4.8s;
@@ -332,6 +333,7 @@ select {
 @keyframes moveleft {
   100% {
     transform: translateX(0);
+    // opacity: 1;
   }
 }
 
