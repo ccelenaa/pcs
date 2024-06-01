@@ -92,17 +92,16 @@ export default function Body(props) {
                 <div class="body-content-inner" onClick={back}>
                     <AsideSetting {...props} isAuth={isAuth}/>
                     <div class="main-container">
-                        {/* <AsideSSetting></AsideSSetting> */}
-                        <div class="main-content">
-                        {
-                          props.organization.name == 'admin' ? <Admin {...props}/> :
-                          (props.organization.name == 'voyageur' ? <Voyageur {...props}/> :
-                            (props.organization.name == 'prestataire' ? <Prestataire {...props}/> :
-                              (props.organization.name == 'bailleur' ? <Bailleur {...props}/> : <></>)
-                            )
+                      <div class="main-content">
+                      {
+                        props.organization.name == 'admin' ? <Admin {...props}/> :
+                        (props.organization.name == 'voyageur' ? <Voyageur {...props}/> :
+                          (props.organization.name == 'prestataire' ? <Prestataire {...props}/> :
+                            (props.organization.name == 'bailleur' ? <Bailleur {...props}/> : <></>)
                           )
-                        }
-                        </div>
+                        )
+                      }
+                      </div>
                     </div>
                 </div>
               </>: <></>

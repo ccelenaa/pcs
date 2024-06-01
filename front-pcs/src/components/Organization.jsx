@@ -4,13 +4,11 @@ import Menu   from './menu/Menu';
 import Header from './header/Header';
 import Body   from './Body';
 import Footer from './footer/Footer';
-import Notification from './aside/Notification';
-import { timer, interval } from 'rxjs';
 
 import {getUserData} from '../services/user';
 import langueService from '../services/langue';
-import { Since } from './../utils/date.ts'
 import { useTranslation } from "react-i18next";
+import Notifications from './Notifications';
 
 
 function Organization() {
@@ -147,7 +145,7 @@ function Organization() {
       <Header organization={organization.organization} langues={langues}/>
       <Body organization={organization.organization} account={user} langues={langues}/>
       <Footer organization={organization.organization} langues={langues}/>
-      <Notification/>
+      <Notifications/>
     </>
   ) :
   (

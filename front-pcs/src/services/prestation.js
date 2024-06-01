@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../Config';
-import notification from './notification';
+import {notifier} from '../components/Notifications';
 
 export default {
     gets: () => {
@@ -70,7 +70,7 @@ export default {
         }).then((response) => {
             if(response.status === 200) {
                 const prestation = response.data;
-                notification.notifier('success', `Notation +${prestation.note} pour ${prestation.prestataire.nom}`);
+                notifier('success', `Notation +${prestation.note} pour ${prestation.prestataire.nom}`);
                 return prestation;
             }
             return {};
