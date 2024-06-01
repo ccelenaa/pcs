@@ -290,7 +290,9 @@ select {
   font-weight: 500;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
   transform: translateX(100%);
-  animation: moveleft 0.3s linear forwards;
+  animation:
+    moveleft 0.2s linear forwards,
+    hiddens 0.2s linear forwards 4.8s;
   &::after{
     content: '';
     border-radius: 5px;
@@ -300,7 +302,7 @@ select {
     width: 100%;
     height: 4px;
     background: rgb(11, 175, 11);
-    animation: consum 4s linear forwards;
+    animation: consum 5s linear forwards;
     animation-play-state: running;
   }
   &.error {
@@ -313,6 +315,7 @@ select {
 .notificationBox {
   &.stopped {
     .notification {
+      animation-play-state: paused;
       &::after {
         animation-play-state: paused;
       }
@@ -329,6 +332,12 @@ select {
 @keyframes moveleft {
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes hiddens {
+  100% {
+    opacity: 0;
   }
 }
 
