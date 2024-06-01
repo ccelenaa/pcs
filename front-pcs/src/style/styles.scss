@@ -279,6 +279,8 @@ select {
 .notification {
   display: flex;
   cursor: pointer;
+  border-radius: 7px;
+  overflow: hidden;
   align-items: center;
   position: relative;
   width: 400px;
@@ -291,6 +293,7 @@ select {
   animation: moveleft 0.3s linear forwards;
   &::after{
     content: '';
+    border-radius: 5px;
     position: absolute;
     left: 0;
     bottom: 0;
