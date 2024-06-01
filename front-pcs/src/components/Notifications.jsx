@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as all from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,15 @@ export default () => {
   )
 }
 
-export function notifier (type, message) {
+const pause = (event) => {
+  notificationBox.classList.add('stopped')
+}
+
+const run = (event) => {
+  notificationBox.classList.remove('stopped')
+}
+
+export function notifier(type, message) {
   let element = null;
   switch (type) {
     case 'success': element = <Success data={{ message }} />; break;
@@ -21,14 +29,22 @@ export function notifier (type, message) {
   }
 
   const notificationBox = document.getElementById('notificationBox');
+  notificationBox.removeEventListener('mouseenter', pause);
+  notificationBox.removeEventListener('mouseleave', run);
+
   const container = document.createElement('div');
   ReactDOM.render(element, container);
   const notification = container.firstChild;
   notificationBox.appendChild(notification);
 
-  setTimeout(() => {
-    notification.remove();
-  }, 5000);
+  notificationBox.addEventListener('mouseenter', pause);
+  notificationBox.addEventListener('mouseleave', run);
+
+  notification.addEventListener('animationend', (event) => {
+    if (event.animationName === 'consum') {
+      notification.remove();
+    }
+  });
 }
 
 export const Information = (props) => {
