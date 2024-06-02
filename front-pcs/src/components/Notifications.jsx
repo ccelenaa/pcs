@@ -22,6 +22,7 @@ export function notifier(type, message) {
   let element = null;
   switch (type) {
     case 'success': element = <Success data={{ message }} />; break;
+    case 'note': element = <Note data={{ message }} />; break;
     case 'warning': element = <Warning data={{ message }} />; break;
     case 'error': element = <Error data={{ message }} />; break;
     case 'auth-error': element = <AuthError data={{ message }} />; break;
@@ -37,6 +38,9 @@ export function notifier(type, message) {
   const notification = container.firstChild;
   notificationBox.appendChild(notification);
 
+  // const firstChild = notificationBox.firstChild;
+  // notificationBox.insertBefore(notification, firstChild);
+
   notificationBox.addEventListener('mouseenter', pause);
   notificationBox.addEventListener('mouseleave', run);
 
@@ -50,8 +54,10 @@ export function notifier(type, message) {
 export const Information = (props) => {
   return (
     <div className='notification'>
-      <FontAwesomeIcon icon={all.faInfoCircle} style={{ color: "green" }} />
-      <div style={{ paddingLeft: "12px" }}>{props.data.message}</div>
+      <div className='notification-icon'>
+        <FontAwesomeIcon icon={all.faInfoCircle} />
+      </div>
+      <div className="notification-content">{props.data.message}</div>
     </div>
   )
 }
@@ -59,26 +65,32 @@ export const Information = (props) => {
 export const Success = (props) => {
   return (
     <div className='notification'>
-      <FontAwesomeIcon icon={all.faAnchorLock} style={{ color: "green" }} />
-      <div style={{ paddingLeft: "12px" }}>{props.data.message}</div>
+      <div className='notification-icon'>
+        <FontAwesomeIcon icon={all.faAnchorLock} />
+      </div>
+      <div className="notification-content">{props.data.message}</div>
     </div>
   )
 }
 
 export const Warning = (props) => {
   return (
-    <div className='notification'>
-      <FontAwesomeIcon icon={all.faAnchorLock} style={{ color: "rgb(210, 40, 40)" }} />
-      <div style={{ paddingLeft: "12px" }}>{props.data.message}</div>
+    <div className='notification warning'>
+      <div className='notification-icon'>
+        <FontAwesomeIcon icon={all.faAnchorLock} />
+      </div>
+      <div className="notification-content">{props.data.message}</div>
     </div>
   )
 }
 
 export const Error = (props) => {
   return (
-    <div className='notification'>
-      <FontAwesomeIcon icon={all.faAnchorLock} style={{ color: "rgb(210, 40, 40)" }} />
-      <div style={{ paddingLeft: "12px" }}>{props.data.message}</div>
+    <div className='notification error'>
+      <div className='notification-icon'>
+        <FontAwesomeIcon icon={all.faAnchorLock} />
+      </div>
+      <div className="notification-content">{props.data.message}</div>
     </div>
   )
 }
@@ -86,8 +98,21 @@ export const Error = (props) => {
 export const AuthError = (props) => {
   return (
     <div className='notification error'>
-      <FontAwesomeIcon icon={all.faLock} style={{ color: "rgb(236, 87, 0)" }} />
-      <div style={{ paddingLeft: "12px" }}>{props.data.message}</div>
+      <div className='notification-icon'>
+        <FontAwesomeIcon icon={all.faLock} />
+      </div>
+      <div className="notification-content">{props.data.message}</div>
+    </div>
+  )
+}
+
+export const Note = (props) => {
+  return (
+    <div className='notification'>
+      <div className='notification-icon'>
+        <FontAwesomeIcon icon={all.faStar} />
+      </div>
+      <div className="notification-content">{props.data.message}</div>
     </div>
   )
 }

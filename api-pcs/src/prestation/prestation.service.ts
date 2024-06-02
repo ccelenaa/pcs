@@ -14,9 +14,11 @@ export class PrestationService {
         service: true,
         voyageur: true
       },
-      orderBy: {
+      orderBy: [{
         date_prestation: 'desc'
-      }
+      },{
+        id: 'desc'
+      }]
     });
   }
 
@@ -29,9 +31,11 @@ export class PrestationService {
         prestataire: true,
         service: true
       },
-      orderBy: {
+      orderBy: [{
         date_prestation: 'desc'
-      }
+      },{
+        id: 'desc'
+      }]
     });
   }
 

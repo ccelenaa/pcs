@@ -70,7 +70,7 @@ export default {
         }).then((response) => {
             if(response.status === 200) {
                 const prestation = response.data;
-                notifier('success', `Notation +${prestation.note} pour ${prestation.prestataire.nom}`);
+                notifier('note', `+${prestation.note} pour ${prestation.prestataire.nom}`);
                 return prestation;
             }
             return {};
