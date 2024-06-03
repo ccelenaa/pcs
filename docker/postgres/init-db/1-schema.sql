@@ -259,6 +259,32 @@ CREATE TABLE public.services (
     CONSTRAINT "services_pkey" PRIMARY KEY ("id")
 );
 
+
+--
+-- TOC entry 239 (class 1259 OID 18938)
+-- Name: services; Type: TABLE; Schema: public; Owner: pcs
+--
+
+CREATE TABLE public.transactions (
+    id BIGSERIAL,
+    id_location bigint,
+    id_prestation bigint,
+    session_id character varying(1024),
+    session_status character varying(32),
+    payment_intent character varying(1024) DEFAULT NULL,
+    payment_status character varying(32),
+    amount character DEFAULT 0 NOT NULL,
+    url character varying(4096),
+    data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_expiration timestamp(3) without time zone,
+    date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_suppression timestamp(3) without time zone,
+
+    CONSTRAINT "transactions_pkey" PRIMARY KEY ("id")
+);
+
+
 --
 -- TOC entry 229 (class 1259 OID 18873)
 -- Name: voyageurs; Type: TABLE; Schema: public; Owner: pcs
@@ -288,15 +314,14 @@ ALTER TABLE ONLY public.biens
     ADD CONSTRAINT bien_bailleur_id_fkey FOREIGN KEY (id_bailleur) REFERENCES public.bailleurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
-ALTER TABLE ONLY public.locations
-    ADD CONSTRAINT location_bien_id_fkey FOREIGN KEY (id_bien) REFERENCES public.biens(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT transaction_location_id_fkey FOREIGN KEY (id_location) REFERENCES public.locations(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    ADD CONSTRAINT transaction_prestation_id_fkey FOREIGN KEY (id_prestation) REFERENCES public.prestations(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 ALTER TABLE ONLY public.locations
-    ADD CONSTRAINT location_facture_id_fkey FOREIGN KEY (id_facture) REFERENCES public.factures(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
-ALTER TABLE ONLY public.locations
+    ADD CONSTRAINT location_bien_id_fkey FOREIGN KEY (id_bien) REFERENCES public.biens(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    ADD CONSTRAINT location_facture_id_fkey FOREIGN KEY (id_facture) REFERENCES public.factures(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     ADD CONSTRAINT location_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -309,29 +334,15 @@ ALTER TABLE ONLY public.planing
 
 
 ALTER TABLE ONLY public.prestataire_service
+    ADD CONSTRAINT prestataire_service_service_id_fkey FOREIGN KEY (id_service) REFERENCES public.services(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     ADD CONSTRAINT prestataire_service_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
-ALTER TABLE ONLY public.prestataire_service
-    ADD CONSTRAINT prestataire_service_service_id_fkey FOREIGN KEY (id_service) REFERENCES public.services(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
 ALTER TABLE ONLY public.prestations
-    ADD CONSTRAINT prestation_facture_id_fkey FOREIGN KEY (id_facture) REFERENCES public.factures(id) ON DELETE CASCADE;
-
-
-ALTER TABLE ONLY public.prestations
+    ADD CONSTRAINT prestation_facture_id_fkey FOREIGN KEY (id_facture) REFERENCES public.factures(id) ON DELETE CASCADE,
+    ADD CONSTRAINT prestation_service_id_fkey FOREIGN KEY (id_service) REFERENCES public.services(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    ADD CONSTRAINT prestation_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     ADD CONSTRAINT prestation_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
-ALTER TABLE ONLY public.prestations
-    ADD CONSTRAINT prestation_service_id_fkey FOREIGN KEY (id_service) REFERENCES public.services(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
-ALTER TABLE ONLY public.prestations
-    ADD CONSTRAINT prestation_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
 REVOKE USAGE ON SCHEMA public FROM PUBLIC;
-
-

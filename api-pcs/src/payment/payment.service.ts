@@ -17,8 +17,7 @@ export class PaymentService {
     // this.subscribes();
   }
   
-  async bien(voyageur: voyageur, id_location: number, origin: string): Promise<Object> {
-    // const location = await this.prisma.location.findFirst({ where: { id: id_location } });
+  async location(voyageur: voyageur, id_location: number, origin: string): Promise<Object> {
     const bien = await this.prisma.bien.findFirst({ where: { id: id_location } });
 
     const url = `${origin}/payment`;
@@ -42,40 +41,24 @@ export class PaymentService {
       images: ['https://multilok.fr/wp-content/uploads/2022/11/ICONE-SITE-premium-1.jpg'],
     };
 
-    // const data = {
-    //   currency: 'eur',
-    //   successUrl: `${url}/success`,
-    //   cancelUrl: `${url}/cancel`,
-    //   productName: `${wallet.title} (${organization.name})`,
-    //   productDescription: 'Description du don',
-    //   images: ['https://www.campingoasis.com/wp-content/uploads/2018/04/merci.jpg'],
-    //   email: account ? account.email : 'guest@email.com',
-    //   amount: price.value['price'],
-    //   metadata: {
-    //     pot: `${wallet.title} (${organization})`,
-    //     price_id: price.value['price'],
-    //     currency: price.value['currency'],
-    //     organization_id: organization.id,
-    //     transaction_id: '00000000-0000-0000-0000-000000000000',
-    //     account_id: account ? account.id : '00000000-0000-0000-0000-000000000000',
-    //     member_id: account && account['members'][0] ? account['members'][0].id : '00000000-0000-0000-0000-000000000000',
-    //   },
-    // };
-
     const paymentHost = this.configService.get('payment.host');
 
     const response = await firstValueFrom(
       this.httpService.post(
         `${paymentHost}/payment`, data, { responseType: 'json' }
       ).pipe(
-        retry({ count: 12, delay: 3000 }),
+        retry({ count: 3, delay: 3000 }),
         catchError(() => {
           return EMPTY;
         })
       )
     );
-    console.log({response});
-    return response['data'];
+
+    // await this.prisma.transaction.create({
+
+    // });
+  
+    return {id: response['data']['id']};
 
     // return await this.httpService.post(`${paymentUrl}/payment`, data, {responseType: 'json'})
     // .pipe(retry(3))

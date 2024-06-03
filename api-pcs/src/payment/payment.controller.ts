@@ -10,13 +10,13 @@ export class PaymentController {
 
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtRequiredGuard)
-  @Post('biens/:id_bien')
+  @Post('locations/:id_bien')
   async bien(
     @Param('id_bien') id_bien: number,
     @GetCompte() compte: Object,
     @Headers('Origin') origin: string
   ) {
-    return await this.paymentService.bien(compte as voyageur, id_bien, origin);
+    return await this.paymentService.location(compte as voyageur, id_bien, origin);
   }
 
 

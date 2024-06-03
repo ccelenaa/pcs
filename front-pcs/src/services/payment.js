@@ -34,7 +34,7 @@ export default class Payment {
     const stripe = await stripePromise;    
     if (stripe) {
       const session = await fetch(
-        `${API_URL}/payments/biens/${id}`,
+        `${API_URL}/payments/locations/${id}`,
         {
           method: 'POST',
           credentials: 'include',

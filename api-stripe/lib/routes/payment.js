@@ -53,10 +53,8 @@ module.exports = function (server) {
                 }
             }
         };
-        console.log(JSON.stringify(options));
         const session = await stripe.checkout.sessions.create(options);
-        console.log({ session: JSON.stringify(session, null, 2) });
-        res.json({ id: session.id });
+        res.json(session);
     });
     server.post({
         path: `/payment/webhooks/event`
