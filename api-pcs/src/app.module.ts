@@ -20,7 +20,7 @@ import { ServiceModule } from './service/service.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true, load: [configuration]}),
-    // PaymentModule,
+    PaymentModule,
     AuthModule,
     PrismaModule,
     CompteModule,

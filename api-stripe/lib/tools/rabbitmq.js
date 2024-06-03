@@ -227,7 +227,7 @@ async function close() {
     }
 }
 exports.close = close;
-(async function connect() {
+async function connect() {
     if (enabled && connecting === false) {
         connecting = true;
         console.log('Connecting');
@@ -271,5 +271,6 @@ exports.close = close;
             connecting = false;
         }
     }
-})();
+}
+;
 //# sourceMappingURL=rabbitmq.js.map

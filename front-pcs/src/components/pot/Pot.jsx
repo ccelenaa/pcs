@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { NavLink, useParams } from 'react-router-dom';
 import { getWallet } from '../../services/wallet';
-import Utils from '../../services/payment/utils';
+import Utils from '../../services/payment';
 import AsideCommon from '../aside/Common';
 
 export default function Pot(props) {

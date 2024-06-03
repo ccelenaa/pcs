@@ -1,17 +1,17 @@
 
 import { loadStripe } from '@stripe/stripe-js';
-import { API_URL } from '../../Config';
+import { API_URL } from '../Config';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('process.env.REACT_APP_PUBLIC_KEY');
+const stripePromise = loadStripe('pk_test_51P7zLsLAPUg4SYkPM4Kqy0st6kN5KrZwMcEaz3fOImGOtdhHK5Q1y8FwIM3ZyetykAHtSfFl9O3n0GAKuSkdj4mO00ZccwCL1k');
 
-export default class Utils {
-  static checkout = async (pot, amount) => {
+export default class Payment {
+  static prestation = async (id) => {
     // Get Stripe.js instance
     const stripe = await stripePromise;
 
     // Call your backend to create the Checkout Session
-    const response = await fetch(`${API_URL}/payment`, {method: 'POST', credentials: 'include', body: JSON.stringify({pot, amount: +amount})});
+    const response = await fetch(`${API_URL}/payments/prestations/${id}`, {method: 'POST', credentials: 'include', body: JSON.stringify({date: new Date()})});
     const session = await response.json();
 
     if (stripe) {
@@ -30,19 +30,19 @@ export default class Utils {
     }
   };
 
-  static checkoutPrice = async (price) => {
-    // Get Stripe.js instance
-    const stripe = await stripePromise;
-
-    // Call your backend to create the Checkout Session
-    const session = await fetch(
-      `${API_URL}/payments/checkout/${price}`,
-      {method: 'POST', credentials: 'include'
-    }).then(res => {
-      return res.json();
-    });
-
+  static bien = async (id) => {
+    const stripe = await stripePromise;    
     if (stripe) {
+      const session = await fetch(
+        `${API_URL}/payments/biens/${id}`,
+        {
+          method: 'POST',
+          credentials: 'include',
+          body: JSON.stringify({debut: new Date(),fin: new Date()})
+        }).then(res => {
+          return res.json();
+        });
+
       // When the customer clicks on the button, redirect them to Checkout.
       const result = await stripe.redirectToCheckout({
         sessionId: session.id

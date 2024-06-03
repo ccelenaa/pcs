@@ -12,15 +12,14 @@ module.exports = function (server) {
     }, async (req, res) => {
         var _a;
         console.log({ body: req.body });
-        let { paymentMethod = ['card'], currency = 'eur', successUrl = 'https://iheggaren.bleme.fr/payment/success', cancelUrl = 'https://unkown.bleme.fr/payment/cancel', productName = 'Unkown product', productDescription = 'Unkown description', images = ['https://www.campingoasis.com/wp-content/uploads/2018/04/merci.jpg'], email = 'unkown@email.com', amount = 9000, metadata: { price_id = 'Unkown', organization_id = 'Unkown', transaction_id = 'Unkown00-0000-0000-0000-000000000000', account_id = 'Unkown00-0000-0000-0000-000000000000', member_id = 'Unkown00-0000-0000-0000-000000000000', }, customer = null, name = 'Unkown' } = (_a = req.body) !== null && _a !== void 0 ? _a : {};
+        let { paymentMethod = ['card'], email = 'Unknown@email.com', productName = 'Unknown', productDescription = 'Unknown', amount = 0, currency = 'Unknown', metadata: { type = `Unknown`, id = 0, product = 'Unknown', price = 0, id_compte = 0, type_compte = 'Unknown', }, successUrl = 'https://unknown.com', cancelUrl = 'https://unknown.com', images = [], } = (_a = req.body) !== null && _a !== void 0 ? _a : {};
         // if (! customer) {
         //   ({id: customer} = await stripe.customers.create({name, email}));
         // }
         const options = {
             payment_method_types: paymentMethod,
             customer_email: email,
-            line_items: [
-                {
+            line_items: [{
                     price_data: {
                         currency,
                         product_data: {
@@ -31,31 +30,30 @@ module.exports = function (server) {
                         unit_amount: amount,
                     },
                     quantity: 1,
-                },
-            ],
+                }],
             mode: 'payment',
             locale: 'fr',
             success_url: successUrl,
             cancel_url: cancelUrl,
             metadata: {
-                transaction_id,
-                organization_id,
-                account_id,
-                member_id,
-                price_id,
+                type,
+                id,
+                product,
+                price,
+                currency,
+                id_compte,
+                type_compte,
             },
             payment_intent_data: {
                 receipt_email: email,
-                description: 'Ihegaren subscription',
+                description: `${type}-${id}`,
                 metadata: {
-                    transaction_id,
-                    organization_id,
-                    account_id,
-                    member_id,
-                    price_id,
+                    type,
+                    id,
                 }
             }
         };
+        console.log(JSON.stringify(options));
         const session = await stripe.checkout.sessions.create(options);
         console.log({ session: JSON.stringify(session, null, 2) });
         res.json({ id: session.id });

@@ -9,8 +9,8 @@ export default {
         port: '80',
         hmr: {
             protocol: 'ws',
-            host: '127.0.0.1',
-            port: 3002
+            host: 'localhost',
+            port: 80
         }
     }
 }

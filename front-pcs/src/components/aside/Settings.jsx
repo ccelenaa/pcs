@@ -130,7 +130,7 @@ export default function AsideSetting(props) {
             icon: faUser
           },{
             menu: '/biens',
-            label: 'Biens disponibles',
+            label: 'Biens',
             icon: all.faHomeLg
           },{
             menu: '/locations',
@@ -165,7 +165,7 @@ export default function AsideSetting(props) {
                         </div>
                         <div style={{flexShrink: '1', flexGrow: '1'}}>{t(m.label)}</div>
                         {
-                          selected===m.menu
+                          selected.startsWith(m.menu)
                           ? <div style={{
                             height: '12px', flexShrink: '0', flexGrow: '0'
                             }}><FontAwesomeIcon icon={all['faAngleRight']} className="burger" style={{

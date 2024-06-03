@@ -23,26 +23,26 @@ const stripe = new Stripe(secretKey, apiVersion);
     required: ['message']
   };
 
-  events.on('connected', async () => {
-    console.log('Rabbitmq "Connnexion" event detected : SUBSCRIBE to queue succeded ...');
+  // events.on('connected', async () => {
+  //   console.log('Rabbitmq "Connnexion" event detected : SUBSCRIBE to queue succeded ...');
 
-    await subscribe({queue: 'bleme.payment.succeded.queue', retry: 5000}, schema, async (msg: any) => {
-      console.log('[ RabbitMQ ] Message recept : ', {msg});
-      try {
-        const data = Buffer.from(msg.body.data);
+  //   await subscribe({queue: 'bleme.payment.succeded.queue', retry: 5000}, schema, async (msg: any) => {
+  //     console.log('[ RabbitMQ ] Message recept : ', {msg});
+  //     try {
+  //       const data = Buffer.from(msg.body.data);
 
-        console.log({data: data.toString()});
-        const clear = stripe.webhooks.constructEvent(data, msg.signature, secretHook);
+  //       console.log({data: data.toString()});
+  //       const clear = stripe.webhooks.constructEvent(data, msg.signature, secretHook);
 
-        console.log({clear});
+  //       console.log({clear});
 
-      } catch (err) {
-        console.log(`Webhook Error: ${err.message}`);
-      }
-    });
+  //     } catch (err) {
+  //       console.log(`Webhook Error: ${err.message}`);
+  //     }
+  //   });
     
-    console.log(' ... SUBSCRIPTION OK');
-  });
+  //   console.log(' ... SUBSCRIPTION OK');
+  // });
 
   // socket configuration
   const socketConfiguration = {

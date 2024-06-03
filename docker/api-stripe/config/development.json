@@ -16,8 +16,8 @@
   },
   "payment": {
     "stripe": {
-      "publicKey": "pk_test_51M8PBwAawPHCrdJRe2wBTwacicYLurQawtSBrCOrxeV1gZAYKRJfaFm8Sg9AM6biGGqBTQexydBZAeMBoP5LypiD00ZYUMOhMu",
-      "secretKey": "sk_test_51M8PBwAawPHCrdJRplwU4ECUMfMtXGRPGPkdqbO3rdKxrfAZMX3HU6ODFh50wnR39LPwiK7aB1NqvxeULV7CE1kO00dp4Ik5hH",
+      "publicKey": "pk_test_51P7zLsLAPUg4SYkPM4Kqy0st6kN5KrZwMcEaz3fOImGOtdhHK5Q1y8FwIM3ZyetykAHtSfFl9O3n0GAKuSkdj4mO00ZccwCL1k",
+      "secretKey": "sk_test_51P7zLsLAPUg4SYkPNNHhsdWbrNqqz8X1yg6j6WblnC967u5jp1mH2mC7HG5ZP5SzvC2mSAUqlIpNmQKkKZ9yRJU5000H2vaQ7p",
       "apiVersion": "2022-11-15",
       "webhooks": {
         "secret": "whsec_xmNhd7mupPsFPdDCXxmSyOIfX62UKyvz"

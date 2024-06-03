@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL } from '../Config';
 
 export default {
-    gets: (event) => {
+    gets: () => {
         return axios({
             method: 'get',
             url: `${API_URL}/biens?cache=${Math.random()}`,
@@ -11,6 +11,19 @@ export default {
         }).catch(function (error) {
             console.log({error});
             return [];
+        });
+    },
+
+    get: (id) => {
+        return axios({
+            method: 'get',
+            url: `${API_URL}/biens/${id}?cache=${Math.random()}`,
+            responseType: 'json',
+            withCredentials: true,
+        }).then((response) => response.status === 200 ? response.data : {})
+        .catch(function (error) {
+            console.log({error});
+            return {};
         });
     },
 

@@ -258,7 +258,7 @@ async function close () {
   }
 }
 
-(async function connect() {
+async function connect() {
   if (enabled && connecting === false) {
     connecting = true;
 
@@ -318,7 +318,7 @@ async function close () {
       connecting = false;
     }
   }
-})();
+};
 
 export {
   events,

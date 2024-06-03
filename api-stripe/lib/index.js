@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const stripe_1 = require("stripe");
 const config = require("config");
 const restify = require("restify");
-const rabbitmq_1 = require("./tools/rabbitmq");
 const secretKey = config.get('payment.stripe.secretKey');
 const apiVersion = { apiVersion: config.get('payment.stripe.apiVersion') };
 const secretHook = config.get('payment.stripe.webhooks.secret');
@@ -17,22 +16,21 @@ const schema = {
     },
     required: ['message']
 };
-rabbitmq_1.events.on('connected', async () => {
-    console.log('Rabbitmq "Connnexion" event detected : SUBSCRIBE to queue succeded ...');
-    await (0, rabbitmq_1.subscribe)({ queue: 'bleme.payment.succeded.queue', retry: 5000 }, schema, async (msg) => {
-        console.log('[ RabbitMQ ] Message recept : ', { msg });
-        try {
-            const data = Buffer.from(msg.body.data);
-            console.log({ data: data.toString() });
-            const clear = stripe.webhooks.constructEvent(data, msg.signature, secretHook);
-            console.log({ clear });
-        }
-        catch (err) {
-            console.log(`Webhook Error: ${err.message}`);
-        }
-    });
-    console.log(' ... SUBSCRIPTION OK');
-});
+// events.on('connected', async () => {
+//   console.log('Rabbitmq "Connnexion" event detected : SUBSCRIBE to queue succeded ...');
+//   await subscribe({queue: 'bleme.payment.succeded.queue', retry: 5000}, schema, async (msg: any) => {
+//     console.log('[ RabbitMQ ] Message recept : ', {msg});
+//     try {
+//       const data = Buffer.from(msg.body.data);
+//       console.log({data: data.toString()});
+//       const clear = stripe.webhooks.constructEvent(data, msg.signature, secretHook);
+//       console.log({clear});
+//     } catch (err) {
+//       console.log(`Webhook Error: ${err.message}`);
+//     }
+//   });
+//   console.log(' ... SUBSCRIPTION OK');
+// });
 // socket configuration
 const socketConfiguration = {
     port: config.has("bind.port")

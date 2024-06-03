@@ -1,15 +1,9 @@
 
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { setConnexion, isConnected } from '../../services/user';
-import { API_URL } from '../../Config';
-import { useHistory, Link, NavLink } from 'react-router-dom';
-import AsideSetting from '../aside/Settings';
-import * as all from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState,  } from 'react';
+import { NavLink } from 'react-router-dom';
 import bienService from '../../services/bien';
-import Utils from 'services/payment/utils';
+import Utils from 'services/payment';
 
 export default function Biens(props) {
 
@@ -35,11 +29,6 @@ export default function Biens(props) {
       biens.map(b => console.log(b.id, b.verified_at));
     });
   }
-  
-  const reserver = (event) => {
-    const bien_id = event.target.getAttribute('data-bienid');
-    Utils.checkoutPrice(100);
-  }
 
   return (<>
     <div className="tab-container">
@@ -48,7 +37,7 @@ export default function Biens(props) {
         <div className="cell slim70">Surface</div>
         <div className="cell">Bien</div>
         <div className="cell slim70">Prix</div>
-        <div className="cell slim70">Reservation</div>
+        <div className="cell slim90">Reservation</div>
         {/* <div className="cell slim">Sus</div>
         <div className="cell slim">Val</div> */}
       </div>
@@ -57,10 +46,10 @@ export default function Biens(props) {
           <>
             <div className="row">
               <div className="cell slim120">{bien.type}</div>
-              <div className="cell slim70">{bien.area}</div>
+              <div className="cell slim70">{bien.surface}</div>
               <div className="cell">{bien.description}</div>
-              <div className="cell slim70">{bien.price} {bien.currency}</div>
-              <div className="cell slim70"><input type="button" value="Reserver" data-bienid={bien.id} onClick={reserver}/></div>
+              <div className="cell slim70" style={{textAlign: 'right'}}>{(bien.prix*1.1).toFixed(2)} {bien.devise}</div>
+              <div className="cell slim90"><NavLink to={`/biens/${bien.id}`}><input type="button" value="Reserver" data-bienid={bien.id}/></NavLink></div>
               {/* <div className="cell slim50"><input id={`${bien.id}_b_val`} data-bienid={bien.id} type="checkbox" defaultChecked={bien.bailleur_suspended_at !== null} title={bien.bailleur_suspended_at?.slice(0, 16).replace('T', ' ')} disabled/></div>
               <div className="cell slim"><input id={`${bien.id}_val`} data-bienid={bien.id} type="checkbox" defaultChecked={bien.suspended_at !== null} onChange={suspenssion} title={bien.suspended_at?.slice(0, 16).replace('T', ' ')} style={{display: bien.validated_at === null ? "none" : "initial"}}/></div>
               <div className="cell slim"><input id={`${bien.id}_sus`} data-bienid={bien.id} type="checkbox" defaultChecked={bien.validated_at !== null} onChange={validation} title={bien.validated_at?.slice(0, 16).replace('T', ' ')} disabled={bien.validated_at !== null}/></div> */}

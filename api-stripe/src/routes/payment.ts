@@ -5,7 +5,7 @@ import Stripe from 'stripe';
 import * as restify from "restify";
 
 const secretKey: string = config.get('payment.stripe.secretKey');
-const apiVersion:Stripe.StripeConfig = {apiVersion: config.get('payment.stripe.apiVersion')};
+const apiVersion: Stripe.StripeConfig = { apiVersion: config.get('payment.stripe.apiVersion') };
 
 const secretHook: string = config.get('payment.stripe.webhooks.secret');
 
@@ -19,27 +19,26 @@ module.exports = function (server: restify.Server) {
     },
     async (req, res) => {
 
-      console.log({body: req.body});
+      console.log({ body: req.body });
 
       let {
         paymentMethod = ['card'],
-        currency = 'eur',
-        successUrl = 'https://iheggaren.bleme.fr/payment/success',
-        cancelUrl = 'https://unkown.bleme.fr/payment/cancel',
-        productName = 'Unkown product',
-        productDescription = 'Unkown description',
-        images = ['https://www.campingoasis.com/wp-content/uploads/2018/04/merci.jpg'],
-        email = 'unkown@email.com',
-        amount = 9000,
+        email = 'Unknown@email.com',
+        productName = 'Unknown',
+        productDescription = 'Unknown',
+        amount = 0,
+        currency = 'Unknown',
         metadata: {
-          price_id = 'Unkown',
-          organization_id = 'Unkown',
-          transaction_id = 'Unkown00-0000-0000-0000-000000000000',
-          account_id = 'Unkown00-0000-0000-0000-000000000000',
-          member_id = 'Unkown00-0000-0000-0000-000000000000',
+          type = `Unknown`,
+          id = 0,
+          product = 'Unknown',
+          price = 0,
+          id_compte = 0,
+          type_compte = 'Unknown',
         },
-        customer = null,
-        name = 'Unkown'
+        successUrl = 'https://unknown.com',
+        cancelUrl = 'https://unknown.com',
+        images = [],
       } = req.body ?? {};
 
       // if (! customer) {
@@ -49,48 +48,47 @@ module.exports = function (server: restify.Server) {
       const options: Stripe.Checkout.SessionCreateParams = {
         payment_method_types: paymentMethod,
         customer_email: email,
-        line_items: [
-          {
-            price_data: {
-              currency,
-              product_data: {
-                name: productName,
-                description: productDescription,
-                images
-              },
-              unit_amount: amount,
+        line_items: [{
+          price_data: {
+            currency,
+            product_data: {
+              name: productName,
+              description: productDescription,
+              images
             },
-            quantity: 1,
+            unit_amount: amount,
           },
-        ],
+          quantity: 1,
+        }],
         mode: 'payment',
         locale: 'fr',
         success_url: successUrl,
         cancel_url: cancelUrl,
         metadata: {
-          transaction_id,
-          organization_id,
-          account_id,
-          member_id,
-          price_id,
+          type,
+          id,
+          product,
+          price,
+          currency,
+          id_compte,
+          type_compte,
         },
         payment_intent_data: {
           receipt_email: email,
-          description: 'Ihegaren subscription',
+          description: `${type}-${id}`,
           metadata: {
-            transaction_id,
-            organization_id,
-            account_id,
-            member_id,
-            price_id,
+            type,
+            id,
           }
         }
       };
+      console.log(JSON.stringify(options));
 
       const session = await stripe.checkout.sessions.create(options);
 
-      console.log({session: JSON.stringify(session, null, 2)});
-      res.json({id: session.id});
+      console.log({ session: JSON.stringify(session, null, 2) });
+
+      res.json({ id: session.id });
     }
   );
 
@@ -102,8 +100,8 @@ module.exports = function (server: restify.Server) {
     async (req: restify.Request, res: restify.Response) => {
       try {
         const revent = stripe.webhooks.constructEvent(req.rawBody, req.headers['signature'], secretHook);
-        console.log({revent});
-        res.json({revent});
+        console.log({ revent });
+        res.json({ revent });
       } catch (err) {
         console.log(`Webhook Error: ${err.message}`);
         res.send(`Webhook Error: ${err.message}`);
