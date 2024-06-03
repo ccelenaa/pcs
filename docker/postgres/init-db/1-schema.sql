@@ -273,7 +273,7 @@ CREATE TABLE public.transactions (
     session_status character varying(32),
     payment_intent character varying(1024) DEFAULT NULL,
     payment_status character varying(32),
-    amount character DEFAULT 0 NOT NULL,
+    amount integer DEFAULT 0 NOT NULL,
     url character varying(4096),
     data jsonb DEFAULT '{}'::jsonb NOT NULL,
     date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,

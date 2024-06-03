@@ -251,7 +251,7 @@ model transaction {
   session_status    String?     @db.VarChar(32)
   payment_intent    String?     @db.VarChar(1024)
   payment_status    String?     @db.VarChar(32)
-  amount            String      @default(dbgenerated("0")) @db.Char(1)
+  amount            Int         @default(0)
   url               String?     @db.VarChar(4096)
   data              Json        @default("{}")
   date_creation     DateTime    @default(now())
