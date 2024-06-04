@@ -9,9 +9,21 @@ import {getUserData} from '../services/user';
 import langueService from '../services/langue';
 import { useTranslation } from "react-i18next";
 import Notifications from './Notifications';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import Payment from 'services/payment';
 
 
 function Organization() {
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const success = searchParams.get("success");
+
+  useEffect(async () => {
+    if(success) {
+      console.log(await Payment.updatePayment(success));
+    }
+  }, []);
+
   const { i18n, t } = useTranslation();
   var url = /^([a-zA-Z0-9-]+)\.([a-zA-Z0-9]+)\.([a-zA-Z]+)$/g.exec(window.location.hostname);
   

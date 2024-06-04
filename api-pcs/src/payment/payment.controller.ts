@@ -32,8 +32,6 @@ export class PaymentController {
       date_fin: new Date(),
     } as location);
 
-    await htmlPdf('https://dashboard.stripe.com/receipts/payment/CAcQARoXChVhY2N0XzFQN3pMc0xBUFVnNFNZa1Ao_-z5sgYyBpN600lG4jovFviGltwqYNrXMNc3A1mc_ZSUoScQGU3RgYMNQ5ni88ZJFy50s4Sa9yxoUFWRBPM','pdf.pdf');
-
     return await this.paymentService.location(compte, location, origin);
   }
 
@@ -70,12 +68,10 @@ export class PaymentController {
     @Headers('Origin') origin: string
   ) {
     const session = await this.paymentService.getSession(session_id);
-    const payment = await this.paymentService.getPayment(session['payment_intent']);
-    const charge  = await this.paymentService.getCharge(payment['latest_charge']);
 
-    console.log({session, payment, charge});
+    console.log(session);
 
-    return await htmlPdf(charge['receipt_url'],'pdf.pdf');
+    return await htmlPdf(session['charge']['receipt_url'],'pdf.pdf');
   }
 }
 

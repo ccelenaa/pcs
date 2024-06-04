@@ -16,7 +16,7 @@ export default function Biens(props) {
   }, []);
 
   const louer = () => {
-    Payment.bien(id);
+    Payment.location(id);
   }
 
   return (<>

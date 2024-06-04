@@ -70,25 +70,18 @@ module.exports = function (server) {
         }
     });
     server.get({
-        path: `/sissions/:id`
+        path: `/sessions/:id`
     }, async (req, res) => {
         const id = req.params.id;
         console.log({ id });
-        res.json(await stripe.checkout.sessions.retrieve(id));
-    });
-    server.get({
-        path: `/payment-intents/:id`
-    }, async (req, res) => {
-        const id = req.params.id;
-        console.log({ id });
-        res.json(await stripe.paymentIntents.retrieve(id));
-    });
-    server.get({
-        path: `/charges/:id`
-    }, async (req, res) => {
-        const id = req.params.id;
-        console.log({ id });
-        res.json(await stripe.charges.retrieve(id));
+        const session = await stripe.checkout.sessions.retrieve(id);
+        const payment = await stripe.paymentIntents.retrieve(session.payment_intent);
+        const charge = await stripe.charges.retrieve(payment.latest_charge);
+        res.json({
+            session,
+            payment,
+            charge
+        });
     });
 };
 //# sourceMappingURL=payment.js.map

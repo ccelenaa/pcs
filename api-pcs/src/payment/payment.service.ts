@@ -140,47 +140,12 @@ export class PaymentService {
     // return response['data'];
   }
 
-
   async getSession(id: string): Promise<Object> {
     const paymentHost = this.configService.get('payment.host');
 
     const response = await firstValueFrom(
       this.httpService.get(
         `${paymentHost}/sessions/${id}`, { responseType: 'json' }
-      ).pipe(
-        retry({ count: 3, delay: 3000 }),
-        catchError(() => {
-          return EMPTY;
-        })
-      )
-    );
-
-    return response['data'];
-  }
-
-  async getPayment(id: string): Promise<Object> {
-    const paymentHost = this.configService.get('payment.host');
-
-    const response = await firstValueFrom(
-      this.httpService.get(
-        `${paymentHost}/payment-intents/${id}`, { responseType: 'json' }
-      ).pipe(
-        retry({ count: 3, delay: 3000 }),
-        catchError(() => {
-          return EMPTY;
-        })
-      )
-    );
-
-    return response['data'];
-  }
-
-  async getCharge(id: string): Promise<Object> {
-    const paymentHost = this.configService.get('payment.host');
-
-    const response = await firstValueFrom(
-      this.httpService.get(
-        `${paymentHost}/charges/${id}`, { responseType: 'json' }
       ).pipe(
         retry({ count: 3, delay: 3000 }),
         catchError(() => {

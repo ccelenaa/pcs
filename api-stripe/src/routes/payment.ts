@@ -3,6 +3,7 @@
 import * as config from 'config';
 import Stripe from 'stripe';
 import * as restify from "restify";
+import { Session } from 'inspector';
 
 const secretKey: string = config.get('payment.stripe.secretKey');
 const apiVersion: Stripe.StripeConfig = { apiVersion: config.get('payment.stripe.apiVersion') };
@@ -109,39 +110,21 @@ module.exports = function (server: restify.Server) {
 
   server.get(
     <restify.RouteOptions>{
-      path: `/sissions/:id`
+      path: `/sessions/:id`
     },
     async (req, res) => {
       const id = req.params.id;
+
       console.log({ id });
+      const session: Stripe.Checkout.Session = await stripe.checkout.sessions.retrieve(id);
+      const payment = await stripe.paymentIntents.retrieve(session.payment_intent as string);
+      const charge = await stripe.charges.retrieve(payment.latest_charge as string);
 
-      res.json(await stripe.checkout.sessions.retrieve(id));
-    }
-  );
-
-
-  server.get(
-    <restify.RouteOptions>{
-      path: `/payment-intents/:id`
-    },
-    async (req, res) => {
-      const id = req.params.id;
-      console.log({ id });
-
-      res.json(await stripe.paymentIntents.retrieve(id));
-    }
-  );
-
-
-  server.get(
-    <restify.RouteOptions>{
-      path: `/charges/:id`
-    },
-    async (req, res) => {
-      const id = req.params.id;
-      console.log({ id });
-
-      res.json(await stripe.charges.retrieve(id));
+      res.json({
+        session,
+        payment,
+        charge
+      });
     }
   );
 };

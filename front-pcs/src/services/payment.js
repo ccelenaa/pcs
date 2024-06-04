@@ -30,7 +30,7 @@ export default class Payment {
     }
   };
 
-  static bien = async (id) => {
+  static location = async (id) => {
     const stripe = await stripePromise;    
     if (stripe) {
       const session = await fetch(
@@ -56,6 +56,17 @@ export default class Payment {
     } else {
 
     }
+  };
+
+  static updatePayment = async (session) => {
+    return await fetch(
+      `${API_URL}/payments/${session}/update`,
+      {
+        method: 'get',
+        credentials: 'include',
+      }).then(res => {
+        return res.json();
+      });
   };
 
 }
