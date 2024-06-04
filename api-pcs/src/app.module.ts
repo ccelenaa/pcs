@@ -16,6 +16,7 @@ import { VoyageurModule } from './voyageur/voyageur.module';
 import { LangueModule } from './langue/langue.module';
 import { PrestationModule } from './prestation/prestation.module';
 import { ServiceModule } from './service/service.module';
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ServiceModule } from './service/service.module';
     PrismaModule,
     CompteModule,
     BienModule,
+    LocationModule,
     BailleurModule,
     PrestataireModule,
     PrestationModule,

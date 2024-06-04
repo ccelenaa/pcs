@@ -6,6 +6,7 @@ import { AuthModule } from 'src/auth/auth.module';
 @Module({
   imports: [AuthModule],
   controllers: [BienController],
-  providers: [BienService]
+  providers: [BienService],
+  exports: [BienService]
 })
 export class BienModule {}

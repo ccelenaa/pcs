@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { HttpService, HttpModule } from '@nestjs/axios';
-import { voyageur } from '@prisma/client';
+import { location, voyageur } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { catchError, EMPTY, firstValueFrom, lastValueFrom, map, Observable, retry, RetryConfig } from 'rxjs';
 import { RabbitMQService } from 'src/rabbitmq/rabbitmq.service';
@@ -17,22 +17,20 @@ export class PaymentService {
     // this.subscribes();
   }
   
-  async location(voyageur: voyageur, id_location: number, origin: string): Promise<Object> {
-    const bien = await this.prisma.bien.findFirst({ where: { id: id_location } });
-
+  async location(voyageur: voyageur, location: location, origin: string): Promise<Object> {
     const url = `${origin}/payment`;
 
     const data = {
       email: voyageur.email,
-      productName: bien.type,
-      productDescription: bien.description,
-      amount: parseFloat((bien.prix*1.1).toFixed(2)) * 100,
+      productName: location['bien'].type,
+      productDescription: location['bien'].description,
+      amount: parseFloat((location['bien'].prix*1.1).toFixed(2)) * 100,
       currency: 'eur',
       metadata: {
         type: `location`,
-        id: bien.id,
-        product: bien.type,
-        price: (bien.prix*1.1).toFixed(2),
+        id: location['bien'].id,
+        product: location['bien'].type,
+        price: (location['bien'].prix*1.1).toFixed(2),
         id_compte: voyageur.id,
         type_compte: 'Voyageur',
       },
@@ -54,11 +52,23 @@ export class PaymentService {
       )
     );
 
-    // await this.prisma.transaction.create({
-
-    // });
+    const session = response['data'];
+    await this.prisma.transaction.create({
+      data: {
+        id_location: location.id,
+        session_id: session.id,
+        session_status: session.status,
+        payment_intent: session.payment_intent,
+        payment_status: session.payment_status,
+        amount: session.amount_total,
+        url: session.url,
+        data: session,
+        date_creation: new Date(session.created * 1000),
+        date_expiration: new Date(session.expires_at * 1000)
+      }
+    });
   
-    return {id: response['data']['id']};
+    return {id: session.id};
 
     // return await this.httpService.post(`${paymentUrl}/payment`, data, {responseType: 'json'})
     // .pipe(retry(3))
