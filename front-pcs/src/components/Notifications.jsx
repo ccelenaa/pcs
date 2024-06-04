@@ -26,6 +26,7 @@ export function notifier(type, message) {
     case 'warning': element = <Warning data={{ message }} />; break;
     case 'error': element = <Error data={{ message }} />; break;
     case 'auth-error': element = <AuthError data={{ message }} />; break;
+    case 'payment': element = <Payment data={{ message }} />; break;
     default: element = <Information data={{ message }} />; break;
   }
 
@@ -111,6 +112,17 @@ export const Note = (props) => {
     <div className='notification'>
       <div className='notification-icon'>
         <FontAwesomeIcon icon={all.faStar} />
+      </div>
+      <div className="notification-content">{props.data.message}</div>
+    </div>
+  )
+}
+
+export const Payment = (props) => {
+  return (
+    <div className='notification'>
+      <div className='notification-icon'>
+        <FontAwesomeIcon icon={all.faCreditCard} />
       </div>
       <div className="notification-content">{props.data.message}</div>
     </div>

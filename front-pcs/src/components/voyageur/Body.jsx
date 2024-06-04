@@ -6,7 +6,7 @@ import Bien from './Bien';
 import Biens from './Biens';
 import Locations from './Locations';
 import Prestations from './Prestations';
-import Factures from './Factures';
+import Paiements from './Paiements';
 import Compte from './Compte';
 import Messages from './Messages';
 import Login from 'components/login/Login';
@@ -20,6 +20,6 @@ export default function Body(props) {
     <Route path='/biens/:id' render={(prps) => <Bien {...props}/>}/>
     <Route path='/locations' render={(prps) => <Locations {...props}/>}/>
     <Route path='/prestations' render={(prps) => <Prestations {...props}/>}/>
-    <Route path='/factures' render={(prps) => <Factures {...props}/>}/>
+    <Route path='/paiements' render={(prps) => <Paiements {...props}/>}/>
   </>)
 }

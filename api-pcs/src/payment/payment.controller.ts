@@ -2,14 +2,18 @@ import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Param, Post, RawB
 import { GetCompte } from 'src/auth/decorator';
 import { JwtRequiredGuard, JwtOptionalGuard } from 'src/auth/guard';
 import { PaymentService } from './payment.service';
-import { location, voyageur } from '@prisma/client';
+import { location, transaction, voyageur } from '@prisma/client';
 import { LocationService } from 'src/location/location.service';
 import { BienService } from 'src/bien/bien.service';
 import { htmlPdf } from 'src/utils/pdf'
+import { createHash } from 'node:crypto'
+import { PrismaService } from 'src/prisma/prisma.service';
+import { TransactionService } from 'src/transaction/transaction.service';
 
 @Controller('payments')
 export class PaymentController {
   constructor(
+    private readonly transactionService: TransactionService,
     private readonly bienService: BienService,
     private readonly paymentService: PaymentService,
     private readonly locationService: LocationService
@@ -67,11 +71,21 @@ export class PaymentController {
     @GetCompte() compte: voyageur,
     @Headers('Origin') origin: string
   ) {
-    const session = await this.paymentService.getSession(session_id);
+    let payment = await this.paymentService.getSession(session_id);
+    const url = payment['charge']['receipt_url'];
+    const pdf = `${createHash('sha256').update(url).digest('hex')}.pdf`;
 
-    console.log(session);
+    await htmlPdf(url,`public/${pdf}`);
 
-    return await htmlPdf(session['charge']['receipt_url'],'pdf.pdf');
+    payment = {...payment, receipt: {web: url, pdf}};
+
+    await this.transactionService.update({
+      session_id: payment['session']['id'],
+      session_status: payment['session']['status'],
+      payment_status: payment['session']['payment_status'],
+      url: payment['session']['url'],
+      data: payment,
+      date_modification: new Date()
+    } as transaction);
   }
 }
-

@@ -23,6 +23,27 @@ export class TransactionService {
     });
   }
 
+  async getsVoyageur(id_voyageur: number): Promise<transaction[]> {
+    return await this.prisma.transaction.findMany({
+      where: {
+        session_status: 'complete',
+        payment_status: 'paid',
+        OR: [
+          {
+            location: {
+              id_voyageur
+            }
+          },
+          {
+            prestation: {
+              id_voyageur
+            }
+          }
+        ]
+      }
+    });
+  }
+
   async update(transaction: transaction): Promise<transaction> {
     return await this.prisma.transaction.update({
       where: {

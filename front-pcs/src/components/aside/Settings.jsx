@@ -141,8 +141,8 @@ export default function AsideSetting(props) {
             label: 'Demande de prestations',
             icon: all.faHandshakeAngle
           },{
-            menu: '/factures',
-            label: 'Mes factures',
+            menu: '/paiements',
+            label: 'Paiements',
             icon: faCreditCard
           },
         ];

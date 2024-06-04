@@ -64,6 +64,18 @@ export default class Payment {
       {
         method: 'get',
         credentials: 'include',
+      });
+      // .then(res => {
+      //   return res.json();
+      // });
+  };
+
+  static voyageurTransactions = async () => {
+    return await fetch(
+      `${API_URL}/voyageurs/1/transactions`,
+      {
+        method: 'get',
+        credentials: 'include',
       }).then(res => {
         return res.json();
       });

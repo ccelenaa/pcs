@@ -8,7 +8,7 @@ import Footer from './footer/Footer';
 import {getUserData} from '../services/user';
 import langueService from '../services/langue';
 import { useTranslation } from "react-i18next";
-import Notifications from './Notifications';
+import Notifications, { notifier } from './Notifications';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import Payment from 'services/payment';
 
@@ -20,7 +20,8 @@ function Organization() {
 
   useEffect(async () => {
     if(success) {
-      console.log(await Payment.updatePayment(success));
+      await Payment.updatePayment(success);
+      notifier('payment', 'Votre recu de paiement est disponible en PDF');
     }
   }, []);
 
