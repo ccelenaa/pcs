@@ -8,7 +8,7 @@ const secretHook = config.get('payment.stripe.webhooks.secret');
 const stripe = new stripe_1.default(secretKey, apiVersion);
 module.exports = function (server) {
     server.post({
-        path: `/payment`
+        path: `/sessions/create`
     }, async (req, res) => {
         var _a;
         console.log({ body: req.body });
@@ -68,6 +68,27 @@ module.exports = function (server) {
             console.log(`Webhook Error: ${err.message}`);
             res.send(`Webhook Error: ${err.message}`);
         }
+    });
+    server.get({
+        path: `/sissions/:id`
+    }, async (req, res) => {
+        const id = req.params.id;
+        console.log({ id });
+        res.json(await stripe.checkout.sessions.retrieve(id));
+    });
+    server.get({
+        path: `/payment-intents/:id`
+    }, async (req, res) => {
+        const id = req.params.id;
+        console.log({ id });
+        res.json(await stripe.paymentIntents.retrieve(id));
+    });
+    server.get({
+        path: `/charges/:id`
+    }, async (req, res) => {
+        const id = req.params.id;
+        console.log({ id });
+        res.json(await stripe.charges.retrieve(id));
     });
 };
 //# sourceMappingURL=payment.js.map

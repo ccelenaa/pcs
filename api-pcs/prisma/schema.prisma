@@ -247,7 +247,7 @@ model transaction {
   id                BigInt      @id @default(autoincrement())
   id_location       BigInt?
   id_prestation     BigInt?
-  session_id        String?     @db.VarChar(1024)
+  session_id        String?     @unique @db.VarChar(1024)
   session_status    String?     @db.VarChar(32)
   payment_intent    String?     @db.VarChar(1024)
   payment_status    String?     @db.VarChar(32)

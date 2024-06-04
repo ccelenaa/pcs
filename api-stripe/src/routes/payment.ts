@@ -15,7 +15,7 @@ module.exports = function (server: restify.Server) {
 
   server.post(
     <restify.RouteOptions>{
-      path: `/payment`
+      path: `/sessions/create`
     },
     async (req, res) => {
 
@@ -106,4 +106,42 @@ module.exports = function (server: restify.Server) {
     }
   );
 
+
+  server.get(
+    <restify.RouteOptions>{
+      path: `/sissions/:id`
+    },
+    async (req, res) => {
+      const id = req.params.id;
+      console.log({ id });
+
+      res.json(await stripe.checkout.sessions.retrieve(id));
+    }
+  );
+
+
+  server.get(
+    <restify.RouteOptions>{
+      path: `/payment-intents/:id`
+    },
+    async (req, res) => {
+      const id = req.params.id;
+      console.log({ id });
+
+      res.json(await stripe.paymentIntents.retrieve(id));
+    }
+  );
+
+
+  server.get(
+    <restify.RouteOptions>{
+      path: `/charges/:id`
+    },
+    async (req, res) => {
+      const id = req.params.id;
+      console.log({ id });
+
+      res.json(await stripe.charges.retrieve(id));
+    }
+  );
 };

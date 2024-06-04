@@ -18,7 +18,7 @@ export class PaymentService {
   }
   
   async location(voyageur: voyageur, location: location, origin: string): Promise<Object> {
-    const url = `${origin}/payment`;
+    const url = `${origin}`;
 
     const data = {
       email: voyageur.email,
@@ -34,8 +34,8 @@ export class PaymentService {
         id_compte: voyageur.id,
         type_compte: 'Voyageur',
       },
-      successUrl: `${url}/success`,
-      cancelUrl: `${url}/cancel`,
+      successUrl: `${url}/biens?success={CHECKOUT_SESSION_ID}`,
+      cancelUrl: `${url}/biens?cancel={CHECKOUT_SESSION_ID}`,
       images: ['https://multilok.fr/wp-content/uploads/2022/11/ICONE-SITE-premium-1.jpg'],
     };
 
@@ -43,7 +43,7 @@ export class PaymentService {
 
     const response = await firstValueFrom(
       this.httpService.post(
-        `${paymentHost}/payment`, data, { responseType: 'json' }
+        `${paymentHost}/sessions/create`, data, { responseType: 'json' }
       ).pipe(
         retry({ count: 3, delay: 3000 }),
         catchError(() => {
@@ -68,16 +68,7 @@ export class PaymentService {
       }
     });
   
-    return {id: session.id};
-
-    // return await this.httpService.post(`${paymentUrl}/payment`, data, {responseType: 'json'})
-    // .pipe(retry(3))
-    // .pipe(map((res) => res))
-    // .pipe(catchError((err) => {
-    //   console.log(err);
-    //   throw new ForbiddenException('API not available');
-    // }));
-    
+    return {id: session.id};    
   }
 
   async prestation(voyageur: voyageur, priceId: string, origin: string): Promise<Object> {
@@ -88,8 +79,8 @@ export class PaymentService {
     
     const data = {
       currency: 'eur',
-      successUrl: `${url}/success`,
-      cancelUrl: `${url}/cancel`,
+      successUrl: `${url}/prestations?success={CHECKOUT_SESSION_ID}`,
+      cancelUrl: `${url}/prestations?cancel={CHECKOUT_SESSION_ID}`,
       productName: `appar`,
       productDescription: 'Appartement',
       images: ['https://multilok.fr/wp-content/uploads/2022/11/ICONE-SITE-premium-1.jpg'],
@@ -106,31 +97,11 @@ export class PaymentService {
       },
     };
 
-    // const data = {
-    //   currency: 'eur',
-    //   successUrl: `${url}/success`,
-    //   cancelUrl: `${url}/cancel`,
-    //   productName: `${wallet.title} (${organization.name})`,
-    //   productDescription: 'Description du don',
-    //   images: ['https://www.campingoasis.com/wp-content/uploads/2018/04/merci.jpg'],
-    //   email: account ? account.email : 'guest@email.com',
-    //   amount: price.value['price'],
-    //   metadata: {
-    //     pot: `${wallet.title} (${organization})`,
-    //     price_id: price.value['price'],
-    //     currency: price.value['currency'],
-    //     organization_id: organization.id,
-    //     transaction_id: '00000000-0000-0000-0000-000000000000',
-    //     account_id: account ? account.id : '00000000-0000-0000-0000-000000000000',
-    //     member_id: account && account['members'][0] ? account['members'][0].id : '00000000-0000-0000-0000-000000000000',
-    //   },
-    // };
-
     const paymentHost = this.configService.get('payment.host');
     
     const response = await firstValueFrom(
       this.httpService.post(
-        `${paymentHost}/payment`, data, { responseType: 'json' }
+        `${paymentHost}/sessions/create`, data, { responseType: 'json' }
       ).pipe(
         retry({ count: 12, delay: 3000 }),
         catchError(() => {
@@ -167,6 +138,58 @@ export class PaymentService {
     //   )
     // );
     // return response['data'];
+  }
+
+
+  async getSession(id: string): Promise<Object> {
+    const paymentHost = this.configService.get('payment.host');
+
+    const response = await firstValueFrom(
+      this.httpService.get(
+        `${paymentHost}/sessions/${id}`, { responseType: 'json' }
+      ).pipe(
+        retry({ count: 3, delay: 3000 }),
+        catchError(() => {
+          return EMPTY;
+        })
+      )
+    );
+
+    return response['data'];
+  }
+
+  async getPayment(id: string): Promise<Object> {
+    const paymentHost = this.configService.get('payment.host');
+
+    const response = await firstValueFrom(
+      this.httpService.get(
+        `${paymentHost}/payment-intents/${id}`, { responseType: 'json' }
+      ).pipe(
+        retry({ count: 3, delay: 3000 }),
+        catchError(() => {
+          return EMPTY;
+        })
+      )
+    );
+
+    return response['data'];
+  }
+
+  async getCharge(id: string): Promise<Object> {
+    const paymentHost = this.configService.get('payment.host');
+
+    const response = await firstValueFrom(
+      this.httpService.get(
+        `${paymentHost}/charges/${id}`, { responseType: 'json' }
+      ).pipe(
+        retry({ count: 3, delay: 3000 }),
+        catchError(() => {
+          return EMPTY;
+        })
+      )
+    );
+
+    return response['data'];
   }
 
   subscribes() {

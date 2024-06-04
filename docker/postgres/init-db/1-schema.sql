@@ -269,7 +269,7 @@ CREATE TABLE public.transactions (
     id BIGSERIAL,
     id_location bigint,
     id_prestation bigint,
-    session_id character varying(1024),
+    session_id character varying(1024) UNIQUE,
     session_status character varying(32),
     payment_intent character varying(1024) DEFAULT NULL,
     payment_status character varying(32),

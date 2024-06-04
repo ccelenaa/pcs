@@ -17,6 +17,7 @@ import { LangueModule } from './langue/langue.module';
 import { PrestationModule } from './prestation/prestation.module';
 import { ServiceModule } from './service/service.module';
 import { LocationModule } from './location/location.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { LocationModule } from './location/location.module';
     PrestationModule,
     ServiceModule,
     VoyageurModule,
+    TransactionModule,
     LangueModule,
     RabbitMQModule,
     CronModule

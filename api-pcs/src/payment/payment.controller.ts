@@ -5,6 +5,7 @@ import { PaymentService } from './payment.service';
 import { location, voyageur } from '@prisma/client';
 import { LocationService } from 'src/location/location.service';
 import { BienService } from 'src/bien/bien.service';
+import { htmlPdf } from 'src/utils/pdf'
 
 @Controller('payments')
 export class PaymentController {
@@ -31,6 +32,8 @@ export class PaymentController {
       date_fin: new Date(),
     } as location);
 
+    await htmlPdf('https://dashboard.stripe.com/receipts/payment/CAcQARoXChVhY2N0XzFQN3pMc0xBUFVnNFNZa1Ao_-z5sgYyBpN600lG4jovFviGltwqYNrXMNc3A1mc_ZSUoScQGU3RgYMNQ5ni88ZJFy50s4Sa9yxoUFWRBPM','pdf.pdf');
+
     return await this.paymentService.location(compte, location, origin);
   }
 
@@ -45,6 +48,7 @@ export class PaymentController {
     return await this.paymentService.prestation(compte as voyageur, null, origin);
   }
 
+
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtOptionalGuard)
   @Post('webhooks/intent/success')
@@ -56,4 +60,22 @@ export class PaymentController {
     return await this.paymentService.webhooks(req.rawBody, signature);
   }
 
+
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtRequiredGuard)
+  @Get(':session_id/update')
+  async updatePayment(
+    @Param('session_id') session_id: string,
+    @GetCompte() compte: voyageur,
+    @Headers('Origin') origin: string
+  ) {
+    const session = await this.paymentService.getSession(session_id);
+    const payment = await this.paymentService.getPayment(session['payment_intent']);
+    const charge  = await this.paymentService.getCharge(payment['latest_charge']);
+
+    console.log({session, payment, charge});
+
+    return await htmlPdf(charge['receipt_url'],'pdf.pdf');
+  }
 }
+
