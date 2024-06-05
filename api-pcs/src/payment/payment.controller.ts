@@ -1,4 +1,17 @@
-import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Param, Post, RawBodyRequest, Req, UseGuards } from '@nestjs/common';
+import { 
+  Body, 
+  Controller,
+  Get,
+  Header,
+  Headers,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  RawBodyRequest,
+  Req,
+  StreamableFile,
+  UseGuards } from '@nestjs/common';
 import { GetCompte } from 'src/auth/decorator';
 import { JwtRequiredGuard, JwtOptionalGuard } from 'src/auth/guard';
 import { PaymentService } from './payment.service';
@@ -7,8 +20,8 @@ import { LocationService } from 'src/location/location.service';
 import { BienService } from 'src/bien/bien.service';
 import { htmlPdf } from 'src/utils/pdf'
 import { createHash } from 'node:crypto'
-import { PrismaService } from 'src/prisma/prisma.service';
 import { TransactionService } from 'src/transaction/transaction.service';
+import { createReadStream } from 'node:fs';
 
 @Controller('payments')
 export class PaymentController {
@@ -82,10 +95,20 @@ export class PaymentController {
     await this.transactionService.update({
       session_id: payment['session']['id'],
       session_status: payment['session']['status'],
+      payment_intent: payment['session']['payment_intent'],
       payment_status: payment['session']['payment_status'],
       url: payment['session']['url'],
       data: payment,
       date_modification: new Date()
     } as transaction);
+  }
+
+  @Get('receipt/:file')
+  @Header('Content-Type', 'application/pdf')
+  @Header('Content-Disposition', 'attachment; filename="recu-paiement.pdf"')
+  getStaticFile(@Param('file') file: string): StreamableFile {
+    console.log({file});
+    const pdf = createReadStream(`public/${file}`);
+    return new StreamableFile(pdf);
   }
 }

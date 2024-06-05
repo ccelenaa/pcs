@@ -356,6 +356,15 @@ select {
   }
 }
 
+div {
+  &.button {
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(60,60,60,0.06);
+    }
+  }
+}
+
 .tab-container {
   display: flex;
   flex-direction: column;

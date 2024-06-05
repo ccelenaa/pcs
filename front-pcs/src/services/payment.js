@@ -81,4 +81,13 @@ export default class Payment {
       });
   };
 
+  static download_receipt = async (file) => {
+    return await fetch(
+      `${API_URL}/payments/receipt/${file}`,
+      {
+        method: 'get',
+        credentials: 'include',
+      });
+  };
+
 }
