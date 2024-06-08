@@ -26,10 +26,7 @@ export class JwtOptionalStrategy extends PassportStrategy(Strategy, 'jwt.optiona
   }) {
     const account = await this.prisma[payload.service].findFirst({
       where: {
-        id: payload.sub
-      },
-      include: {
-        members: true
+        id: payload.sub as unknown
       }
     });
 
@@ -42,6 +39,7 @@ export class JwtOptionalStrategy extends PassportStrategy(Strategy, 'jwt.optiona
   }
 
   private static extractJWT(req: Request): string | null {
-    return req.cookies['token'];
+    const service = req.headers.origin.match(/^(?:https?:\/\/)?([\w]+)\.pcs\.fr/)?.[1] || "";
+    return req.cookies[`token_${service}`];
   }
 }

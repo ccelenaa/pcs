@@ -83,7 +83,7 @@ export default class Payment {
 
   static download_receipt = async (file) => {
     return await fetch(
-      `${API_URL}/payments/receipt/${file}`,
+      `${API_URL}/payments/receipts/${file}`,
       {
         method: 'get',
         credentials: 'include',

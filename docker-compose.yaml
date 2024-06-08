@@ -34,6 +34,7 @@ services:
     volumes:
       - ./api-pcs:/usr/lib/esgi/api-pcs
       - ./docker/api-pcs/config:/usr/lib/esgi/api-pcs/config
+      - ./docker/api-pcs/public:/usr/lib/esgi/api-pcs/public
     ports:
       - "3000:80"
     environment:

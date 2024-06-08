@@ -14,6 +14,11 @@ jwt_secret: 'MY_SECRET'
 payment:
   host: 'http://api-stripe'
 
+# Facturation
+cron:
+  facturation:
+    prestataires: '0 0 0 1 * *'
+
 # Database
 databases:
   postgres:

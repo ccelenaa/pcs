@@ -9,7 +9,7 @@ import { BienModule } from './bien/bien.module';
 import { PaymentModule } from './payment/payment.module';
 import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
 import configuration from './utils/configuration';
-import { CronModule } from './cron/cron.module';
+import { CronModule } from './facturation/prestataires.module';
 import { BailleurModule } from './bailleur/bailleur.module';
 import { PrestataireModule } from './prestataire/prestataire.module';
 import { VoyageurModule } from './voyageur/voyageur.module';

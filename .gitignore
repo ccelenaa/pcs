@@ -1,4 +1,4 @@
 */node_modules
 docker/postgres/data
 api-pcs/lib
-api-pcs/public
+**/api-pcs/public/*

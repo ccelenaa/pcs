@@ -350,9 +350,53 @@ select {
   }
 }
 
+:root {
+  --width: 100%;
+}
+
+@keyframes deminute {
+  100% {
+    width: var(--width);
+  }
+}
+
+
 @keyframes hiddens {
   100% {
     opacity: 0;
+  }
+}
+
+.compteur {
+  position: relative;;
+  &::after {
+    content: '';
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: rgb(11, 175, 11);
+    animation: deminute 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  }
+
+  &::before {
+    content: '';
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: rgb(210, 217, 228);
+  }
+}
+
+.compteur.deminute {
+  position: relative;;
+  &::after {
+    animation: deminute 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
   }
 }
 

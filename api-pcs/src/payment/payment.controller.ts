@@ -88,7 +88,7 @@ export class PaymentController {
     const url = payment['charge']['receipt_url'];
     const pdf = `${createHash('sha256').update(url).digest('hex')}.pdf`;
 
-    await htmlPdf(url,`public/${pdf}`);
+    await htmlPdf(url,`public/receipts/${pdf}`);
 
     payment = {...payment, receipt: {web: url, pdf}};
 
@@ -103,12 +103,11 @@ export class PaymentController {
     } as transaction);
   }
 
-  @Get('receipt/:file')
+  @Get('receipts/:file')
   @Header('Content-Type', 'application/pdf')
   @Header('Content-Disposition', 'attachment; filename="recu-paiement.pdf"')
   getStaticFile(@Param('file') file: string): StreamableFile {
-    console.log({file});
-    const pdf = createReadStream(`public/${file}`);
+    const pdf = createReadStream(`public/receipts/${file}`);
     return new StreamableFile(pdf);
   }
 }

@@ -40,6 +40,9 @@ export class TransactionService {
             }
           }
         ]
+      },
+      orderBy: {
+        date_modification: 'desc'
       }
     });
   }

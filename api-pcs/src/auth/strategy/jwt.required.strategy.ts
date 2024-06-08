@@ -24,7 +24,6 @@ export class JwtRequiredStrategy extends PassportStrategy(Strategy, 'jwt.require
     email: string,
     login: string
   }) {
-    
     const account = await this.prisma[payload.service].findFirst({
       where: {
         id: payload.sub as unknown

@@ -57,12 +57,16 @@ export default function AsideSetting(props) {
             label: 'side.admin.bailleurs',
             icon: faUserFriends
           },{
+            menu: '/voyageurs',
+            label: 'side.admin.voyageurs',
+            icon: faUserGroup
+          },{
             menu: '/prestataires',
             label: 'side.admin.prestataires',
             icon: faUserGroup
           },{
-            menu: '/voyageurs',
-            label: 'side.admin.voyageurs',
+            menu: '/facturations',
+            label: 'Facturations',
             icon: faUserGroup
           },{
             menu: '/langues',

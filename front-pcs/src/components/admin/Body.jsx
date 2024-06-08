@@ -17,6 +17,7 @@ import Voyageur from './Voyageur';
 import Voyageurs from './Voyageurs';
 import Messages from './Messages';
 import Langues from './Langues';
+import Facturations from './Facturations';
 
 export default function Body(props) {
 
@@ -34,6 +35,7 @@ export default function Body(props) {
     <Route path='/prestataires/:id' render={(prps) => <Prestataire {...props}/>}/>
     <Route path='/voyageurs' exact render={(prps) => <Voyageurs {...props}/>}/>
     <Route path='/voyageurs/:id' render={(prps) => <Voyageur {...props}/>}/>
+    <Route path='/facturations' exact render={(prps) => <Facturations {...props}/>}/>
     <Route path='/langues' render={(prps) => <Langues {...props}/>}/>
   </>)
 }
