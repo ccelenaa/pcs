@@ -21,7 +21,6 @@ export default function Biens(props) {
 
   return (<>
     <NavLink to="/biens">Retour</NavLink>
-    <button onClick={louer}>Location</button>
     <div className="tab-container">
       <div className="row">
         <div className="cell slim120">Type</div>
@@ -44,5 +43,8 @@ export default function Biens(props) {
         <div className="cell">{bien.description}</div>
       </div>
     </div>
+    <input type="date"/>
+    <input type="date"/>
+    <button onClick={louer}>Location</button>
   </>)
 }
