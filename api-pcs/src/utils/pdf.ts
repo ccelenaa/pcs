@@ -1,5 +1,5 @@
-const axios = require('axios');
-const pdf = require('html-pdf');
+import axios from 'axios';
+import {create} from 'html-pdf';
 
 export async function htmlPdf(url, path) {
   const response = await axios.get(url);
@@ -13,7 +13,7 @@ export async function htmlPdf(url, path) {
   const htmlSansLien = html.replace(/<a[^>]*>(\s*<img.*?)<\/a>/gsi, '$1').replace(/font-size: 16px;/gsi, 'font-size: 14px;');
   
   return new Promise((resolve, reject) =>
-    pdf.create(htmlSansLien, options).toFile(path, (err, res) => {
+    create(htmlSansLien, options).toFile(path, (err, res) => {
       if (err) reject(err);
       resolve(res);
     }));

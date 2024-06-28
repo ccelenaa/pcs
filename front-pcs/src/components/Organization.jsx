@@ -20,8 +20,13 @@ function Organization() {
 
   useEffect(async () => {
     if(success) {
-      await Payment.updatePayment(success);
-      notifier('payment', 'Votre recu de paiement est disponible en PDF');
+      const response = await Payment.updatePayment(success);
+      if(response.status === 200) {
+        notifier('payment', 'Votre recu de paiement est disponible en PDF');
+      } else {
+        notifier('error', 'Erreur lors de la creation du PDF');
+      }
+        
     }
   }, []);
 
