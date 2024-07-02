@@ -7,7 +7,7 @@ WORKDIR /usr/lib/esgi/front-pcs/
 # # Install dependencies
 COPY package.json .
 RUN npm install
-# RUN npm install -g react react-scripts
+RUN npm install -g react react-scripts
 
 # Exports
 EXPOSE 80
