@@ -67,14 +67,3 @@ services:
       - "3003:80"
     # env_file:
     # - ./front-pcs/.env
-
-  rabbitmq:
-    privileged: true
-    image: "rabbitmq:3.8.32-management"
-    environment:
-      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbitmq_management sample_retention_policies [{global,[{3600,1}]},{basic,[{3600,1}]},{detailed,[{10,1}]}]"
-    ports:
-      - "5672:5672"
-      - "25672:15672"
-    volumes:
-      - ./docker/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
