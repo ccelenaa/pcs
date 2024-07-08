@@ -1,0 +1,9 @@
+[submodule "front-pcs"]
+	path = front-pcs
+	url = git@github.com:ccelenaa/front-pcs.git
+[submodule "api-pcs"]
+	path = api-pcs
+	url = git@github.com:ccelenaa/api-pcs.git
+[submodule "api-stripe"]
+	path = api-stripe
+	url = git@github.com:ccelenaa/api-stripe.git

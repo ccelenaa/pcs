@@ -3,6 +3,3 @@ docker/postgres/data
 api-pcs/lib
 **/api-pcs/public/*
 
-api-pcs
-front-pcs
-api-stripe
