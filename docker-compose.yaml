@@ -63,7 +63,10 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./front-pcs:/usr/lib/pcs/front-pcs
+      - ./docker/front-pcs/development.js:/usr/lib/pcs/front-pcs/env.js
     ports:
       - "3003:80"
+    environment:
+      NODE_ENV: development
     # env_file:
     # - ./front-pcs/.env

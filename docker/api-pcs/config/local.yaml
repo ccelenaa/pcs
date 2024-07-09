@@ -1,0 +1,35 @@
+# The domain name
+domain: 'pcs.fr'
+
+# Server
+server:
+  host: '0.0.0.0'
+  port: 80
+
+# Token & Cookie
+cookie_name: 'token'
+jwt_secret: 'MY_SECRET'
+
+# Payment
+payment:
+  host: 'http://api-stripe'
+
+# Facturation
+cron:
+  facturation:
+    prestataires: '0 0 0 1 * *'
+
+# Database
+databases:
+  postgres:
+    url: 'postgresql://pcs:pcs@postgresql:5432/pcs?schema=public'
+
+# Rabbitmq
+rabbitmq:
+  connection:
+    protocol: 'amqp'
+    hostname: 'rabbitmq'
+    port:     5672
+    username: 'admin'
+    password: 'admin'
+    vhost:    'bleme'

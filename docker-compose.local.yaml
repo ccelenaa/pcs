@@ -35,7 +35,7 @@ services:
     ports:
       - "3000:80"
     environment:
-      NODE_ENV: production
+      NODE_ENV: local
       DATABASE_URL: 'postgresql://pcs:pcs@postgresql:5432/pcs?schema=public'
     # env_file:
     # - ./docker/nest/config/development.yaml
@@ -48,14 +48,14 @@ services:
     ports:
       - "3002:80"
     environment:
-      NODE_ENV: production
+      NODE_ENV: local
 
   front-pcs:
     image: docker.io/celenaaa/front-pcs:1.2.0
     restart: always
     volumes:
-      - ./docker/front-pcs/production.js:/usr/lib/pcs/front-pcs/env.js
+      - ./docker/front-pcs/local.js:/usr/lib/pcs/front-pcs/env.js
     ports:
       - "3003:80"
-    # env_file:
-    # - ./front-pcs/.env
+    environment:
+      NODE_ENV: local
