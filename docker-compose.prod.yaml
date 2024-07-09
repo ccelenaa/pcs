@@ -54,7 +54,7 @@ services:
     image: docker.io/celenaaa/front-pcs:1.2.0
     restart: always
     volumes:
-      - ./docker/front-pcs/production.js:/usr/lib/pcs/front-pcs/env.js
+      - ./docker/front-pcs/production.js:/usr/lib/pcs/front-pcs/public/env.js
     ports:
       - "3003:80"
     # env_file:

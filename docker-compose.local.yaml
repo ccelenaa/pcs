@@ -51,10 +51,10 @@ services:
       NODE_ENV: local
 
   front-pcs:
-    image: docker.io/celenaaa/front-pcs:1.2.0
+    image: docker.io/celenaaa/front-pcs:1.5.0
     restart: always
     volumes:
-      - ./docker/front-pcs/local.js:/usr/lib/pcs/front-pcs/env.js
+      - ./docker/front-pcs/local.js:/usr/lib/pcs/front-pcs/public/env.js
     ports:
       - "3003:80"
     environment:

@@ -10,8 +10,9 @@ services:
       - "${NGINX_PORT:-443}:443"
     volumes:
       - ./docker/nginx:/etc/nginx/conf.d
-      - ./front-pcs/src/public:/var/www/pcs/public
+      # - ./front-pcs/src/public:/var/www/pcs/public
       - ./docker/nginx/SSL/certs/rsa:/etc/nginx/ssl
+      - ./docker/front-pcs/development.js:/var/www/pcs/public/env.js
 
   postgresql:
     privileged: true
@@ -63,7 +64,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./front-pcs:/usr/lib/pcs/front-pcs
-      - ./docker/front-pcs/development.js:/usr/lib/pcs/front-pcs/env.js
+      # - ./docker/front-pcs/development.js:/usr/lib/pcs/front-pcs/public/env.js
     ports:
       - "3003:80"
     environment:
