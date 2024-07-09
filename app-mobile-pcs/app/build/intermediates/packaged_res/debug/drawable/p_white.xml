@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+    <group
+        android:name="totator"
+        android:pivotX="72"
+        android:pivotY="72">
+        <path
+            android:fillColor="#ffffff"
+            android:pathData="M0,0h1024v1024h-1024z" />
+        <path
+            android:fillColor="#535DE9"
+            android:pathData="M284,353C284,242.5 373.5,153 484,153H734C761.6,153 784,175.4 784,203V453C784,563.5 694.5,653 584,653H334C306.4,653 284,630.6 284,603V353Z" />
+        <path
+            android:fillColor="#ffffff"
+            android:pathData="M433,373C433,334.3 464.3,303 503,303H583C610.6,303 633,325.4 633,353V433C633,471.7 601.7,503 563,503H483C455.4,503 433,480.6 433,453V373Z" />
+        <path
+            android:fillColor="#ffffff"
+            android:pathData="M563,442H303V683H433H563V442Z" />
+        <path
+            android:fillColor="#535DE9"
+            android:pathData="M284,403H433V603C433,630.6 410.6,653 383,653H334C306.4,653 284,630.6 284,603V403Z" />
+        <path
+            android:fillColor="#535DE9"
+            android:pathData="M488,553C488,525.4 510.4,503 538,503H603V613C603,635.1 585.1,653 563,653H538C510.4,653 488,630.6 488,603V553Z" />
+        <path
+            android:fillColor="#535DE9"
+            android:pathData="M383,721H334C306.4,721 284,743.4 284,771V820C284,847.6 306.4,870 334,870H383C410.6,870 433,847.6 433,820V771C433,743.4 410.6,721 383,721Z" />
+    </group>
+</vector>

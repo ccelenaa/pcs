@@ -1,0 +1,318 @@
+[
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_tick.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/tick.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_semi_bold.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_semi_bold.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_close_square_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/close_square_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_filter_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/filter_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_logout_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/logout_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_arrow_left_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/arrow_left_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_home_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/home_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_clock_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/clock_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_doc_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/doc_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_pay.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/pay.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_dots_circle_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/dots_circle_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_location_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/location_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_swap.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/swap.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_bold.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_bold.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_black.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_black.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_doc_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/doc_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_google.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/google.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_wallet_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/wallet_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_p_white.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/p_white.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_info_square_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/info_square_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_show_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/show_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_arrow_down_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/arrow_down_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_thin.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_thin.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_arrow_right_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/arrow_right_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_phone.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/phone.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_extra_light.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_extra_light.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_chat_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/chat_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_lock_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/lock_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/xml_backup_rules.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_bookmark_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/bookmark_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_light.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_light.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_edit_square_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/edit_square_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_calendar.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/calendar.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_message_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/message_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_loop_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/loop_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_clock_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/clock_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_map.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/map.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_dinar.png.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/dinar.png"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_profile_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/profile_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_shield_tick_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/shield_tick_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_eddahabia_card.png.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/eddahabia_card.png"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_security.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/security.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_timing.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/timing.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_parking.jpg.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/parking.jpg"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_profile_pic.jpg.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/profile_pic.jpg"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_message_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/message_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_home_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/home_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_apple.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/apple.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_bookmark_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/bookmark_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_extra_bold.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_extra_bold.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_pcs.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/pcs.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_profile_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/profile_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_regular.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_regular.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_tick_square_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/tick_square_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_facebook.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/facebook.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_wallet_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/wallet_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_department.jpg.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/department.jpg"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_discovery_bold.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/discovery_bold.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_close_square_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/close_square_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_notification_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/notification_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_password.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/password.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_baridi_mob.png.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/baridi_mob.png"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/font_urbanist_medium.ttf.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/font/urbanist_medium.ttf"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/drawable_show_outline.xml.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/drawable/show_outline.xml"
+    },
+    {
+        "merged": "com.example.paris_cartaker_services.app-merged_res-53:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.paris_cartaker_services.app-main-55:/mipmap-xhdpi/ic_launcher.webp"
+    }
+]
