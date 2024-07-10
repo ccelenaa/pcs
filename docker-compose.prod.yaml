@@ -51,7 +51,7 @@ services:
       NODE_ENV: production
 
   front-pcs:
-    image: docker.io/celenaaa/front-pcs:1.2.0
+    image: docker.io/celenaaa/front-pcs:1.5.0
     restart: always
     volumes:
       - ./docker/front-pcs/production.js:/usr/lib/pcs/front-pcs/public/env.js
