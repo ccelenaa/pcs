@@ -7,3 +7,6 @@
 [submodule "api-stripe"]
 	path = api-stripe
 	url = git@github.com:ccelenaa/api-stripe.git
+[submodule "kube-pcs"]
+	path = kube-pcs
+	url = git@github.com:ccelenaa/kube-pcs.git
