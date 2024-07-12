@@ -40,3 +40,27 @@ DNS:
 127.0.0.1   bailleur.pcs.fr
 127.0.0.1   prestataire.pcs.fr
 127.0.0.1   voyageur.pcs.fr
+
+
+- Lancer le projet
+docker compose up -d
+
+- Arreter le projet
+docker compose down
+
+- lister les container
+docker ps
+
+- lister les images
+docker images ()
+
+
+- Connection aux container pour tester les ping:
+docker exec -it front-pcs sh
+docker exec -it api-stripe sh
+
+il faut dabord instaler les outils: ping, ip
+
+apt update && apt install iproute2 iputils-ping -y
+apk update && apk add iproute2 iputils-ping
+
