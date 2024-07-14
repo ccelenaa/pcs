@@ -86,7 +86,7 @@ CREATE TABLE public.facturations (
     date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_suppression timestamp(3) without time zone,
 
-    CONSTRAINT "factures_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "facturations_pkey" PRIMARY KEY ("id")
 );
 
 
