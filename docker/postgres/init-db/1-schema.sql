@@ -98,7 +98,7 @@ CREATE TABLE public.facturations (
 CREATE TABLE public.factures (
     id BIGSERIAL,
     id_facturation bigint DEFAULT NULL,
-    id_pretataire bigint DEFAULT NULL,
+    id_prestataire bigint DEFAULT NULL,
     id_bailleur bigint DEFAULT NULL,
     id_voyageur bigint DEFAULT NULL,
     type character varying(32) DEFAULT 'location'::character varying NOT NULL,
@@ -385,9 +385,9 @@ ALTER TABLE ONLY public.planing
 
 
 ALTER TABLE ONLY public.factures
-    ADD CONSTRAINT facture_facturation_id_fkey FOREIGN KEY (id_caturation) REFERENCES public.facturations(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-    ADD CONSTRAINT facture_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-    ADD CONSTRAINT facture_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT facture_facturation_id_fkey FOREIGN KEY (id_facturation) REFERENCES public.facturations(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    ADD CONSTRAINT facture_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    ADD CONSTRAINT facture_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     ADD CONSTRAINT facture_bailleur_id_fkey FOREIGN KEY (id_bailleur) REFERENCES public.bailleurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
