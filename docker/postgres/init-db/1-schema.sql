@@ -265,10 +265,11 @@ CREATE TABLE public.services (
     adresse character varying(150),
     prix_min real DEFAULT NULL,
     prix_max real DEFAULT NULL,
-    statut character varying(30) DEFAULT 'new'::character varying NOT NULL,
+    statut integer DEFAULT 0 NOT NULL,
     remarque character varying(512),
     data jsonb DEFAULT '{}'::jsonb NOT NULL,
 
+    date timestamp(3) without time zone NOT NULL,
     date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_realisation timestamp(3) without time zone,
     date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -287,7 +288,7 @@ CREATE TABLE public.services (
 CREATE TABLE public.prestations (
     id BIGSERIAL,
     id_service bigint NOT NULL,
-    id_prestataire bigint DEFAULT NULL,
+    id_prestataire bigint NOT NULL,
     id_facture bigint DEFAULT NULL,
     prix_pretataire real DEFAULT 0 NOT NULL,
     pcs_marge real DEFAULT 0 NOT NULL,
@@ -295,9 +296,9 @@ CREATE TABLE public.prestations (
     date_prestation timestamp(3) without time zone,
     date_validation_voyageur timestamp(3) without time zone,
     date_validation_prestataire timestamp(3) without time zone,
-    statut character varying(32) DEFAULT 'new'::character varying NOT NULL,
-    remarque character varying(512),
     note integer DEFAULT 0 NOT NULL,
+    remarque character varying(512),
+    statut integer DEFAULT 0 NOT NULL,
     data jsonb DEFAULT '{}'::jsonb NOT NULL,
 
     date_suppression_admin timestamp(3) without time zone,
