@@ -237,12 +237,12 @@ CREATE TABLE public.messages (
 
 CREATE TABLE public.services (
     id BIGSERIAL,
-    id_voyageur bigint,
+    id_voyageur bigint NOT NULL,
     label character varying(1024),
     adresse character varying(150),
     prix_min real DEFAULT NULL,
     prix_max real DEFAULT NULL,
-    statut character varying(30) 'new'::character varying NOT NULL,
+    statut character varying(30) DEFAULT 'new'::character varying NOT NULL,
     remarque character varying(512),
     data jsonb DEFAULT '{}'::jsonb NOT NULL,
 
@@ -264,8 +264,8 @@ CREATE TABLE public.services (
 CREATE TABLE public.prestations (
     id BIGSERIAL,
     id_service bigint NOT NULL,
-    id_prestataire bigint,
-    id_facture bigint,
+    id_prestataire bigint DEFAULT NULL,
+    id_facture bigint DEFAULT NULL,
     prix_pretataire real DEFAULT 0 NOT NULL,
     pcs_marge real DEFAULT 0 NOT NULL,
     prix_supplementaire real DEFAULT 0 NOT NULL,
