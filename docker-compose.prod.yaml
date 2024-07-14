@@ -102,6 +102,8 @@ services:
             - ./docker/api-stripe/config:/usr/lib/pcs/api-stripe/config
         environment:
             NODE_ENV: production
+        ports:
+        - "3002:80"
 
 
     # Postgresql: la base de données 
@@ -119,5 +121,7 @@ services:
         volumes:
             - ./docker/postgres/data:/var/lib/postgresql/data
             - ./docker/postgres/init-db:/docker-entrypoint-initdb.d
+        ports:
+        - "5432:5432"
 
 

@@ -137,9 +137,27 @@ CREATE TABLE public.locations (
 -- Name: photos; Type: TABLE; Schema: public; Owner: pcs
 --
 
+CREATE TABLE public.tarifs (
+    id BIGSERIAL,
+    key character varying(128) NOT NULL,
+    value real DEFAULT 10,
+    date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_suppression timestamp(3) without time zone,
+
+    CONSTRAINT "tarifs_pkey" PRIMARY KEY ("id")
+);
+
+
+--
+-- TOC entry 223 (class 1259 OID 18837)
+-- Name: photos; Type: TABLE; Schema: public; Owner: pcs
+--
+
 CREATE TABLE public.photos (
     id BIGSERIAL,
-    id_bien bigint NOT NULL,
+    id_model bigint NOT NULL,
+    model character varying(128) NOT NULL,
     url character varying(32) NOT NULL,
     date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -170,25 +188,6 @@ CREATE TABLE public.planing (
 
 
 --
--- TOC entry 235 (class 1259 OID 18912)
--- Name: prestataire_service; Type: TABLE; Schema: public; Owner: pcs
---
-
-CREATE TABLE public.prestataire_service (
-    id BIGSERIAL,
-    id_prestataire bigint NOT NULL,
-    id_service bigint NOT NULL,
-    prix real DEFAULT 0 NOT NULL,
-    pcs_marge real DEFAULT 0 NOT NULL,
-    date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    date_suppression timestamp(3) without time zone,
-
-    CONSTRAINT "prestataire_service_pkey" PRIMARY KEY ("id")
-);
-
-
---
 -- TOC entry 227 (class 1259 OID 18860)
 -- Name: prestataires; Type: TABLE; Schema: public; Owner: pcs
 --
@@ -212,33 +211,22 @@ CREATE TABLE public.prestataires (
 
 
 --
--- TOC entry 237 (class 1259 OID 18923)
--- Name: prestations; Type: TABLE; Schema: public; Owner: pcs
+-- TOC entry 239 (class 1259 OID 18938)
+-- Name: services; Type: TABLE; Schema: public; Owner: pcs
 --
 
-CREATE TABLE public.prestations (
+CREATE TABLE public.messages (
     id BIGSERIAL,
-    id_voyageur bigint NOT NULL,
-    id_prestataire bigint,
-    id_service bigint NOT NULL,
-    id_facture bigint,
-    prix real DEFAULT 0 NOT NULL,
-    pcs_marge real DEFAULT 0 NOT NULL,
-    prix_client real DEFAULT 0 NOT NULL,
-    prix_supplementaire real DEFAULT 0 NOT NULL,
-    devise character varying(32) DEFAULT 'eu'::character varying NOT NULL,
-    lieu_prestation character varying(512),
-    date_prestation timestamp(3) without time zone,
-    date_validation_voyageur timestamp(3) without time zone,
-    date_validation_prestataire timestamp(3) without time zone,
-    statut character varying(32) DEFAULT 'new'::character varying NOT NULL,
-    remarque character varying(512),
-    note integer DEFAULT 0 NOT NULL,
+    id_prestation bigint NOT NULL,
+    id_voyageur bigint DEFAULT NULL,
+    id_prestataire bigint DEFAULT NULL,
+    id_admin bigint DEFAULT NULL,
+    message character varying(1024),
     date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_suppression timestamp(3) without time zone,
 
-    CONSTRAINT "prestations_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "message_pkey" PRIMARY KEY ("id")
 );
 
 
@@ -249,14 +237,54 @@ CREATE TABLE public.prestations (
 
 CREATE TABLE public.services (
     id BIGSERIAL,
-    label character varying(255),
-    prix_standard real DEFAULT 0 NOT NULL,
-    pcs_marge real DEFAULT 0 NOT NULL,
+    id_voyageur bigint,
+    label character varying(1024),
+    adresse character varying(150),
+    prix_min real DEFAULT NULL,
+    prix_max real DEFAULT NULL,
+    statut character varying(30) 'new'::character varying NOT NULL,
+    remarque character varying(512),
+    data jsonb DEFAULT '{}'::jsonb NOT NULL,
+
     date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_realisation timestamp(3) without time zone,
     date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    date_suppression timestamp(3) without time zone,
+    date_admin_suppression timestamp(3) without time zone,
+    date_voyageur_suppression timestamp(3) without time zone,
 
     CONSTRAINT "services_pkey" PRIMARY KEY ("id")
+);
+
+
+--
+-- TOC entry 237 (class 1259 OID 18923)
+-- Name: prestations; Type: TABLE; Schema: public; Owner: pcs
+--
+
+CREATE TABLE public.prestations (
+    id BIGSERIAL,
+    id_service bigint NOT NULL,
+    id_prestataire bigint,
+    id_facture bigint,
+    prix_pretataire real DEFAULT 0 NOT NULL,
+    pcs_marge real DEFAULT 0 NOT NULL,
+    prix_supplementaire real DEFAULT 0 NOT NULL,
+    date_prestation timestamp(3) without time zone,
+    date_validation_voyageur timestamp(3) without time zone,
+    date_validation_prestataire timestamp(3) without time zone,
+    statut character varying(32) DEFAULT 'new'::character varying NOT NULL,
+    remarque character varying(512),
+    note integer DEFAULT 0 NOT NULL,
+    data jsonb DEFAULT '{}'::jsonb NOT NULL,
+
+    date_suppression_admin timestamp(3) without time zone,
+    date_suppression_voyageur timestamp(3) without time zone,
+    date_suppression_prestataire timestamp(3) without time zone,
+
+    date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+
+    CONSTRAINT "prestations_pkey" PRIMARY KEY ("id")
 );
 
 
@@ -325,23 +353,17 @@ ALTER TABLE ONLY public.locations
     ADD CONSTRAINT location_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
-ALTER TABLE ONLY public.photos
-    ADD CONSTRAINT photo_bien_id_fkey FOREIGN KEY (id_bien) REFERENCES public.biens(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT message_prestation_id_fkey FOREIGN KEY (id_prestation) REFERENCES public.prestations(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 ALTER TABLE ONLY public.planing
     ADD CONSTRAINT planing_bien_id_fkey FOREIGN KEY (id_bien) REFERENCES public.biens(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
-ALTER TABLE ONLY public.prestataire_service
-    ADD CONSTRAINT prestataire_service_service_id_fkey FOREIGN KEY (id_service) REFERENCES public.services(id) ON UPDATE CASCADE ON DELETE RESTRICT,
-    ADD CONSTRAINT prestataire_service_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
 ALTER TABLE ONLY public.prestations
     ADD CONSTRAINT prestation_facture_id_fkey FOREIGN KEY (id_facture) REFERENCES public.factures(id) ON DELETE CASCADE,
     ADD CONSTRAINT prestation_service_id_fkey FOREIGN KEY (id_service) REFERENCES public.services(id) ON UPDATE CASCADE ON DELETE RESTRICT,
-    ADD CONSTRAINT prestation_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     ADD CONSTRAINT prestation_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
