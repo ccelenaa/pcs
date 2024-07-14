@@ -76,8 +76,31 @@ CREATE TABLE public.biens (
 -- Name: factures; Type: TABLE; Schema: public; Owner: pcs
 --
 
+CREATE TABLE public.facturations (
+    id BIGSERIAL,
+    type character varying(32) DEFAULT 'prestation'::character varying NOT NULL,
+    data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    date_debut timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_fin timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_creation timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_modification timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_suppression timestamp(3) without time zone,
+
+    CONSTRAINT "factures_pkey" PRIMARY KEY ("id")
+);
+
+
+--
+-- TOC entry 233 (class 1259 OID 18900)
+-- Name: factures; Type: TABLE; Schema: public; Owner: pcs
+--
+
 CREATE TABLE public.factures (
     id BIGSERIAL,
+    id_facturation bigint DEFAULT NULL,
+    id_pretataire bigint DEFAULT NULL,
+    id_bailleur bigint DEFAULT NULL,
+    id_voyageur bigint DEFAULT NULL,
     type character varying(32) DEFAULT 'location'::character varying NOT NULL,
     prix real DEFAULT 0 NOT NULL,
     total real DEFAULT 0 NOT NULL,
@@ -295,8 +318,8 @@ CREATE TABLE public.prestations (
 
 CREATE TABLE public.transactions (
     id BIGSERIAL,
-    id_location bigint,
-    id_prestation bigint,
+    id_location bigint DEFAULT NULL,
+    id_prestation bigint DEFAULT NULL,
     session_id character varying(1024) UNIQUE,
     session_status character varying(32),
     payment_intent character varying(1024) DEFAULT NULL,
@@ -359,6 +382,13 @@ ALTER TABLE ONLY public.messages
 
 ALTER TABLE ONLY public.planing
     ADD CONSTRAINT planing_bien_id_fkey FOREIGN KEY (id_bien) REFERENCES public.biens(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY public.factures
+    ADD CONSTRAINT facture_facturation_id_fkey FOREIGN KEY (id_caturation) REFERENCES public.facturations(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT facture_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT facture_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT facture_bailleur_id_fkey FOREIGN KEY (id_bailleur) REFERENCES public.bailleurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 ALTER TABLE ONLY public.prestations
