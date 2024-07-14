@@ -385,6 +385,10 @@ ALTER TABLE ONLY public.planing
     ADD CONSTRAINT planing_bien_id_fkey FOREIGN KEY (id_bien) REFERENCES public.biens(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
+ALTER TABLE ONLY public.services
+    ADD CONSTRAINT services_voyageur_id_fkey FOREIGN KEY (id_voyageur) REFERENCES public.voyageurs(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
 ALTER TABLE ONLY public.factures
     ADD CONSTRAINT facture_facturation_id_fkey FOREIGN KEY (id_facturation) REFERENCES public.facturations(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     ADD CONSTRAINT facture_prestataire_id_fkey FOREIGN KEY (id_prestataire) REFERENCES public.prestataires(id) ON UPDATE CASCADE ON DELETE RESTRICT,
