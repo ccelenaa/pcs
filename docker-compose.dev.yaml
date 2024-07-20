@@ -35,7 +35,7 @@ services:
     volumes:
       - ./api-pcs:/usr/lib/pcs/api-pcs
       - ./docker/api-pcs/config:/usr/lib/pcs/api-pcs/config
-      - ./docker/public:/usr/lib/pcs/api-pcs/public
+      - ./docker/api-pcs/public:/usr/lib/pcs/api-pcs/public
     ports:
       - "3000:80"
     environment:

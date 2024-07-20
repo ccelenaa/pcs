@@ -1,9 +1,9 @@
 node_modules
 docker/postgres/data
-docker/public/images/*
-docker/public/factures/*
-docker/public/receipts/*
+docker/api-pcs/public/images/*
+docker/api-pcs/public/factures/*
+docker/api-pcs/public/receipts/*
 
-!docker/public/images/.gitkeep
-!docker/public/factures/.gitkeep
-!docker/public/receipts/.gitkeep
+!docker/api-pcs/public/images/.gitkeep
+!docker/api-pcs/public/factures/.gitkeep
+!docker/api-pcs/public/receipts/.gitkeep
