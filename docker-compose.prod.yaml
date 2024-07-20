@@ -50,6 +50,8 @@ services:
         volumes:
             - ./docker/nginx:/etc/nginx/conf.d
             - ./docker/nginx/SSL/certs/rsa:/etc/nginx/ssl
+            - ./docker/api-pcs/public:/var/www/pcs/public
+            - ./docker/front-pcs/development.js:/var/www/pcs/public/js/env.js
 
     # Le conteneur front-end
     front-pcs:
@@ -59,8 +61,6 @@ services:
             reseau_public:
                 ipv4_address: 172.20.0.21
         restart: always
-        volumes:
-            - ./docker/front-pcs/production.js:/usr/lib/pcs/front-pcs/public/env.js
         ports:
             - "3003:80"
         environment:

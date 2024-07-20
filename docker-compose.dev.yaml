@@ -12,7 +12,7 @@ services:
       - ./docker/nginx:/etc/nginx/conf.d
       - ./docker/nginx/SSL/certs/rsa:/etc/nginx/ssl
       - ./docker/api-pcs/public:/var/www/pcs/public
-      - ./docker/front-pcs/development.js:/var/www/pcs/public/env.js
+      - ./docker/front-pcs/development.js:/var/www/pcs/public/js/env.js
 
   postgresql:
     privileged: true
@@ -64,10 +64,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./front-pcs:/usr/lib/pcs/front-pcs
-      # - ./docker/front-pcs/development.js:/usr/lib/pcs/front-pcs/public/env.js
     ports:
       - "3003:80"
     environment:
       NODE_ENV: development
-    # env_file:
-    # - ./front-pcs/.env
