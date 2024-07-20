@@ -1,4 +1,6 @@
 node_modules
 docker/postgres/data
-docker/public/
+docker/public/images/*
+docker/public/factures/*
+docker/public/receipts/*
 
