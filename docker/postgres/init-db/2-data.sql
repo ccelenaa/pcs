@@ -34,7 +34,7 @@ INSERT INTO public.locations (id_bien,id_voyageur,prix,date_debut,date_fin,prix_
 	 (7,1,60,NOW(),NOW() + INTERVAL '2 days',120,'€'),
 	 (5,2,150,NOW(),NOW() + INTERVAL '10 days',1200,'€');
 
-INSERT INTO public.prestations (id_service,id_prestataire,prix_pretataire,pcs_marge,date_prestation,statut) VALUES
-	 (1,1, 120, 10, NOW() + INTERVAL '1 days', 0),
-	 (2,2, 80, 10, NOW() + INTERVAL '2 days', 0),
-	 (5,1, 50, 10, NOW() + INTERVAL '2 days', 0);
+-- INSERT INTO public.prestations (id_service,id_prestataire,prix_pretataire,pcs_marge,date_prestation,statut) VALUES
+-- 	 (1,1, 120, 10, NOW() + INTERVAL '1 days', 0),
+-- 	 (2,2, 80, 10, NOW() + INTERVAL '2 days', 0),
+-- 	 (5,1, 50, 10, NOW() + INTERVAL '2 days', 0);
