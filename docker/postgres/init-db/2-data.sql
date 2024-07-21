@@ -20,14 +20,14 @@ INSERT INTO public.services (id_voyageur, label, adresse, prix_max, date, statut
 	 (2,'Cuisine a domicile', '89 Rue Emil Zola 92006', 70, now() + INTERVAL '1 DAYS', 0),
 	 (2,'Nettoyages', '89 Rue Emil Zola 92006', 110, now() + INTERVAL '2 DAYS', 0),
 	 (2,'Coach sportif', '89 Rue Emil Zola 92006', 150, now() + INTERVAL' 5 DAYS', 0);
-INSERT INTO public.biens (id_bailleur,type,surface,titre,description,statut,prix,devise) VALUES
-	 (1,'appartement','62m2','Appartement en plein Paris','Description ppartement en plein Paris','disponible',150,'€'),
-	 (1,'appartement','55m2','Appartement en Seine-et-Marne','Description Appartement en Seine-et-Marne','disponible',90,'€'),
-	 (1,'studio','32m2','Studio en plein Paris','Description Studio en plein Paris','disponible',80,'€'),
-	 (1,'appartement','62m2','Appartement a Lyon','Description Appartement a Lyon','disponible',100,'€'),
-	 (2,'appartement','80m2','Appartement a coté de Paris','Description Appartement a coté de Paris','disponible',120,'€'),
-	 (2,'appartement','55m2','Appartement a la defense','Description Appartement a la defense','disponible',110,'€'),
-	 (2,'studio','27m2','Studio a Evry','Description Studio a Evry','disponible',60,'€');
+INSERT INTO public.biens (id_bailleur,type,surface,titre,description,adresse,statut,prix,devise) VALUES
+	 (1,'appartement','62m2','Appartement en plein Paris','Description ppartement en plein Paris', '36 Rue Charles 75001','disponible',150,'€'),
+	 (1,'appartement','55m2','Appartement en Seine-et-Marne','Description Appartement en Seine-et-Marne', '128 Rue Michel 64011','disponible',90,'€'),
+	 (1,'studio','32m2','Studio en plein Paris','Description Studio en plein Paris', '36 Rue Charles 75001','disponible',80,'€'),
+	 (1,'appartement','62m2','Appartement a Lyon','Description Appartement a Lyon', '89 Rue Emil Zola 92006','disponible',100,'€'),
+	 (2,'appartement','80m2','Appartement a coté de Paris','Description Appartement a coté de Paris', '89 Rue Emil Zola 92006','disponible',120,'€'),
+	 (2,'appartement','55m2','Appartement a la defense','Description Appartement a la defense', '89 Rue Emil Zola 92006','disponible',110,'€'),
+	 (2,'studio','27m2','Studio a Evry','Description Studio a Evry', '89 Rue Emil Zola 92006','disponible',60,'€');
 
 INSERT INTO public.locations (id_bien,id_voyageur,prix,date_debut,date_fin,prix_total,devise) VALUES
 	 (1,1,150,NOW(),NOW() + INTERVAL '3 days',450,'€'),
