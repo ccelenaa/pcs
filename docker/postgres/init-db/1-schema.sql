@@ -297,7 +297,7 @@ CREATE TABLE public.prestations (
     id_service bigint NOT NULL,
     id_prestataire bigint NOT NULL,
     id_facture bigint DEFAULT NULL,
-    prix_pretataire real DEFAULT 0 NOT NULL,
+    prix_prestataire real DEFAULT 0 NOT NULL,
     pcs_marge real DEFAULT 0 NOT NULL,
     prix_supplementaire real DEFAULT 0 NOT NULL,
     date_prestation timestamp(3) without time zone,
