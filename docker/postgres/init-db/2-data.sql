@@ -23,7 +23,7 @@ INSERT INTO public.services (id_voyageur, label, adresse, prix_max, date, statut
 INSERT INTO public.biens (id_bailleur,type,surface,titre,description,statut,prix,devise) VALUES
 	 (1,'appartement','62m2','Appartement en plein Paris','Description ppartement en plein Paris','disponible',150,'€'),
 	 (1,'appartement','55m2','Appartement en Seine-et-Marne','Description Appartement en Seine-et-Marne','disponible',90,'€'),
-	 (1,'studio','32m2','Studio en plein Paris','disponible','Description Studio en plein Paris','disponible',80,'€'),
+	 (1,'studio','32m2','Studio en plein Paris','Description Studio en plein Paris','disponible',80,'€'),
 	 (1,'appartement','62m2','Appartement a Lyon','Description Appartement a Lyon','disponible',100,'€'),
 	 (2,'appartement','80m2','Appartement a coté de Paris','Description Appartement a coté de Paris','disponible',120,'€'),
 	 (2,'appartement','55m2','Appartement a la defense','Description Appartement a la defense','disponible',110,'€'),
