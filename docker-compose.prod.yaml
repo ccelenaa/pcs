@@ -56,7 +56,7 @@ services:
     # Le conteneur front-end
     front-pcs:
         container_name: front-pcs
-        image: docker.io/celenaaa/front-pcs:3.5.0
+        image: docker.io/celenaaa/front-pcs:3.6.0
         networks:
             reseau_public:
                 ipv4_address: 172.20.0.21
