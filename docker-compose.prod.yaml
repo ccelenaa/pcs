@@ -56,7 +56,7 @@ services:
     # Le conteneur front-end
     front-pcs:
         container_name: front-pcs
-        image: docker.io/celenaaa/front-pcs:2.1.0
+        image: docker.io/celenaaa/front-pcs:3.5.0
         networks:
             reseau_public:
                 ipv4_address: 172.20.0.21
@@ -71,7 +71,7 @@ services:
     #   ce conteneur appartien aux 2 reseaux.
     api-pcs:
         container_name: api-pcs
-        image: docker.io/celenaaa/api-pcs:2.4.0
+        image: docker.io/celenaaa/api-pcs:3.5.0
         networks:
             reseau_securise:
                 ipv4_address: 172.30.0.31
